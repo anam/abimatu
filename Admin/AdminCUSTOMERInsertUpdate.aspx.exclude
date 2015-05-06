@@ -1,0 +1,277 @@
+<%@ Page Language="C#" MasterPageFile="~/Admin/AdminMaster.master" AutoEventWireup="true" 
+CodeFile="AdminCUSTOMERInsertUpdate.aspx.cs" Inherits="AdminCUSTOMERInsertUpdate" Title="CUSTOMER Insert/Update By Admin" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <style type="text/css">
+        .tableCss
+        {
+        	text-align: left;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <div class="tableCss">
+        <table>
+            <tr>
+                <td>
+                    <asp:Label ID="lblEMTID" runat="server" Text="EMTID: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlEMT" runat="server">
+                    </asp:DropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblUSERNAME" runat="server" Text="USERNAME: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtUSERNAME" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCUSTFNAME" runat="server" Text="CUSTFNAME: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCUSTFNAME" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCUSTMNAME" runat="server" Text="CUSTMNAME: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCUSTMNAME" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCUSTLNAME" runat="server" Text="CUSTLNAME: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCUSTLNAME" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCUSTADDRESS1" runat="server" Text="CUSTADDRESS1: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCUSTADDRESS1" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCUSTADDRESS2" runat="server" Text="CUSTADDRESS2: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCUSTADDRESS2" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCUSTCITY" runat="server" Text="CUSTCITY: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCUSTCITY" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCUSTSTATE" runat="server" Text="CUSTSTATE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCUSTSTATE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCUSTZIP" runat="server" Text="CUSTZIP: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCUSTZIP" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCUSTHPHONE" runat="server" Text="CUSTHPHONE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCUSTHPHONE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCUSTCPHONE" runat="server" Text="CUSTCPHONE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCUSTCPHONE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCUSTWPHONE" runat="server" Text="CUSTWPHONE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCUSTWPHONE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCUSTSSN" runat="server" Text="CUSTSSN: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCUSTSSN" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCUSTIDTYPE" runat="server" Text="CUSTIDTYPE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlCUST" runat="server">
+                    </asp:DropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCUSTIDNUMBER" runat="server" Text="CUSTIDNUMBER: ">
+                    </asp:Label>
+                </td>
+                <td>
+                   <%-- <asp:DropDownList ID="ddlCUST" runat="server">
+                    </asp:DropDownList>--%>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCUSTDOB" runat="server" Text="CUSTDOB: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCUSTDOB" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCUSTISSUEDATE" runat="server" Text="CUSTISSUEDATE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCUSTISSUEDATE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCUSTEXPIREDATE" runat="server" Text="CUSTEXPIREDATE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCUSTEXPIREDATE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblISOFACVERIFIED" runat="server" Text="ISOFACVERIFIED: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtISOFACVERIFIED" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCUSTREMARKS" runat="server" Text="CUSTREMARKS: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCUSTREMARKS" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCREATEDBY" runat="server" Text="CREATEDBY: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCREATEDBY" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCREATEDON" runat="server" Text="CREATEDON: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCREATEDON" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblUPDATEDBY" runat="server" Text="UPDATEDBY: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtUPDATEDBY" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblUPDATEDON" runat="server" Text="UPDATEDON: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtUPDATEDON" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+                    <asp:Button ID="btnUpdate" runat="server" Text="Update" 
+                        OnClick="btnUpdate_Click" />
+                </td>
+                <td>
+                    <asp:Button ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_Click" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</asp:Content>

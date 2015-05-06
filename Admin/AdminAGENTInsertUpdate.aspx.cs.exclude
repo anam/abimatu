@@ -1,0 +1,116 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminAGENTInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            if (Request.QueryString["aGENTID"] != null)
+            {
+                int aGENTID = Int32.Parse(Request.QueryString["aGENTID"]);
+                if (aGENTID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showAGENTData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        AGENT aGENT = new AGENT();
+
+        aGENT.AGENTNAME = txtAGENTNAME.Text;
+        aGENT.USERNAME = txtUSERNAME.Text;
+        aGENT.AGENTLOCATION = txtAGENTLOCATION.Text;
+        aGENT.AGENTADDRESS = txtAGENTADDRESS.Text;
+        aGENT.AGENTCITY = txtAGENTCITY.Text;
+        aGENT.AGENTSTATE = txtAGENTSTATE.Text;
+        aGENT.AGENTZIP = txtAGENTZIP.Text;
+        aGENT.AGENTPHONE = txtAGENTPHONE.Text;
+        aGENT.AGENTACC = txtAGENTACC.Text;
+        aGENT.CREATEDBY = Int32.Parse(txtCREATEDBY.Text);
+        aGENT.CREATEDON = txtCREATEDON.Text;
+        aGENT.UPDATEDBY = Int32.Parse(txtUPDATEDBY.Text);
+        aGENT.UPDATEDON = txtUPDATEDON.Text;
+        int resutl = AGENTManager.InsertAGENT(aGENT);
+        Response.Redirect("AdminAGENTDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        AGENT aGENT = new AGENT();
+        aGENT = AGENTManager.GetAGENTByID(Int32.Parse(Request.QueryString["aGENTID"]));
+        AGENT tempAGENT = new AGENT();
+        tempAGENT.AGENTID = aGENT.AGENTID;
+
+        tempAGENT.AGENTNAME = txtAGENTNAME.Text;
+        tempAGENT.USERNAME = txtUSERNAME.Text;
+        tempAGENT.AGENTLOCATION = txtAGENTLOCATION.Text;
+        tempAGENT.AGENTADDRESS = txtAGENTADDRESS.Text;
+        tempAGENT.AGENTCITY = txtAGENTCITY.Text;
+        tempAGENT.AGENTSTATE = txtAGENTSTATE.Text;
+        tempAGENT.AGENTZIP = txtAGENTZIP.Text;
+        tempAGENT.AGENTPHONE = txtAGENTPHONE.Text;
+        tempAGENT.AGENTACC = txtAGENTACC.Text;
+        tempAGENT.CREATEDBY = Int32.Parse(txtCREATEDBY.Text);
+        tempAGENT.CREATEDON = txtCREATEDON.Text;
+        tempAGENT.UPDATEDBY = Int32.Parse(txtUPDATEDBY.Text);
+        tempAGENT.UPDATEDON = txtUPDATEDON.Text;
+        bool result = AGENTManager.UpdateAGENT(tempAGENT);
+        Response.Redirect("AdminAGENTDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        txtAGENTNAME.Text = "";
+        txtUSERNAME.Text = "";
+        txtAGENTLOCATION.Text = "";
+        txtAGENTADDRESS.Text = "";
+        txtAGENTCITY.Text = "";
+        txtAGENTSTATE.Text = "";
+        txtAGENTZIP.Text = "";
+        txtAGENTPHONE.Text = "";
+        txtAGENTACC.Text = "";
+        txtCREATEDBY.Text = "";
+        txtCREATEDON.Text = "";
+        txtUPDATEDBY.Text = "";
+        txtUPDATEDON.Text = "";
+    }
+    private void showAGENTData()
+    {
+        AGENT aGENT = new AGENT();
+        aGENT = AGENTManager.GetAGENTByID(Int32.Parse(Request.QueryString["aGENTID"]));
+
+        txtAGENTNAME.Text = aGENT.AGENTNAME;
+        txtUSERNAME.Text = aGENT.USERNAME;
+        txtAGENTLOCATION.Text = aGENT.AGENTLOCATION;
+        txtAGENTADDRESS.Text = aGENT.AGENTADDRESS;
+        txtAGENTCITY.Text = aGENT.AGENTCITY;
+        txtAGENTSTATE.Text = aGENT.AGENTSTATE;
+        txtAGENTZIP.Text = aGENT.AGENTZIP;
+        txtAGENTPHONE.Text = aGENT.AGENTPHONE;
+        txtAGENTACC.Text = aGENT.AGENTACC;
+        txtCREATEDBY.Text = aGENT.CREATEDBY.ToString();
+        txtCREATEDON.Text = aGENT.CREATEDON;
+        txtUPDATEDBY.Text = aGENT.UPDATEDBY.ToString();
+        txtUPDATEDON.Text = aGENT.UPDATEDON;
+    }
+}

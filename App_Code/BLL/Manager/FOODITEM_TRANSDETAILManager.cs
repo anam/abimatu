@@ -1,0 +1,68 @@
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Configuration;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public class FOODITEM_TRANSDETAILManager
+{
+	public FOODITEM_TRANSDETAILManager()
+	{
+	}
+
+    public static List<FOODITEM_TRANSDETAIL> GetAllFOODITEM_TRANSDETAILs()
+    {
+        List<FOODITEM_TRANSDETAIL> fOODITEM_TRANSDETAILs = new List<FOODITEM_TRANSDETAIL>();
+        SqlFOODITEM_TRANSDETAILProvider sqlFOODITEM_TRANSDETAILProvider = new SqlFOODITEM_TRANSDETAILProvider();
+        fOODITEM_TRANSDETAILs = sqlFOODITEM_TRANSDETAILProvider.GetAllFOODITEM_TRANSDETAILs();
+        return fOODITEM_TRANSDETAILs;
+    }
+
+    public static List<FOODITEM_TRANSMASTERDETAIL> GetAllFOODITEM_TRANSDETAILByFoodTransID(int foodTransID)
+    {
+        List<FOODITEM_TRANSMASTERDETAIL> fOODITEM_TRANSDETAILs = new List<FOODITEM_TRANSMASTERDETAIL>();
+        SqlFOODITEM_TRANSDETAILProvider sqlFOODITEM_TRANSDETAILProvider = new SqlFOODITEM_TRANSDETAILProvider();
+        fOODITEM_TRANSDETAILs = sqlFOODITEM_TRANSDETAILProvider.GetAllFOODITEM_TRANSDETAILByFoodTransID(foodTransID);
+        return fOODITEM_TRANSDETAILs;
+    }
+    public static FOODITEM_TRANSDETAIL GetFOODITEM_TRANSDETAILByID(int id)
+    {
+        FOODITEM_TRANSDETAIL fOODITEM_TRANSDETAIL = new FOODITEM_TRANSDETAIL();
+        SqlFOODITEM_TRANSDETAILProvider sqlFOODITEM_TRANSDETAILProvider = new SqlFOODITEM_TRANSDETAILProvider();
+        fOODITEM_TRANSDETAIL = sqlFOODITEM_TRANSDETAILProvider.GetFOODITEM_TRANSDETAILByID(id);
+        return fOODITEM_TRANSDETAIL;
+    }
+
+
+    public static int InsertFOODITEM_TRANSDETAIL(FOODITEM_TRANSDETAIL fOODITEM_TRANSDETAIL)
+    {
+        SqlFOODITEM_TRANSDETAILProvider sqlFOODITEM_TRANSDETAILProvider = new SqlFOODITEM_TRANSDETAILProvider();
+        return sqlFOODITEM_TRANSDETAILProvider.InsertFOODITEM_TRANSDETAIL(fOODITEM_TRANSDETAIL);
+    }
+
+
+    public static bool UpdateFOODITEM_TRANSDETAIL(FOODITEM_TRANSDETAIL fOODITEM_TRANSDETAIL)
+    {
+        SqlFOODITEM_TRANSDETAILProvider sqlFOODITEM_TRANSDETAILProvider = new SqlFOODITEM_TRANSDETAILProvider();
+        return sqlFOODITEM_TRANSDETAILProvider.UpdateFOODITEM_TRANSDETAIL(fOODITEM_TRANSDETAIL);
+    }
+
+    public static bool DeleteFOODITEM_TRANSDETAIL(int fOODITEM_TRANSDETAILID)
+    {
+        SqlFOODITEM_TRANSDETAILProvider sqlFOODITEM_TRANSDETAILProvider = new SqlFOODITEM_TRANSDETAILProvider();
+        return sqlFOODITEM_TRANSDETAILProvider.DeleteFOODITEM_TRANSDETAIL(fOODITEM_TRANSDETAILID);
+    }
+
+    public static bool DeleteFOODITEM_TRANSDETAILByTID(int tID)
+    {
+        SqlFOODITEM_TRANSDETAILProvider sqlFOODITEM_TRANSDETAILProvider = new SqlFOODITEM_TRANSDETAILProvider();
+        return sqlFOODITEM_TRANSDETAILProvider.DeleteFOODITEM_TRANSDETAILByTID(tID);
+    }
+}

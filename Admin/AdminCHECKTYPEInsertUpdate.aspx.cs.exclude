@@ -1,0 +1,80 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminCHECKTYPEInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            if (Request.QueryString["cHECKTYPEID"] != null)
+            {
+                int cHECKTYPEID = Int32.Parse(Request.QueryString["cHECKTYPEID"]);
+                if (cHECKTYPEID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showCHECKTYPEData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        CHECKTYPE cHECKTYPE = new CHECKTYPE();
+
+        cHECKTYPE.CHKTYPE = txtCHKTYPE.Text;
+        cHECKTYPE.CHKRATE = Int32.Parse(txtCHKRATE.Text);
+        cHECKTYPE.CHKROUTING = txtCHKROUTING.Text;
+        cHECKTYPE.CHKACCOUNT = txtCHKACCOUNT.Text;
+        int resutl = CHECKTYPEManager.InsertCHECKTYPE(cHECKTYPE);
+        Response.Redirect("AdminCHECKTYPEDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        CHECKTYPE cHECKTYPE = new CHECKTYPE();
+        cHECKTYPE = CHECKTYPEManager.GetCHECKTYPEByID(Int32.Parse(Request.QueryString["cHECKTYPEID"]));
+        CHECKTYPE tempCHECKTYPE = new CHECKTYPE();
+        tempCHECKTYPE.CHECKTYPEID = cHECKTYPE.CHECKTYPEID;
+
+        tempCHECKTYPE.CHKTYPE = txtCHKTYPE.Text;
+        tempCHECKTYPE.CHKRATE = Int32.Parse(txtCHKRATE.Text);
+        tempCHECKTYPE.CHKROUTING = txtCHKROUTING.Text;
+        tempCHECKTYPE.CHKACCOUNT = txtCHKACCOUNT.Text;
+        bool result = CHECKTYPEManager.UpdateCHECKTYPE(tempCHECKTYPE);
+        Response.Redirect("AdminCHECKTYPEDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        txtCHKTYPE.Text = "";
+        txtCHKRATE.Text = "";
+        txtCHKROUTING.Text = "";
+        txtCHKACCOUNT.Text = "";
+    }
+    private void showCHECKTYPEData()
+    {
+        CHECKTYPE cHECKTYPE = new CHECKTYPE();
+        cHECKTYPE = CHECKTYPEManager.GetCHECKTYPEByID(Int32.Parse(Request.QueryString["cHECKTYPEID"]));
+
+        txtCHKTYPE.Text = cHECKTYPE.CHKTYPE;
+        txtCHKRATE.Text = cHECKTYPE.CHKRATE.ToString();
+        txtCHKROUTING.Text = cHECKTYPE.CHKROUTING;
+        txtCHKACCOUNT.Text = cHECKTYPE.CHKACCOUNT;
+    }
+}

@@ -1,0 +1,56 @@
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Configuration;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public class SQLPLUS_PRODUCT_PROFILEManager
+{
+	public SQLPLUS_PRODUCT_PROFILEManager()
+	{
+	}
+
+    public static List<SQLPLUS_PRODUCT_PROFILE> GetAllSQLPLUS_PRODUCT_PROFILEs()
+    {
+        List<SQLPLUS_PRODUCT_PROFILE> sQLPLUS_PRODUCT_PROFILEs = new List<SQLPLUS_PRODUCT_PROFILE>();
+        SqlSQLPLUS_PRODUCT_PROFILEProvider sqlSQLPLUS_PRODUCT_PROFILEProvider = new SqlSQLPLUS_PRODUCT_PROFILEProvider();
+        sQLPLUS_PRODUCT_PROFILEs = sqlSQLPLUS_PRODUCT_PROFILEProvider.GetAllSQLPLUS_PRODUCT_PROFILEs();
+        return sQLPLUS_PRODUCT_PROFILEs;
+    }
+
+
+    public static SQLPLUS_PRODUCT_PROFILE GetSQLPLUS_PRODUCT_PROFILEByID(int id)
+    {
+        SQLPLUS_PRODUCT_PROFILE sQLPLUS_PRODUCT_PROFILE = new SQLPLUS_PRODUCT_PROFILE();
+        SqlSQLPLUS_PRODUCT_PROFILEProvider sqlSQLPLUS_PRODUCT_PROFILEProvider = new SqlSQLPLUS_PRODUCT_PROFILEProvider();
+        sQLPLUS_PRODUCT_PROFILE = sqlSQLPLUS_PRODUCT_PROFILEProvider.GetSQLPLUS_PRODUCT_PROFILEByID(id);
+        return sQLPLUS_PRODUCT_PROFILE;
+    }
+
+
+    public static int InsertSQLPLUS_PRODUCT_PROFILE(SQLPLUS_PRODUCT_PROFILE sQLPLUS_PRODUCT_PROFILE)
+    {
+        SqlSQLPLUS_PRODUCT_PROFILEProvider sqlSQLPLUS_PRODUCT_PROFILEProvider = new SqlSQLPLUS_PRODUCT_PROFILEProvider();
+        return sqlSQLPLUS_PRODUCT_PROFILEProvider.InsertSQLPLUS_PRODUCT_PROFILE(sQLPLUS_PRODUCT_PROFILE);
+    }
+
+
+    public static bool UpdateSQLPLUS_PRODUCT_PROFILE(SQLPLUS_PRODUCT_PROFILE sQLPLUS_PRODUCT_PROFILE)
+    {
+        SqlSQLPLUS_PRODUCT_PROFILEProvider sqlSQLPLUS_PRODUCT_PROFILEProvider = new SqlSQLPLUS_PRODUCT_PROFILEProvider();
+        return sqlSQLPLUS_PRODUCT_PROFILEProvider.UpdateSQLPLUS_PRODUCT_PROFILE(sQLPLUS_PRODUCT_PROFILE);
+    }
+
+    public static bool DeleteSQLPLUS_PRODUCT_PROFILE(int sQLPLUS_PRODUCT_PROFILEID)
+    {
+        SqlSQLPLUS_PRODUCT_PROFILEProvider sqlSQLPLUS_PRODUCT_PROFILEProvider = new SqlSQLPLUS_PRODUCT_PROFILEProvider();
+        return sqlSQLPLUS_PRODUCT_PROFILEProvider.DeleteSQLPLUS_PRODUCT_PROFILE(sQLPLUS_PRODUCT_PROFILEID);
+    }
+}

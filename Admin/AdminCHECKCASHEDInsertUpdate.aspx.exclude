@@ -1,0 +1,197 @@
+<%@ Page Language="C#" MasterPageFile="~/Admin/AdminMaster.master" AutoEventWireup="true" 
+CodeFile="AdminCHECKCASHEDInsertUpdate.aspx.cs" Inherits="AdminCHECKCASHEDInsertUpdate" Title="CHECKCASHED Insert/Update By Admin" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <style type="text/css">
+        .tableCss
+        {
+        	text-align: left;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <div class="tableCss">
+        <table>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCHKDT" runat="server" Text="CHKDT: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCHKDT" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCUSTID" runat="server" Text="CUSTID: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlCUST" runat="server">
+                    </asp:DropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblMAKERID" runat="server" Text="MAKERID: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlMAKER" runat="server">
+                    </asp:DropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCHKTYPE" runat="server" Text="CHKTYPE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCHKTYPE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCHKNO" runat="server" Text="CHKNO: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCHKNO" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCHKAMOUNT" runat="server" Text="CHKAMOUNT: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCHKAMOUNT" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCHKFEES" runat="server" Text="CHKFEES: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCHKFEES" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCHKAMOUNTOWE" runat="server" Text="CHKAMOUNTOWE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCHKAMOUNTOWE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblISDEPOSITED" runat="server" Text="ISDEPOSITED: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtISDEPOSITED" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblEMP_ID" runat="server" Text="EMP_ID: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlEMP_" runat="server">
+                    </asp:DropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblSHIFT_ID" runat="server" Text="SHIFT_ID: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlSHIFT_" runat="server">
+                    </asp:DropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblSTATION_ID" runat="server" Text="STATION_ID: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlSTATION_" runat="server">
+                    </asp:DropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCREATEDBY" runat="server" Text="CREATEDBY: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCREATEDBY" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCREATEDON" runat="server" Text="CREATEDON: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCREATEDON" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblISBAD" runat="server" Text="ISBAD: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtISBAD" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblBADCHECKAMOUNTOWE" runat="server" Text="BADCHECKAMOUNTOWE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtBADCHECKAMOUNTOWE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblBADCHECKREMARKS" runat="server" Text="BADCHECKREMARKS: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtBADCHECKREMARKS" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+                    <asp:Button ID="btnUpdate" runat="server" Text="Update" 
+                        OnClick="btnUpdate_Click" />
+                </td>
+                <td>
+                    <asp:Button ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_Click" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</asp:Content>

@@ -1,0 +1,82 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminCUSTIDTYPEInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            loadCUST();
+            if (Request.QueryString["cUSTIDTYPEID"] != null)
+            {
+                int cUSTIDTYPEID = Int32.Parse(Request.QueryString["cUSTIDTYPEID"]);
+                if (cUSTIDTYPEID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showCUSTIDTYPEData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        CUSTIDTYPE cUSTIDTYPE = new CUSTIDTYPE();
+
+        cUSTIDTYPE.CUSTIDTYPEName = Int32.Parse(ddlCUST.SelectedValue);
+        int resutl = CUSTIDTYPEManager.InsertCUSTIDTYPE(cUSTIDTYPE);
+        Response.Redirect("AdminCUSTIDTYPEDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        CUSTIDTYPE cUSTIDTYPE = new CUSTIDTYPE();
+        cUSTIDTYPE = CUSTIDTYPEManager.GetCUSTIDTYPEByID(Int32.Parse(Request.QueryString["cUSTIDTYPEID"]));
+        CUSTIDTYPE tempCUSTIDTYPE = new CUSTIDTYPE();
+        tempCUSTIDTYPE.CUSTIDTYPEID = cUSTIDTYPE.CUSTIDTYPEID;
+
+        tempCUSTIDTYPE.CUSTIDTYPEName = Int32.Parse(ddlCUST.SelectedValue);
+        bool result = CUSTIDTYPEManager.UpdateCUSTIDTYPE(tempCUSTIDTYPE);
+        Response.Redirect("AdminCUSTIDTYPEDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        ddlCUST.SelectedIndex = 0;
+    }
+    private void showCUSTIDTYPEData()
+    {
+        CUSTIDTYPE cUSTIDTYPE = new CUSTIDTYPE();
+        cUSTIDTYPE = CUSTIDTYPEManager.GetCUSTIDTYPEByID(Int32.Parse(Request.QueryString["cUSTIDTYPEID"]));
+
+        ddlCUST.SelectedValue = cUSTIDTYPE.CUSTIDTYPEName.ToString();
+    }
+    private void loadCUST()
+    {
+        ListItem li = new ListItem("Select CUST...", "0");
+        ddlCUST.Items.Add(li);
+
+        List<CUST> cUSTs = new List<CUST>();
+        cUSTs = CUSTManager.GetAllCUSTs();
+        foreach (CUST cUST in cUSTs)
+        {
+            ListItem item = new ListItem(cUST.CUSTName.ToString(), cUST.CUSTIDTYPEName.ToString());
+            ddlCUST.Items.Add(item);
+        }
+    }
+}

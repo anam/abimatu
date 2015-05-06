@@ -1,0 +1,23 @@
+﻿
+
+.modalBackground
+{
+	background-color: Gray;
+	filter: alpha(opacity=50);
+	opacity: 0.50;
+}
+
+
+
+.updateProgress1
+{
+
+	position: absolute;
+	/*
+	width: 180px;
+	height: 65px;
+*/
+width:150px;
+height:150px;
+
+}

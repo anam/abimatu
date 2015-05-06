@@ -1,0 +1,104 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminCUSTOMERACCOUNTInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            loadSERVICE();
+            loadCUST_();
+            if (Request.QueryString["cUSTOMERACCOUNTID"] != null)
+            {
+                int cUSTOMERACCOUNTID = Int32.Parse(Request.QueryString["cUSTOMERACCOUNTID"]);
+                if (cUSTOMERACCOUNTID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showCUSTOMERACCOUNTData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        CUSTOMERACCOUNT cUSTOMERACCOUNT = new CUSTOMERACCOUNT();
+
+        cUSTOMERACCOUNT.ACCOUNTNO = txtACCOUNTNO.Text;
+        cUSTOMERACCOUNT.SERVICEID = Int32.Parse(ddlSERVICE.SelectedValue);
+        cUSTOMERACCOUNT.CUST_ID = Int32.Parse(ddlCUST_.SelectedValue);
+        int resutl = CUSTOMERACCOUNTManager.InsertCUSTOMERACCOUNT(cUSTOMERACCOUNT);
+        Response.Redirect("AdminCUSTOMERACCOUNTDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        CUSTOMERACCOUNT cUSTOMERACCOUNT = new CUSTOMERACCOUNT();
+        cUSTOMERACCOUNT = CUSTOMERACCOUNTManager.GetCUSTOMERACCOUNTByID(Int32.Parse(Request.QueryString["cUSTOMERACCOUNTID"]));
+        CUSTOMERACCOUNT tempCUSTOMERACCOUNT = new CUSTOMERACCOUNT();
+        tempCUSTOMERACCOUNT.CUSTOMERACCOUNTID = cUSTOMERACCOUNT.CUSTOMERACCOUNTID;
+
+        tempCUSTOMERACCOUNT.ACCOUNTNO = txtACCOUNTNO.Text;
+        tempCUSTOMERACCOUNT.SERVICEID = Int32.Parse(ddlSERVICE.SelectedValue);
+        tempCUSTOMERACCOUNT.CUST_ID = Int32.Parse(ddlCUST_.SelectedValue);
+        bool result = CUSTOMERACCOUNTManager.UpdateCUSTOMERACCOUNT(tempCUSTOMERACCOUNT);
+        Response.Redirect("AdminCUSTOMERACCOUNTDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        txtACCOUNTNO.Text = "";
+        ddlSERVICE.SelectedIndex = 0;
+        ddlCUST_.SelectedIndex = 0;
+    }
+    private void showCUSTOMERACCOUNTData()
+    {
+        CUSTOMERACCOUNT cUSTOMERACCOUNT = new CUSTOMERACCOUNT();
+        cUSTOMERACCOUNT = CUSTOMERACCOUNTManager.GetCUSTOMERACCOUNTByID(Int32.Parse(Request.QueryString["cUSTOMERACCOUNTID"]));
+
+        txtACCOUNTNO.Text = cUSTOMERACCOUNT.ACCOUNTNO;
+        ddlSERVICE.SelectedValue = cUSTOMERACCOUNT.SERVICEID.ToString();
+        ddlCUST_.SelectedValue = cUSTOMERACCOUNT.CUST_ID.ToString();
+    }
+    private void loadSERVICE()
+    {
+        ListItem li = new ListItem("Select SERVICE...", "0");
+        ddlSERVICE.Items.Add(li);
+
+        List<SERVICE> sERVICEs = new List<SERVICE>();
+        sERVICEs = SERVICEManager.GetAllSERVICEs();
+        foreach (SERVICE sERVICE in sERVICEs)
+        {
+            ListItem item = new ListItem(sERVICE.SERVICEName.ToString(), sERVICE.SERVICEID.ToString());
+            ddlSERVICE.Items.Add(item);
+        }
+    }
+    private void loadCUST_()
+    {
+        ListItem li = new ListItem("Select CUST_...", "0");
+        ddlCUST_.Items.Add(li);
+
+        List<CUST_> cUST_s = new List<CUST_>();
+        cUST_s = CUST_Manager.GetAllCUST_s();
+        foreach (CUST_ cUST_ in cUST_s)
+        {
+            ListItem item = new ListItem(cUST_.CUST_Name.ToString(), cUST_.CUST_ID.ToString());
+            ddlCUST_.Items.Add(item);
+        }
+    }
+}

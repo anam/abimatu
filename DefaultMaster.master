@@ -1,0 +1,86 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="DefaultMaster.master.cs"
+    Inherits="DefaultMaster" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Abimatu Enterprise</title>
+    <!--[if IE]><link href="App_Themes/Default/css/ie.css" rel="stylesheet" type="text/css" /><![endif]-->
+    <!--[if IE 6]><script src="App_Themes/Default/js/ie6PngFix.js"></script><![endif]-->
+    <link href="App_Themes/Default/style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="App_Themes/Default/js/jquery-1.4.1.min.js"></script>
+    <script type="text/javascript" src="App_Themes/Default/js/js.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+<%--    <script type="text/javascript" language="javascript">
+        var ModalProgress = 'ctl00_ModalProgress';         
+	</script>--%>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <%--<script type="text/javascript" src="App_Themes/Default/js/jsUpdateProgress.js"></script>--%>
+    <asp:ScriptManager ID="sc" runat="server">
+    </asp:ScriptManager>
+    <div id="header" >
+        <!-- Begin: header -->
+        <h1 class="logo">
+            <a href="#">Abumatu Interprise</a></h1>
+<div class="agentName">
+            <%--            <h4>
+                Agent Name</h4>
+            <a href="#">BELTSVILLE</a>--%>
+            <asp:LoginView ID="masterview" runat="server">
+                <LoggedInTemplate>
+
+                            <h2>
+                                <asp:LoginName ID="memberLoginName" runat="server" meta:resourcekey="memberLoginNameResource1" />
+                                </h2>
+
+                                <asp:LoginStatus ID="memberLoginStatus" runat="server" LogoutText="Log out" LogoutPageUrl="~/LogInPage.aspx"
+                                    meta:resourcekey="memberLoginStatusResource1" Font-Size="12px" />
+                </LoggedInTemplate>
+            </asp:LoginView>
+            <br />
+            <span style="float: right; text-align: right; width: 90%; margin: 0px 10px 0px 0px">
+            <asp:Label ID="lblAgentName" runat="server" Text="" Font-Size="14px"></asp:Label>
+            </span>
+        </div>
+    </div>
+    <!-- End: header -->
+    <div id="page">
+        <!-- Begin: page -->
+        <asp:ContentPlaceHolder ID="mainContent" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    <!-- End: page -->
+    <div id="footer">
+        <!-- Begin: footer -->
+        <div id="footerWrapper">
+            <!-- Begin: footerWrapper -->
+            <p>
+                All contents copyright &copy; Abimatu Enterprise, All rights reserved
+                <br />
+                Website Design, Development and SEO by <a href="http://adeptmax.com/" target="_blank">
+                    ADEPTMAX</a></p>
+        </div>
+        <!-- End: footerWrapper -->
+    </div>
+    <!-- End: footer -->
+
+<%--        <asp:Panel ID="panelUpdateProgress" runat="server" CssClass="updateProgress">
+        <asp:UpdateProgress ID="UpdateProg1" DisplayAfter="0" runat="server">
+            <ProgressTemplate>
+                <div style="position: relative; top: 30%; text-align: center;">
+                    <img src="App_Themes/Default/images/ajax-loader.gif" style="vertical-align: middle"
+                        alt="Processing" />
+                    
+                </div>
+            </ProgressTemplate>
+        </asp:UpdateProgress>
+    </asp:Panel>
+    <ajaxToolkit:ModalPopupExtender ID="ModalProgress" runat="server" TargetControlID="panelUpdateProgress"
+        BackgroundCssClass="modalBackground" PopupControlID="panelUpdateProgress" />--%>
+    </form>
+</body>
+</html>

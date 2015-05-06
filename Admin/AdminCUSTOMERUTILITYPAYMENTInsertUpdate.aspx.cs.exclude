@@ -1,0 +1,104 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminCUSTOMERUTILITYPAYMENTInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            loadCUST();
+            loadUTILITY();
+            if (Request.QueryString["cUSTOMERUTILITYPAYMENTID"] != null)
+            {
+                int cUSTOMERUTILITYPAYMENTID = Int32.Parse(Request.QueryString["cUSTOMERUTILITYPAYMENTID"]);
+                if (cUSTOMERUTILITYPAYMENTID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showCUSTOMERUTILITYPAYMENTData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        CUSTOMERUTILITYPAYMENT cUSTOMERUTILITYPAYMENT = new CUSTOMERUTILITYPAYMENT();
+
+        cUSTOMERUTILITYPAYMENT.CUSTID = Int32.Parse(ddlCUST.SelectedValue);
+        cUSTOMERUTILITYPAYMENT.UTILITYID = Int32.Parse(ddlUTILITY.SelectedValue);
+        cUSTOMERUTILITYPAYMENT.ACCOUNTNUMBER = txtACCOUNTNUMBER.Text;
+        int resutl = CUSTOMERUTILITYPAYMENTManager.InsertCUSTOMERUTILITYPAYMENT(cUSTOMERUTILITYPAYMENT);
+        Response.Redirect("AdminCUSTOMERUTILITYPAYMENTDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        CUSTOMERUTILITYPAYMENT cUSTOMERUTILITYPAYMENT = new CUSTOMERUTILITYPAYMENT();
+        cUSTOMERUTILITYPAYMENT = CUSTOMERUTILITYPAYMENTManager.GetCUSTOMERUTILITYPAYMENTByID(Int32.Parse(Request.QueryString["cUSTOMERUTILITYPAYMENTID"]));
+        CUSTOMERUTILITYPAYMENT tempCUSTOMERUTILITYPAYMENT = new CUSTOMERUTILITYPAYMENT();
+        tempCUSTOMERUTILITYPAYMENT.CUSTOMERUTILITYPAYMENTID = cUSTOMERUTILITYPAYMENT.CUSTOMERUTILITYPAYMENTID;
+
+        tempCUSTOMERUTILITYPAYMENT.CUSTID = Int32.Parse(ddlCUST.SelectedValue);
+        tempCUSTOMERUTILITYPAYMENT.UTILITYID = Int32.Parse(ddlUTILITY.SelectedValue);
+        tempCUSTOMERUTILITYPAYMENT.ACCOUNTNUMBER = txtACCOUNTNUMBER.Text;
+        bool result = CUSTOMERUTILITYPAYMENTManager.UpdateCUSTOMERUTILITYPAYMENT(tempCUSTOMERUTILITYPAYMENT);
+        Response.Redirect("AdminCUSTOMERUTILITYPAYMENTDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        ddlCUST.SelectedIndex = 0;
+        ddlUTILITY.SelectedIndex = 0;
+        txtACCOUNTNUMBER.Text = "";
+    }
+    private void showCUSTOMERUTILITYPAYMENTData()
+    {
+        CUSTOMERUTILITYPAYMENT cUSTOMERUTILITYPAYMENT = new CUSTOMERUTILITYPAYMENT();
+        cUSTOMERUTILITYPAYMENT = CUSTOMERUTILITYPAYMENTManager.GetCUSTOMERUTILITYPAYMENTByID(Int32.Parse(Request.QueryString["cUSTOMERUTILITYPAYMENTID"]));
+
+        ddlCUST.SelectedValue = cUSTOMERUTILITYPAYMENT.CUSTID.ToString();
+        ddlUTILITY.SelectedValue = cUSTOMERUTILITYPAYMENT.UTILITYID.ToString();
+        txtACCOUNTNUMBER.Text = cUSTOMERUTILITYPAYMENT.ACCOUNTNUMBER;
+    }
+    private void loadCUST()
+    {
+        ListItem li = new ListItem("Select CUST...", "0");
+        ddlCUST.Items.Add(li);
+
+        List<CUST> cUSTs = new List<CUST>();
+        cUSTs = CUSTManager.GetAllCUSTs();
+        foreach (CUST cUST in cUSTs)
+        {
+            ListItem item = new ListItem(cUST.CUSTName.ToString(), cUST.CUSTID.ToString());
+            ddlCUST.Items.Add(item);
+        }
+    }
+    private void loadUTILITY()
+    {
+        ListItem li = new ListItem("Select UTILITY...", "0");
+        ddlUTILITY.Items.Add(li);
+
+        List<UTILITY> uTILITYs = new List<UTILITY>();
+        uTILITYs = UTILITYManager.GetAllUTILITYs();
+        foreach (UTILITY uTILITY in uTILITYs)
+        {
+            ListItem item = new ListItem(uTILITY.UTILITYName.ToString(), uTILITY.UTILITYID.ToString());
+            ddlUTILITY.Items.Add(item);
+        }
+    }
+}

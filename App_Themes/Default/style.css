@@ -1,0 +1,881 @@
+@charset "utf-8";
+/*======================================
+				Creator: Ratul
+				DATE:2011-02-24
+				Project Name: Abumatu Interprise
+=======================================*/
+body{
+	text-align:center;
+	font-family:Arial, sans-serif;
+	font-size:12px;
+	background:#FFF url(images/interface/bg_body.jpg) repeat-x;
+}
+/*===========@Global Styles ============*/
+*{margin:0; padding:0; outline:none}
+img,fieldset{border:0}
+a{text-decoration:none}
+/*===============================================
+					Typography
+================================================*/
+h2{}
+h3{font-size:28px}
+h4{font-size:18px; font-family:Arial, Helvetica, sans-serif; color:#3f3f3f;}
+h5{font-size:16px}
+h6{font-size:12px}
+p{font-size:11px; font-family:Arial, Helvetica, sans-serif; color:#333333;}
+/*===============================================
+					Navigation
+================================================*/
+
+/*===============================================
+					Form-Elements
+================================================*/
+.gridIteamCenter{padding-left:10px;}
+/*===============================================
+					Module
+================================================*/
+
+
+.SearchPaymentControlCSS_Left
+{
+    text-align:left;
+    }
+    .SearchPaymentControlCSS_center
+{
+    text-align:center;
+    }
+    
+     .MyCalendar
+        {
+            background:#398AD2;
+            color:#fff;
+        }
+/*============================================================================
+								Header
+============================================================================*/
+#header{
+	width:1000px;
+	height:130px;
+	margin:0 auto;
+	text-align:left;
+	position:relative;
+	
+}
+
+/*----logo-----*/
+h1.logo {
+	width:473px;
+	height:80px;
+	position:absolute;
+	top:0;
+	left:0;	
+}
+h1.logo a {
+	width:479px;
+	height:80px;
+	position:absolute;
+	top:45px;
+	left:0px;	
+	overflow:hidden;
+	text-indent:-1000px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:30px;
+	line-height:40px;
+	text-decoration:none;
+	text-transform:capitalize;
+	background:url(images/interface/bg_logo.png) no-repeat;
+}
+/*============================================================================
+							   Footer
+============================================================================*/
+#footer{
+	width:100%;
+	height:62px;
+	text-align:left;
+	
+	
+}
+#footerWrapper{
+	width:1000px;
+	margin:0 auto;
+	text-align:left;
+	
+	
+}
+#footerWrapper p {
+	float:right;
+	text-align:right;
+	line-height:18px;
+	margin:15px 30px 0 0;
+	
+}
+	#footerWrapper p a {
+		color:#333333;
+	}
+		#footer p a:hover{
+			text-decoration:underline;
+		}
+/*============================================================================
+							  banenr
+============================================================================*/
+#banenr {
+	width:100%;	
+	margin:0 auto;
+	overflow:hidden;
+	height:302px;
+	background:url(images/banner/bg_banner.jpg) no-repeat center;
+	
+}
+
+/*============================================================================
+							  page
+		    Note: @content And @sidebar are sibling of parent-[main]
+============================================================================*/
+#page{
+	width:1000px;
+	margin:0 auto;
+	text-align:left;
+	padding-top:20px;
+	overflow:hidden;
+	position:relative;
+	
+	}
+/*=====agentName=====*/
+.agentName {
+	width:211px;
+	height:82px;
+	float:right;
+	background:url(images/interface/bg_agent.png) no-repeat;
+	margin-top:48px;	
+}
+.agentName h4 {
+	color:#1c3baa;
+	text-align:right;
+	padding-right:20px;
+	padding-top:20px;	
+}
+.agentName a {
+	color:#3b3b3b;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	font-size:18px;
+	line-height:24px;
+	float:right;
+	padding-right:20px;
+	text-align:right;
+	text-transform:uppercase;
+	
+}
+.agentName a:hover {
+	text-decoration:underline;	
+}
+
+/*============================================================================
+							 Content
+============================================================================*/
+.content {
+	width:1000px;
+	height:542px;
+	position:relative;
+	background:url(images/interface/bg_conBody.png) no-repeat center;
+}
+
+a.administrator {
+	width:185px;
+	height:85px;
+	position:absolute;
+	top:55px;
+	right:200px;
+	background:url(images/interface/bg_administrator.png) no-repeat;
+}
+a.locationReport {
+	width:193px;
+	height:88px;
+	position:absolute;
+	top:175px;
+	right:-5px;
+	background:url(images/interface/bg_location.png) no-repeat;
+}
+
+a.agentCommReport {
+	width:179px;
+	height:89px;
+	position:absolute;
+	bottom:10px;
+	right:215px;
+	background:url(images/interface/bg_agentComReportt.png) no-repeat;
+}
+
+a.dailyReport {
+	width:184px;
+	height:75px;
+	position:absolute;
+	bottom:-2px;
+	right:475px;
+	background:url(images/interface/bg_dailyReport.png) no-repeat;
+}
+
+a.editTransfer {
+	width:173px;
+	height:68px;
+	position:absolute;
+	top:320px;
+	left:72px;
+	background:url(images/interface/bg_edit.png) no-repeat;
+}
+
+a.compliance {
+	width:187px;
+	height:80px;
+	position:absolute;
+	top:205px;
+	left:0px;
+	background:url(images/interface/bg_compliance.png) no-repeat;
+}
+
+a.agentWiseReport {
+	width:194px;
+	height:129px;
+	position:absolute;
+	top:0px;
+	left:130px;
+	background:url(images/interface/bg_agentWiseReport.png) no-repeat;
+}
+
+a.transferMoney {
+	width:182px;
+	height:86px;
+	position:absolute;
+	top:-20px;
+	left:345px;
+	background:url(images/interface/bg_transfer.png) no-repeat;
+}
+a.btnexit {
+	width:93px;
+	height:30px;
+	position:absolute;
+	bottom:5px;
+	right:5px;
+	background:url(images/interface/bg_exit.png) no-repeat;
+}
+a.foodItems {
+	width:176px;
+	height:73px;
+	position:absolute;
+	top:340px;
+	right:50px;
+	background:url(images/interface/bg_foodItem.png) no-repeat;
+}
+
+
+/*=========================================================[@Page Name: LOGIN ]==============================================*/
+/*====loginbg========*/
+.loginbg {
+	width:1000px;
+	background:url(images/interface/bg_login.png) no-repeat left top;	
+}
+/*====login========*/
+.login {
+	width:420px;
+	
+	height:350px;
+	overflow:hidden;
+	margin:0 auto;	
+}
+.login h3 {
+	text-align:center;
+	color:#1c3baa;
+	font-size:18px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	line-height:51px;
+	text-transform:capitalize;
+	background:url(images/interface/bg_loginhead.png) no-repeat 80px;
+	padding-left:40px;	
+}
+.loginRow {
+	width:414px;
+	margin:10px 0;
+	float:left;
+}
+.loginRow select {
+	width:333px;	
+	float:right;
+}
+.loginRow label {
+	color:#3d3d3d;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	font-size:14px;
+	float:left;
+	width:80px;
+	text-align:right;
+	line-height:30px;
+	text-transform:capitalize;	
+	display:block;
+
+}
+span.txtinput {
+	width:323px;/*333*/
+	height:21px;/*35*/
+	float:right;
+	padding:7px 5px;
+	background:url(images/interface/bg_txtlogin.jpg) no-repeat;	
+}
+span.txtinput input.txtlogin{
+	width:320px;
+	line-height:20px;
+	font-size:16px;
+	background:none;
+	border:0;
+}
+.btnlogin {
+	width:120px;
+	height:38px;
+	border:0;
+	float:left;
+	margin-left:80px;
+	cursor:pointer;
+	background:url(images/interface/bg_btnlogin.jpg) no-repeat;	
+}
+.btnexit {
+	width:120px;
+	height:38px;
+	border:0;
+	float:right;
+	cursor:pointer;
+	background:url(images/interface/bg_btnexit.jpg) no-repeat;	
+}
+
+/*=========================================================[@Page Name: MEMBER ID ]==============================================*/
+/*==========memberbg=============*/
+.memberbg {
+	width:930px;
+	margin:0 auto;
+	overflow:hidden;
+	/*background:url(images/interface/bg_memberbg.png) no-repeat left top;*/
+}
+/*==========sidebar=============*/
+.sidebar {
+	width:234px;
+	float:left;
+	position:relative;
+	
+
+}
+/*==========memberlogin=============*/
+.memberlogin {
+	width:180px;
+	height:90px;
+	position:absolute;
+	left:5px;
+	/*top:175px;*/
+	background:url(images/interface/bg_loginman.png) no-repeat left top;
+	
+}
+.memberlogin h3 {
+	width:100%;
+	line-height:28px;
+	color:#1c3baa;
+	text-align:center;
+	font-size:12px;
+	font-weight:bold;
+	border-bottom:1px solid #b7b7b7;	
+}
+.memberlogin h3 span {
+	color:#3b3b3b;
+	font-size:12px;
+	display:block;
+	text-transform:uppercase;	
+}
+.memberlogin label {
+	color:#7c7c7c;
+	font-size:12px;
+	font-weight:bold;
+	font-family:Arial, Helvetica, sans-serif;	
+}
+
+/*======memberBotLeft=====*/
+.memberBotLeft {
+	width:234px;
+	float:left;
+	overflow:hidden;
+	/*margin-top:90px;*/
+	
+}
+
+.memberBotLeft ul {
+	width:100%;
+	overflow:hidden;	
+}
+
+.memberBotLeft ul li {
+	width:234px;
+	height:31px;
+	float:left;
+	margin-bottom:14px;
+	list-style:none;
+	overflow:hidden;	
+}
+.memberBotLeft ul li a {
+	width:234px;
+	line-height:31px;
+	float:left;
+	text-align:center;
+	text-transform:capitalize;
+	color:#393939;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	background:url(images/interface/bg_memberlist.gif) no-repeat left bottom;	
+}
+.memberBotLeft ul li a:hover, .memberBotLeft ul li#selected a  {
+	color:#FFF;
+	background:url(images/interface/bg_memberlist.gif) no-repeat left top;	
+}
+
+
+/*--------admin menu---------------*/
+.memberBotLeft_admin {
+	width:129px;
+	float:left;
+	overflow:hidden;
+	/*margin-top:90px;	*/
+}
+
+.memberBotLeft_admin ul {
+	width:100%;
+	overflow:hidden;	
+}
+
+.memberBotLeft_admin ul li {
+	width:129px;
+	height:31px;
+	float:left;
+	margin-bottom:14px;
+	list-style:none;
+	overflow:hidden;	
+}
+.memberBotLeft_admin ul li a {
+	width:129px;
+	line-height:31px;
+	float:left;
+	text-align:center;
+	text-transform:capitalize;
+	color:#393939;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	background:url(images/interface/bg_memberlist_admin.gif) no-repeat left bottom;	
+}
+.memberBotLeft_admin ul li a:hover, .memberBotLeft_admin ul li#selected a  {
+	color:#FFF;
+	background:url(images/interface/bg_memberlist_admin.gif) no-repeat left top;	
+}
+
+/*==========contentMember=============*/
+.contentMember {
+	width:690px;
+	float:right;
+	
+}
+
+.gvRowCss td
+{
+    width:200px;
+}
+/*============memberReg=========*/
+.memberReg {
+	width:100%;
+	float:right;
+	
+}
+.regRow {
+	width:100%;
+	overflow:hidden;
+	margin:15px 0;
+	float:left;	
+}
+.processPaymentButton {
+    background: url("images/interface/bg_memberlist.gif") no-repeat scroll left top transparent;
+    border: 0 none;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline;
+    float: left;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    height: 31px;
+    margin-right: 24px;
+    
+    text-align: center;
+    text-transform: capitalize;
+    width: 234px;
+}
+.regRow_Payment {
+	overflow:hidden;
+	margin:15px 0;
+	float:left;	
+}
+.regRow label {
+	display:block;
+	color:#3d3d3d;
+	font-family:Arial, Helvetica, sans-serif;
+	line-height:30px;
+	font-size:12px;	
+	float:left;
+	width:115px;
+	font-weight:bold;
+	text-align:right;
+}
+.regRowLeft {
+	width:345px;
+	float:left;	
+}
+
+.regRowRight {
+	width:345px;
+	float:right;	
+}
+
+span.regBox {
+	width:215px;/*225*/
+	height:24px;/*32*/
+	float:right;
+	padding:4px 5px;
+	background:url(images/interface/bg_txtreg.jpg) no-repeat;	
+}
+span.regBox input.txtReg {
+	width:210px;
+	line-height:20px;
+	font-size:14px;
+	border:0;
+	background:none;	
+}
+/*========namerow=========*/
+.nameRow {
+	width:100%;
+	overflow:hidden;
+	margin:15px 0;
+	float:left;	
+}
+.nameRow label {
+	display:block;
+	color:#3d3d3d;
+	font-family:Arial, Helvetica, sans-serif;
+	line-height:30px;
+	font-size:12px;	
+	float:left;
+	width:100px;
+	font-weight:bold;
+	text-align:right;
+}
+
+
+span.memberName {
+	width:180px;/*190*/
+	height:22px;/*32*/
+	float:right;
+	margin-right:2px;
+	padding:5px 5px;
+	background:url(images/interface/bg_txtname.jpg) no-repeat;	
+}
+span.memberName input.txtName {
+	width:175px;
+	line-height:20px;
+	font-size:14px;
+	border:0;
+	background:none;	
+}
+.regbtnrow {
+	width:400px;
+	margin-left:115px;
+	display:inline;
+	float:left;
+	
+	
+}
+.btnregtop {
+	width:101px;
+	height:37px;
+	text-align:center;
+	float:left;
+	font-size:14px;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#FFF;
+	text-transform:capitalize;
+	margin-right:20px;
+	border:0;
+	cursor:pointer;
+	font-weight:bold;
+	display:inline;
+	background:url(images/interface/bg_btnmember.jpg) no-repeat;	
+}
+
+.btnregtop_payment {
+	width:180px;
+	height:37px;
+	text-align:center;
+	float:left;
+	font-size:14px;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#FFF;
+	text-transform:capitalize;
+	margin-right:10px;
+	border:0;
+	cursor:pointer;
+	font-weight:bold;
+	display:inline;
+	background:url(images/interface/bg_btnmember.jpg) repeat-x;	
+}
+
+.btnselect {
+	width:103px;
+	line-height:39px;
+	height:39px;
+	float:right;
+	font-size:18px;
+	font-family:Arial, Helvetica, sans-serif;
+	text-align:center;
+	border:0;
+	cursor:pointer;
+	color:#FFF;
+	text-transform:uppercase;
+	background:url(images/interface/bg_btnselect.jpg) no-repeat;	
+}
+/*=====memberlist=======*/
+.memberlist {
+	/*width:581px;*/
+	float:right;	
+}
+/*=====memberBotBtnlist=======*/
+.memberBotBtnlist {
+	width:580px;
+	float:right;
+	margin:10px 0;
+}
+
+.btnregbot {
+	width:101px;
+	height:37px;
+	text-align:center;
+	float:left;
+	font-size:14px;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#FFF;
+	text-transform:capitalize;
+	margin-right:18px;
+	border:0;
+	cursor:pointer;
+	font-weight:bold;
+	background:url(images/interface/bg_btnmember.jpg) no-repeat;	
+}
+.nomargin {
+	margin:0px;	
+}
+
+
+
+/************************************************************* Added By Maruf***********************************************************/
+
+.textBOXcss2
+{
+    width:90%;
+    text-align:left;
+    padding:0 2px 0 2px;
+    border:1px solid #CCCCCC;
+    height:22px;
+    line-height:22px;
+    font-family:Tahoma,Verdana;
+    }
+    
+    
+    .ddlcss
+                {                        
+                    text-align:left;
+                    padding:0 2px 0 2px;                       
+                    height:22px;
+                    line-height:22px;
+                    font-family:Tahoma,Verdana;
+                    border-top:1px solid #CCCCCC;
+                        border-bottom:1px solid #CCCCCC;
+                        border-left:1px solid #CCCCCC;
+                        width:92%;
+                    }
+                    
+                    
+                    
+span.regBoxsmall
+{
+	width:150px;/*225*/
+	height:24px;/*32*/
+	float:left;
+	padding:4px 5px;
+	background:url(images/interface/bg_txtreg.jpg) no-repeat;	
+}
+span.regBoxsmall input.txtRegsmall {
+	width:150px;
+	line-height:20px;
+	font-size:14px;
+	border:0;
+	background:none;	
+}
+
+
+span.regBoxbig {
+	width:215px;/*225*/
+	height:24px;/*32*/
+	float:left;
+	padding:4px 5px;
+	background:url(images/interface/bg_txtreg.jpg) no-repeat;	
+}
+span.regBoxbig_small {
+	width:113px;/*225*/
+	height:24px;/*32*/
+	float:left;
+	padding:4px 5px;
+	background:url(images/interface/bg_txtreg_small.jpg) no-repeat;	
+}
+span.regBoxbig input.txtRegbig {
+	width:215px;
+	line-height:20px;
+	font-size:14px;
+	border:0;
+	background:none;	
+}
+
+span.regBoxbig_small input.txtRegbig {
+	width:113px;
+	line-height:20px;
+	font-size:14px;
+	border:0;
+	background:none;	
+}
+span.regBoxbig1 {
+	width:600px;/*225*/
+	height:24px;/*32*/
+	float:left;
+	padding:4px 5px;
+	background:url(images/interface/bg_txtreg11.jpg) repeat-x;	
+}
+span.regBoxbig1_others {
+	width:600px;/*225*/
+	height:100px;/*32*/
+	float:left;
+	
+}
+span.regBoxbig1 input.txtRegbig1 {
+	width:600px;
+	line-height:20px;
+	font-size:14px;
+	border:0;
+	background:none;	
+}
+
+
+
+.gridCss
+{
+    width:100%;    
+    float:left;
+}
+.gridCss .gvHeadercss
+{
+    text-align:center;
+    background-color:#326EB6;
+    height:30px;
+    line-height:25px;
+    font-size:12px;
+    font-weight:bold;
+    color:White;
+    text-align:center;
+}
+.gridCss .gvRowCss
+{
+    text-align:center;    
+    height:20px;
+    line-height:20px;
+    font-size:12px;
+    background-color:#EFEFEF;
+     /*
+    border:1px solid red;
+   
+    background:url(images/interface/bg_txtreg11.jpg) repeat-x;	
+*/
+}
+.gridCss .gvRowAltCss
+{
+    text-align:center;
+    background-color:#EFEFEF;
+    height:20px;
+    line-height:20px;
+    font-size:12px;
+    background-color:#F5F5F5;
+      /*
+    border:1px solid red;
+  
+    background:url(images/interface/bg_txtreg11.jpg) repeat-x;	
+*/
+}
+
+.gridcell
+{
+     border:1px solid red;
+}
+
+
+.agentName h2 {
+	color:#1c3baa;
+	text-align:right;
+	padding-right:20px;
+	padding-top:10px;	
+	font-size:14px;
+}
+
+
+
+
+/******************************** Added BY MAruf***************************/
+
+.fieldsetcls
+{
+border: 1px solid #162A89; padding: 0px 0px 5px 10px;
+
+
+}
+
+.lgdcls
+{
+    font-size:14px;
+    font-weight:bold;
+}
+
+.susDIv
+{
+    width:100%;
+    float:left;
+    padding:10px 0px 10px 0px;
+}
+span.regBoxbig2 {
+	width:350px;
+	height:24px;
+	float:left;
+	padding:4px 5px;
+	
+	background:url(images/interface/bg_txtreg11.jpg) repeat-x;	
+
+
+}
+span.regBoxbig2 input.txtRegbig2 {
+	width:350px;
+	line-height:20px;
+	font-size:14px;
+	border:0;
+	background:none;	
+
+}
+
+.suslabel
+{
+    font-size:14px;
+    font-weight:bold;
+}

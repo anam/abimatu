@@ -1,0 +1,138 @@
+<%@ Page Language="C#" MasterPageFile="~/Admin/AdminMaster.master" AutoEventWireup="true"
+    CodeFile="AdminCHECKCASHEDDisplay.aspx.cs" Inherits="AdminCHECKCASHEDDisplay" Title="Display CHECKCASHED By Admin" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style type="text/css">
+        .gridCss
+        {
+            width: 100%;
+            padding: 20px 10px 10px 10px;
+            text-align: center;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <div>
+        <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+        <asp:GridView ID="gvCHECKCASHED" runat="server" AutoGenerateColumns="false" CssClass="gridCss">
+            <Columns>
+                <asp:TemplateField HeaderText="Select">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="lbSelect" runat="server" CommandArgument='<%#Eval("CHECKCASHEDID") %>' OnClick="lbSelect_Click">
+                            Select
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CHKDT">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCHKDT" runat="server" Text='<%#Eval("CHKDT") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CUSTID">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCUSTID" runat="server" Text='<%#Eval("CUSTID") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="MAKERID">
+                    <ItemTemplate>
+                        <asp:Label ID="lblMAKERID" runat="server" Text='<%#Eval("MAKERID") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CHKTYPE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCHKTYPE" runat="server" Text='<%#Eval("CHKTYPE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CHKNO">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCHKNO" runat="server" Text='<%#Eval("CHKNO") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CHKAMOUNT">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCHKAMOUNT" runat="server" Text='<%#Eval("CHKAMOUNT") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CHKFEES">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCHKFEES" runat="server" Text='<%#Eval("CHKFEES") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CHKAMOUNTOWE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCHKAMOUNTOWE" runat="server" Text='<%#Eval("CHKAMOUNTOWE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="ISDEPOSITED">
+                    <ItemTemplate>
+                        <asp:Label ID="lblISDEPOSITED" runat="server" Text='<%#Eval("ISDEPOSITED") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="EMP_ID">
+                    <ItemTemplate>
+                        <asp:Label ID="lblEMP_ID" runat="server" Text='<%#Eval("EMP_ID") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="SHIFT_ID">
+                    <ItemTemplate>
+                        <asp:Label ID="lblSHIFT_ID" runat="server" Text='<%#Eval("SHIFT_ID") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="STATION_ID">
+                    <ItemTemplate>
+                        <asp:Label ID="lblSTATION_ID" runat="server" Text='<%#Eval("STATION_ID") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CREATEDBY">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCREATEDBY" runat="server" Text='<%#Eval("CREATEDBY") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CREATEDON">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCREATEDON" runat="server" Text='<%#Eval("CREATEDON") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="ISBAD">
+                    <ItemTemplate>
+                        <asp:Label ID="lblISBAD" runat="server" Text='<%#Eval("ISBAD") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="BADCHECKAMOUNTOWE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblBADCHECKAMOUNTOWE" runat="server" Text='<%#Eval("BADCHECKAMOUNTOWE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="BADCHECKREMARKS">
+                    <ItemTemplate>
+                        <asp:Label ID="lblBADCHECKREMARKS" runat="server" Text='<%#Eval("BADCHECKREMARKS") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Delete">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="lbDelete" runat="server" CommandArgument='<%#Eval("CHECKCASHEDID") %>' OnClick="lbDelete_Click">
+                            Delete
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+    </div>
+</asp:Content>

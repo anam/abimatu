@@ -1,0 +1,186 @@
+<%@ Page Language="C#" MasterPageFile="~/Admin/AdminMaster.master" AutoEventWireup="true"
+    CodeFile="AdminCUSTOMERDisplay.aspx.cs" Inherits="AdminCUSTOMERDisplay" Title="Display CUSTOMER By Admin" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style type="text/css">
+        .gridCss
+        {
+            width: 100%;
+            padding: 20px 10px 10px 10px;
+            text-align: center;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <div>
+        <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+        <asp:GridView ID="gvCUSTOMER" runat="server" AutoGenerateColumns="false" CssClass="gridCss">
+            <Columns>
+                <asp:TemplateField HeaderText="Select">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="lbSelect" runat="server" CommandArgument='<%#Eval("CUSTOMERID") %>' OnClick="lbSelect_Click">
+                            Select
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="EMTID">
+                    <ItemTemplate>
+                        <asp:Label ID="lblEMTID" runat="server" Text='<%#Eval("EMTID") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="USERNAME">
+                    <ItemTemplate>
+                        <asp:Label ID="lblUSERNAME" runat="server" Text='<%#Eval("USERNAME") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CUSTFNAME">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCUSTFNAME" runat="server" Text='<%#Eval("CUSTFNAME") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CUSTMNAME">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCUSTMNAME" runat="server" Text='<%#Eval("CUSTMNAME") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CUSTLNAME">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCUSTLNAME" runat="server" Text='<%#Eval("CUSTLNAME") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CUSTADDRESS1">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCUSTADDRESS1" runat="server" Text='<%#Eval("CUSTADDRESS1") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CUSTADDRESS2">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCUSTADDRESS2" runat="server" Text='<%#Eval("CUSTADDRESS2") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CUSTCITY">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCUSTCITY" runat="server" Text='<%#Eval("CUSTCITY") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CUSTSTATE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCUSTSTATE" runat="server" Text='<%#Eval("CUSTSTATE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CUSTZIP">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCUSTZIP" runat="server" Text='<%#Eval("CUSTZIP") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CUSTHPHONE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCUSTHPHONE" runat="server" Text='<%#Eval("CUSTHPHONE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CUSTCPHONE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCUSTCPHONE" runat="server" Text='<%#Eval("CUSTCPHONE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CUSTWPHONE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCUSTWPHONE" runat="server" Text='<%#Eval("CUSTWPHONE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CUSTSSN">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCUSTSSN" runat="server" Text='<%#Eval("CUSTSSN") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CUSTIDTYPE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCUSTIDTYPE" runat="server" Text='<%#Eval("CUSTIDTYPE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CUSTIDNUMBER">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCUSTIDNUMBER" runat="server" Text='<%#Eval("CUSTIDNUMBER") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CUSTDOB">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCUSTDOB" runat="server" Text='<%#Eval("CUSTDOB") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CUSTISSUEDATE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCUSTISSUEDATE" runat="server" Text='<%#Eval("CUSTISSUEDATE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CUSTEXPIREDATE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCUSTEXPIREDATE" runat="server" Text='<%#Eval("CUSTEXPIREDATE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="ISOFACVERIFIED">
+                    <ItemTemplate>
+                        <asp:Label ID="lblISOFACVERIFIED" runat="server" Text='<%#Eval("ISOFACVERIFIED") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CUSTREMARKS">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCUSTREMARKS" runat="server" Text='<%#Eval("CUSTREMARKS") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CREATEDBY">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCREATEDBY" runat="server" Text='<%#Eval("CREATEDBY") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CREATEDON">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCREATEDON" runat="server" Text='<%#Eval("CREATEDON") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="UPDATEDBY">
+                    <ItemTemplate>
+                        <asp:Label ID="lblUPDATEDBY" runat="server" Text='<%#Eval("UPDATEDBY") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="UPDATEDON">
+                    <ItemTemplate>
+                        <asp:Label ID="lblUPDATEDON" runat="server" Text='<%#Eval("UPDATEDON") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Delete">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="lbDelete" runat="server" CommandArgument='<%#Eval("CUSTOMERID") %>' OnClick="lbDelete_Click">
+                            Delete
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+    </div>
+</asp:Content>

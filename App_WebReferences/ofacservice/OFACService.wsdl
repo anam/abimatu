@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.lyonsreg.com/WebServices/OFACService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" targetNamespace="http://www.lyonsreg.com/WebServices/OFACService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.lyonsreg.com/WebServices/OFACService">
+      <s:element name="companyID" type="s:int" />
+      <s:element name="userName" type="s:string" />
+      <s:element name="password" type="s:string" />
+      <s:element name="name" type="s:string" />
+      <s:element name="OFACLogonScanNameResult">
+        <s:complexType mixed="true">
+          <s:sequence>
+            <s:any />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OFACScanName">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OFACScanNameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="OFACScanNameResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OFACScanCountry">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="country" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OFACScanCountryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="OFACScanCountryResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CountryList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CountryListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CountryListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Logon">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="companyID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LogonResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LogonResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Logoff">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LogoffResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="RequiredLogon">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RequiredLogonResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RequiredLogonResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindCompanyID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wildcard" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindCompanyIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FindCompanyIDResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindASCompanyID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serialNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="payeeCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindASCompanyIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FindASCompanyIDResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="OFACLogonScanNameSoapIn">
+    <wsdl:part name="companyID" element="tns:companyID" />
+    <wsdl:part name="userName" element="tns:userName" />
+    <wsdl:part name="password" element="tns:password" />
+    <wsdl:part name="name" element="tns:name" />
+  </wsdl:message>
+  <wsdl:message name="OFACLogonScanNameSoapOut">
+    <wsdl:part name="OFACLogonScanNameResult" element="tns:OFACLogonScanNameResult" />
+  </wsdl:message>
+  <wsdl:message name="OFACScanNameSoapIn">
+    <wsdl:part name="parameters" element="tns:OFACScanName" />
+  </wsdl:message>
+  <wsdl:message name="OFACScanNameSoapOut">
+    <wsdl:part name="parameters" element="tns:OFACScanNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="OFACScanCountrySoapIn">
+    <wsdl:part name="parameters" element="tns:OFACScanCountry" />
+  </wsdl:message>
+  <wsdl:message name="OFACScanCountrySoapOut">
+    <wsdl:part name="parameters" element="tns:OFACScanCountryResponse" />
+  </wsdl:message>
+  <wsdl:message name="CountryListSoapIn">
+    <wsdl:part name="parameters" element="tns:CountryList" />
+  </wsdl:message>
+  <wsdl:message name="CountryListSoapOut">
+    <wsdl:part name="parameters" element="tns:CountryListResponse" />
+  </wsdl:message>
+  <wsdl:message name="LogonSoapIn">
+    <wsdl:part name="parameters" element="tns:Logon" />
+  </wsdl:message>
+  <wsdl:message name="LogonSoapOut">
+    <wsdl:part name="parameters" element="tns:LogonResponse" />
+  </wsdl:message>
+  <wsdl:message name="LogoffSoapIn">
+    <wsdl:part name="parameters" element="tns:Logoff" />
+  </wsdl:message>
+  <wsdl:message name="LogoffSoapOut">
+    <wsdl:part name="parameters" element="tns:LogoffResponse" />
+  </wsdl:message>
+  <wsdl:message name="RequiredLogonSoapIn">
+    <wsdl:part name="parameters" element="tns:RequiredLogon" />
+  </wsdl:message>
+  <wsdl:message name="RequiredLogonSoapOut">
+    <wsdl:part name="parameters" element="tns:RequiredLogonResponse" />
+  </wsdl:message>
+  <wsdl:message name="FindCompanyIDSoapIn">
+    <wsdl:part name="parameters" element="tns:FindCompanyID" />
+  </wsdl:message>
+  <wsdl:message name="FindCompanyIDSoapOut">
+    <wsdl:part name="parameters" element="tns:FindCompanyIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="FindASCompanyIDSoapIn">
+    <wsdl:part name="parameters" element="tns:FindASCompanyID" />
+  </wsdl:message>
+  <wsdl:message name="FindASCompanyIDSoapOut">
+    <wsdl:part name="parameters" element="tns:FindASCompanyIDResponse" />
+  </wsdl:message>
+  <wsdl:portType name="OFACServiceSoap">
+    <wsdl:operation name="OFACLogonScanName">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">OFAC Logon to service and Scan Name</documentation>
+      <wsdl:input message="tns:OFACLogonScanNameSoapIn" />
+      <wsdl:output message="tns:OFACLogonScanNameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OFACScanName">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">OFAC Scan Name.</documentation>
+      <wsdl:input message="tns:OFACScanNameSoapIn" />
+      <wsdl:output message="tns:OFACScanNameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OFACScanCountry">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">OFAC Scan Name and Country.</documentation>
+      <wsdl:input message="tns:OFACScanCountrySoapIn" />
+      <wsdl:output message="tns:OFACScanCountrySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CountryList">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">List of countries in OFAC</documentation>
+      <wsdl:input message="tns:CountryListSoapIn" />
+      <wsdl:output message="tns:CountryListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Logon">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Logon to service</documentation>
+      <wsdl:input message="tns:LogonSoapIn" />
+      <wsdl:output message="tns:LogonSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Logoff">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Log out user.</documentation>
+      <wsdl:input message="tns:LogoffSoapIn" />
+      <wsdl:output message="tns:LogoffSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RequiredLogon">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Has a session expired?</documentation>
+      <wsdl:input message="tns:RequiredLogonSoapIn" />
+      <wsdl:output message="tns:RequiredLogonSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindCompanyID">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Find my company ID using wild card name search (%)</documentation>
+      <wsdl:input message="tns:FindCompanyIDSoapIn" />
+      <wsdl:output message="tns:FindCompanyIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindASCompanyID">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Find company identifier using AutoScribe serial number and payee code.</documentation>
+      <wsdl:input message="tns:FindASCompanyIDSoapIn" />
+      <wsdl:output message="tns:FindASCompanyIDSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="OFACServiceSoap" type="tns:OFACServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="OFACLogonScanName">
+      <soap:operation soapAction="http://www.lyonsreg.com/WebServices/OFACService/OFACLogonScanName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OFACScanName">
+      <soap:operation soapAction="http://www.lyonsreg.com/WebServices/OFACService/OFACScanName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OFACScanCountry">
+      <soap:operation soapAction="http://www.lyonsreg.com/WebServices/OFACService/OFACScanCountry" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CountryList">
+      <soap:operation soapAction="http://www.lyonsreg.com/WebServices/OFACService/CountryList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Logon">
+      <soap:operation soapAction="http://www.lyonsreg.com/WebServices/OFACService/Logon" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Logoff">
+      <soap:operation soapAction="http://www.lyonsreg.com/WebServices/OFACService/Logoff" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RequiredLogon">
+      <soap:operation soapAction="http://www.lyonsreg.com/WebServices/OFACService/RequiredLogon" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindCompanyID">
+      <soap:operation soapAction="http://www.lyonsreg.com/WebServices/OFACService/FindCompanyID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindASCompanyID">
+      <soap:operation soapAction="http://www.lyonsreg.com/WebServices/OFACService/FindASCompanyID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="OFACService">
+    <wsdl:port name="OFACServiceSoap" binding="tns:OFACServiceSoap">
+      <soap:address location="https://www.lyonsreg.com/webservices/ofac/OFACService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

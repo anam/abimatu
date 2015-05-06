@@ -1,0 +1,202 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminCHECKCASHEDInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            loadCUST();
+            loadMAKER();
+            loadEMP_();
+            loadSHIFT_();
+            loadSTATION_();
+            if (Request.QueryString["cHECKCASHEDID"] != null)
+            {
+                int cHECKCASHEDID = Int32.Parse(Request.QueryString["cHECKCASHEDID"]);
+                if (cHECKCASHEDID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showCHECKCASHEDData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        CHECKCASHED cHECKCASHED = new CHECKCASHED();
+
+        cHECKCASHED.CHKDT = txtCHKDT.Text;
+        cHECKCASHED.CUSTID = Int32.Parse(ddlCUST.SelectedValue);
+        cHECKCASHED.MAKERID = Int32.Parse(ddlMAKER.SelectedValue);
+        cHECKCASHED.CHKTYPE = txtCHKTYPE.Text;
+        cHECKCASHED.CHKNO = txtCHKNO.Text;
+        cHECKCASHED.CHKAMOUNT = Int32.Parse(txtCHKAMOUNT.Text);
+        cHECKCASHED.CHKFEES = Int32.Parse(txtCHKFEES.Text);
+        cHECKCASHED.CHKAMOUNTOWE = Int32.Parse(txtCHKAMOUNTOWE.Text);
+        cHECKCASHED.ISDEPOSITED = txtISDEPOSITED.Text;
+        cHECKCASHED.EMP_ID = Int32.Parse(ddlEMP_.SelectedValue);
+        cHECKCASHED.SHIFT_ID = Int32.Parse(ddlSHIFT_.SelectedValue);
+        cHECKCASHED.STATION_ID = Int32.Parse(ddlSTATION_.SelectedValue);
+        cHECKCASHED.CREATEDBY = txtCREATEDBY.Text;
+        cHECKCASHED.CREATEDON = txtCREATEDON.Text;
+        cHECKCASHED.ISBAD = txtISBAD.Text;
+        cHECKCASHED.BADCHECKAMOUNTOWE = Int32.Parse(txtBADCHECKAMOUNTOWE.Text);
+        cHECKCASHED.BADCHECKREMARKS = txtBADCHECKREMARKS.Text;
+        int resutl = CHECKCASHEDManager.InsertCHECKCASHED(cHECKCASHED);
+        Response.Redirect("AdminCHECKCASHEDDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        CHECKCASHED cHECKCASHED = new CHECKCASHED();
+        cHECKCASHED = CHECKCASHEDManager.GetCHECKCASHEDByID(Int32.Parse(Request.QueryString["cHECKCASHEDID"]));
+        CHECKCASHED tempCHECKCASHED = new CHECKCASHED();
+        tempCHECKCASHED.CHECKCASHEDID = cHECKCASHED.CHECKCASHEDID;
+
+        tempCHECKCASHED.CHKDT = txtCHKDT.Text;
+        tempCHECKCASHED.CUSTID = Int32.Parse(ddlCUST.SelectedValue);
+        tempCHECKCASHED.MAKERID = Int32.Parse(ddlMAKER.SelectedValue);
+        tempCHECKCASHED.CHKTYPE = txtCHKTYPE.Text;
+        tempCHECKCASHED.CHKNO = txtCHKNO.Text;
+        tempCHECKCASHED.CHKAMOUNT = Int32.Parse(txtCHKAMOUNT.Text);
+        tempCHECKCASHED.CHKFEES = Int32.Parse(txtCHKFEES.Text);
+        tempCHECKCASHED.CHKAMOUNTOWE = Int32.Parse(txtCHKAMOUNTOWE.Text);
+        tempCHECKCASHED.ISDEPOSITED = txtISDEPOSITED.Text;
+        tempCHECKCASHED.EMP_ID = Int32.Parse(ddlEMP_.SelectedValue);
+        tempCHECKCASHED.SHIFT_ID = Int32.Parse(ddlSHIFT_.SelectedValue);
+        tempCHECKCASHED.STATION_ID = Int32.Parse(ddlSTATION_.SelectedValue);
+        tempCHECKCASHED.CREATEDBY = txtCREATEDBY.Text;
+        tempCHECKCASHED.CREATEDON = txtCREATEDON.Text;
+        tempCHECKCASHED.ISBAD = txtISBAD.Text;
+        tempCHECKCASHED.BADCHECKAMOUNTOWE = Int32.Parse(txtBADCHECKAMOUNTOWE.Text);
+        tempCHECKCASHED.BADCHECKREMARKS = txtBADCHECKREMARKS.Text;
+        bool result = CHECKCASHEDManager.UpdateCHECKCASHED(tempCHECKCASHED);
+        Response.Redirect("AdminCHECKCASHEDDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        txtCHKDT.Text = "";
+        ddlCUST.SelectedIndex = 0;
+        ddlMAKER.SelectedIndex = 0;
+        txtCHKTYPE.Text = "";
+        txtCHKNO.Text = "";
+        txtCHKAMOUNT.Text = "";
+        txtCHKFEES.Text = "";
+        txtCHKAMOUNTOWE.Text = "";
+        txtISDEPOSITED.Text = "";
+        ddlEMP_.SelectedIndex = 0;
+        ddlSHIFT_.SelectedIndex = 0;
+        ddlSTATION_.SelectedIndex = 0;
+        txtCREATEDBY.Text = "";
+        txtCREATEDON.Text = "";
+        txtISBAD.Text = "";
+        txtBADCHECKAMOUNTOWE.Text = "";
+        txtBADCHECKREMARKS.Text = "";
+    }
+    private void showCHECKCASHEDData()
+    {
+        CHECKCASHED cHECKCASHED = new CHECKCASHED();
+        cHECKCASHED = CHECKCASHEDManager.GetCHECKCASHEDByID(Int32.Parse(Request.QueryString["cHECKCASHEDID"]));
+
+        txtCHKDT.Text = cHECKCASHED.CHKDT;
+        ddlCUST.SelectedValue = cHECKCASHED.CUSTID.ToString();
+        ddlMAKER.SelectedValue = cHECKCASHED.MAKERID.ToString();
+        txtCHKTYPE.Text = cHECKCASHED.CHKTYPE;
+        txtCHKNO.Text = cHECKCASHED.CHKNO;
+        txtCHKAMOUNT.Text = cHECKCASHED.CHKAMOUNT.ToString();
+        txtCHKFEES.Text = cHECKCASHED.CHKFEES.ToString();
+        txtCHKAMOUNTOWE.Text = cHECKCASHED.CHKAMOUNTOWE.ToString();
+        txtISDEPOSITED.Text = cHECKCASHED.ISDEPOSITED;
+        ddlEMP_.SelectedValue = cHECKCASHED.EMP_ID.ToString();
+        ddlSHIFT_.SelectedValue = cHECKCASHED.SHIFT_ID.ToString();
+        ddlSTATION_.SelectedValue = cHECKCASHED.STATION_ID.ToString();
+        txtCREATEDBY.Text = cHECKCASHED.CREATEDBY;
+        txtCREATEDON.Text = cHECKCASHED.CREATEDON;
+        txtISBAD.Text = cHECKCASHED.ISBAD;
+        txtBADCHECKAMOUNTOWE.Text = cHECKCASHED.BADCHECKAMOUNTOWE.ToString();
+        txtBADCHECKREMARKS.Text = cHECKCASHED.BADCHECKREMARKS;
+    }
+    private void loadCUST()
+    {
+        ListItem li = new ListItem("Select CUST...", "0");
+        ddlCUST.Items.Add(li);
+
+        List<CUST> cUSTs = new List<CUST>();
+        cUSTs = CUSTManager.GetAllCUSTs();
+        foreach (CUST cUST in cUSTs)
+        {
+            ListItem item = new ListItem(cUST.CUSTName.ToString(), cUST.CUSTID.ToString());
+            ddlCUST.Items.Add(item);
+        }
+    }
+    private void loadMAKER()
+    {
+        ListItem li = new ListItem("Select MAKER...", "0");
+        ddlMAKER.Items.Add(li);
+
+        List<MAKER> mAKERs = new List<MAKER>();
+        mAKERs = MAKERManager.GetAllMAKERs();
+        foreach (MAKER mAKER in mAKERs)
+        {
+            ListItem item = new ListItem(mAKER.MAKERName.ToString(), mAKER.MAKERID.ToString());
+            ddlMAKER.Items.Add(item);
+        }
+    }
+    private void loadEMP_()
+    {
+        ListItem li = new ListItem("Select EMP_...", "0");
+        ddlEMP_.Items.Add(li);
+
+        List<EMP_> eMP_s = new List<EMP_>();
+        eMP_s = EMP_Manager.GetAllEMP_s();
+        foreach (EMP_ eMP_ in eMP_s)
+        {
+            ListItem item = new ListItem(eMP_.EMP_Name.ToString(), eMP_.EMP_ID.ToString());
+            ddlEMP_.Items.Add(item);
+        }
+    }
+    private void loadSHIFT_()
+    {
+        ListItem li = new ListItem("Select SHIFT_...", "0");
+        ddlSHIFT_.Items.Add(li);
+
+        List<SHIFT_> sHIFT_s = new List<SHIFT_>();
+        sHIFT_s = SHIFT_Manager.GetAllSHIFT_s();
+        foreach (SHIFT_ sHIFT_ in sHIFT_s)
+        {
+            ListItem item = new ListItem(sHIFT_.SHIFT_Name.ToString(), sHIFT_.SHIFT_ID.ToString());
+            ddlSHIFT_.Items.Add(item);
+        }
+    }
+    private void loadSTATION_()
+    {
+        ListItem li = new ListItem("Select STATION_...", "0");
+        ddlSTATION_.Items.Add(li);
+
+        List<STATION_> sTATION_s = new List<STATION_>();
+        sTATION_s = STATION_Manager.GetAllSTATION_s();
+        foreach (STATION_ sTATION_ in sTATION_s)
+        {
+            ListItem item = new ListItem(sTATION_.STATION_Name.ToString(), sTATION_.STATION_ID.ToString());
+            ddlSTATION_.Items.Add(item);
+        }
+    }
+}

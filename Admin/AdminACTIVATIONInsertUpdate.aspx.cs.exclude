@@ -1,0 +1,154 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminACTIVATIONInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            loadCUST_();
+            if (Request.QueryString["aCTIVATIONID"] != null)
+            {
+                int aCTIVATIONID = Int32.Parse(Request.QueryString["aCTIVATIONID"]);
+                if (aCTIVATIONID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showACTIVATIONData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        ACTIVATION aCTIVATION = new ACTIVATION();
+
+        aCTIVATION.CUST_ID = Int32.Parse(ddlCUST_.SelectedValue);
+        aCTIVATION.CARRIERTYPE = txtCARRIERTYPE.Text;
+        aCTIVATION.ACTIVATIONTYPE = txtACTIVATIONTYPE.Text;
+        aCTIVATION.ACCOUNTNO = txtACCOUNTNO.Text;
+        aCTIVATION.ORDERNO = txtORDERNO.Text;
+        aCTIVATION.DEALERCODE = txtDEALERCODE.Text;
+        aCTIVATION.ACTIVATIONDATE = txtACTIVATIONDATE.Text;
+        aCTIVATION.MOBILENO = txtMOBILENO.Text;
+        aCTIVATION.SIMM = txtSIMM.Text;
+        aCTIVATION.IMEI = txtIMEI.Text;
+        aCTIVATION.RATEPLAN = txtRATEPLAN.Text;
+        aCTIVATION.COMMAMOUNT = Int32.Parse(txtCOMMAMOUNT.Text);
+        aCTIVATION.SPIFF = Int32.Parse(txtSPIFF.Text);
+        aCTIVATION.REBATE = Int32.Parse(txtREBATE.Text);
+        aCTIVATION.ISACTIVE = txtISACTIVE.Text;
+        aCTIVATION.CREATEDBY = Int32.Parse(txtCREATEDBY.Text);
+        aCTIVATION.CREATEDON = txtCREATEDON.Text;
+        aCTIVATION.UPDATEDBY = Int32.Parse(txtUPDATEDBY.Text);
+        aCTIVATION.UPDATEDON = txtUPDATEDON.Text;
+        int resutl = ACTIVATIONManager.InsertACTIVATION(aCTIVATION);
+        Response.Redirect("AdminACTIVATIONDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        ACTIVATION aCTIVATION = new ACTIVATION();
+        aCTIVATION = ACTIVATIONManager.GetACTIVATIONByID(Int32.Parse(Request.QueryString["aCTIVATIONID"]));
+        ACTIVATION tempACTIVATION = new ACTIVATION();
+        tempACTIVATION.ACTIVATIONID = aCTIVATION.ACTIVATIONID;
+
+        tempACTIVATION.CUST_ID = Int32.Parse(ddlCUST_.SelectedValue);
+        tempACTIVATION.CARRIERTYPE = txtCARRIERTYPE.Text;
+        tempACTIVATION.ACTIVATIONTYPE = txtACTIVATIONTYPE.Text;
+        tempACTIVATION.ACCOUNTNO = txtACCOUNTNO.Text;
+        tempACTIVATION.ORDERNO = txtORDERNO.Text;
+        tempACTIVATION.DEALERCODE = txtDEALERCODE.Text;
+        tempACTIVATION.ACTIVATIONDATE = txtACTIVATIONDATE.Text;
+        tempACTIVATION.MOBILENO = txtMOBILENO.Text;
+        tempACTIVATION.SIMM = txtSIMM.Text;
+        tempACTIVATION.IMEI = txtIMEI.Text;
+        tempACTIVATION.RATEPLAN = txtRATEPLAN.Text;
+        tempACTIVATION.COMMAMOUNT = Int32.Parse(txtCOMMAMOUNT.Text);
+        tempACTIVATION.SPIFF = Int32.Parse(txtSPIFF.Text);
+        tempACTIVATION.REBATE = Int32.Parse(txtREBATE.Text);
+        tempACTIVATION.ISACTIVE = txtISACTIVE.Text;
+        tempACTIVATION.CREATEDBY = Int32.Parse(txtCREATEDBY.Text);
+        tempACTIVATION.CREATEDON = txtCREATEDON.Text;
+        tempACTIVATION.UPDATEDBY = Int32.Parse(txtUPDATEDBY.Text);
+        tempACTIVATION.UPDATEDON = txtUPDATEDON.Text;
+        bool result = ACTIVATIONManager.UpdateACTIVATION(tempACTIVATION);
+        Response.Redirect("AdminACTIVATIONDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        ddlCUST_.SelectedIndex = 0;
+        txtCARRIERTYPE.Text = "";
+        txtACTIVATIONTYPE.Text = "";
+        txtACCOUNTNO.Text = "";
+        txtORDERNO.Text = "";
+        txtDEALERCODE.Text = "";
+        txtACTIVATIONDATE.Text = "";
+        txtMOBILENO.Text = "";
+        txtSIMM.Text = "";
+        txtIMEI.Text = "";
+        txtRATEPLAN.Text = "";
+        txtCOMMAMOUNT.Text = "";
+        txtSPIFF.Text = "";
+        txtREBATE.Text = "";
+        txtISACTIVE.Text = "";
+        txtCREATEDBY.Text = "";
+        txtCREATEDON.Text = "";
+        txtUPDATEDBY.Text = "";
+        txtUPDATEDON.Text = "";
+    }
+    private void showACTIVATIONData()
+    {
+        ACTIVATION aCTIVATION = new ACTIVATION();
+        aCTIVATION = ACTIVATIONManager.GetACTIVATIONByID(Int32.Parse(Request.QueryString["aCTIVATIONID"]));
+
+        ddlCUST_.SelectedValue = aCTIVATION.CUST_ID.ToString();
+        txtCARRIERTYPE.Text = aCTIVATION.CARRIERTYPE;
+        txtACTIVATIONTYPE.Text = aCTIVATION.ACTIVATIONTYPE;
+        txtACCOUNTNO.Text = aCTIVATION.ACCOUNTNO;
+        txtORDERNO.Text = aCTIVATION.ORDERNO;
+        txtDEALERCODE.Text = aCTIVATION.DEALERCODE;
+        txtACTIVATIONDATE.Text = aCTIVATION.ACTIVATIONDATE;
+        txtMOBILENO.Text = aCTIVATION.MOBILENO;
+        txtSIMM.Text = aCTIVATION.SIMM;
+        txtIMEI.Text = aCTIVATION.IMEI;
+        txtRATEPLAN.Text = aCTIVATION.RATEPLAN;
+        txtCOMMAMOUNT.Text = aCTIVATION.COMMAMOUNT.ToString();
+        txtSPIFF.Text = aCTIVATION.SPIFF.ToString();
+        txtREBATE.Text = aCTIVATION.REBATE.ToString();
+        txtISACTIVE.Text = aCTIVATION.ISACTIVE;
+        txtCREATEDBY.Text = aCTIVATION.CREATEDBY.ToString();
+        txtCREATEDON.Text = aCTIVATION.CREATEDON;
+        txtUPDATEDBY.Text = aCTIVATION.UPDATEDBY.ToString();
+        txtUPDATEDON.Text = aCTIVATION.UPDATEDON;
+    }
+    private void loadCUST_()
+    {
+        ListItem li = new ListItem("Select CUST_...", "0");
+        ddlCUST_.Items.Add(li);
+
+        List<CUST_> cUST_s = new List<CUST_>();
+        cUST_s = CUST_Manager.GetAllCUST_s();
+        foreach (CUST_ cUST_ in cUST_s)
+        {
+            ListItem item = new ListItem(cUST_.CUST_Name.ToString(), cUST_.CUST_ID.ToString());
+            ddlCUST_.Items.Add(item);
+        }
+    }
+}

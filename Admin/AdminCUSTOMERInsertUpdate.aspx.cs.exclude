@@ -1,0 +1,206 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminCUSTOMERInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            loadEMT();
+            loadCUST();
+            loadCUST();
+            if (Request.QueryString["cUSTOMERID"] != null)
+            {
+                int cUSTOMERID = Int32.Parse(Request.QueryString["cUSTOMERID"]);
+                if (cUSTOMERID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showCUSTOMERData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        CUSTOMER cUSTOMER = new CUSTOMER();
+
+        cUSTOMER.EMTID = Int32.Parse(ddlEMT.SelectedValue);
+        cUSTOMER.USERNAME = txtUSERNAME.Text;
+        cUSTOMER.CUSTFNAME = txtCUSTFNAME.Text;
+        cUSTOMER.CUSTMNAME = txtCUSTMNAME.Text;
+        cUSTOMER.CUSTLNAME = txtCUSTLNAME.Text;
+        cUSTOMER.CUSTADDRESS1 = txtCUSTADDRESS1.Text;
+        cUSTOMER.CUSTADDRESS2 = txtCUSTADDRESS2.Text;
+        cUSTOMER.CUSTCITY = txtCUSTCITY.Text;
+        cUSTOMER.CUSTSTATE = txtCUSTSTATE.Text;
+        cUSTOMER.CUSTZIP = txtCUSTZIP.Text;
+        cUSTOMER.CUSTHPHONE = txtCUSTHPHONE.Text;
+        cUSTOMER.CUSTCPHONE = txtCUSTCPHONE.Text;
+        cUSTOMER.CUSTWPHONE = txtCUSTWPHONE.Text;
+        cUSTOMER.CUSTSSN = txtCUSTSSN.Text;
+        cUSTOMER.CUSTIDTYPE = Int32.Parse(ddlCUST.SelectedValue);
+        cUSTOMER.CUSTIDNUMBER = Int32.Parse(ddlCUST.SelectedValue);
+        cUSTOMER.CUSTDOB = txtCUSTDOB.Text;
+        cUSTOMER.CUSTISSUEDATE = txtCUSTISSUEDATE.Text;
+        cUSTOMER.CUSTEXPIREDATE = txtCUSTEXPIREDATE.Text;
+        cUSTOMER.ISOFACVERIFIED = txtISOFACVERIFIED.Text;
+        cUSTOMER.CUSTREMARKS = txtCUSTREMARKS.Text;
+        cUSTOMER.CREATEDBY = Int32.Parse(txtCREATEDBY.Text);
+        cUSTOMER.CREATEDON = txtCREATEDON.Text;
+        cUSTOMER.UPDATEDBY = Int32.Parse(txtUPDATEDBY.Text);
+        cUSTOMER.UPDATEDON = txtUPDATEDON.Text;
+        int resutl = CUSTOMERManager.InsertCUSTOMER(cUSTOMER);
+        Response.Redirect("AdminCUSTOMERDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        CUSTOMER cUSTOMER = new CUSTOMER();
+        cUSTOMER = CUSTOMERManager.GetCUSTOMERByID(Int32.Parse(Request.QueryString["cUSTOMERID"]));
+        CUSTOMER tempCUSTOMER = new CUSTOMER();
+        tempCUSTOMER.CUSTOMERID = cUSTOMER.CUSTOMERID;
+
+        tempCUSTOMER.EMTID = Int32.Parse(ddlEMT.SelectedValue);
+        tempCUSTOMER.USERNAME = txtUSERNAME.Text;
+        tempCUSTOMER.CUSTFNAME = txtCUSTFNAME.Text;
+        tempCUSTOMER.CUSTMNAME = txtCUSTMNAME.Text;
+        tempCUSTOMER.CUSTLNAME = txtCUSTLNAME.Text;
+        tempCUSTOMER.CUSTADDRESS1 = txtCUSTADDRESS1.Text;
+        tempCUSTOMER.CUSTADDRESS2 = txtCUSTADDRESS2.Text;
+        tempCUSTOMER.CUSTCITY = txtCUSTCITY.Text;
+        tempCUSTOMER.CUSTSTATE = txtCUSTSTATE.Text;
+        tempCUSTOMER.CUSTZIP = txtCUSTZIP.Text;
+        tempCUSTOMER.CUSTHPHONE = txtCUSTHPHONE.Text;
+        tempCUSTOMER.CUSTCPHONE = txtCUSTCPHONE.Text;
+        tempCUSTOMER.CUSTWPHONE = txtCUSTWPHONE.Text;
+        tempCUSTOMER.CUSTSSN = txtCUSTSSN.Text;
+        tempCUSTOMER.CUSTIDTYPE = Int32.Parse(ddlCUST.SelectedValue);
+        tempCUSTOMER.CUSTIDNUMBER = Int32.Parse(ddlCUST.SelectedValue);
+        tempCUSTOMER.CUSTDOB = txtCUSTDOB.Text;
+        tempCUSTOMER.CUSTISSUEDATE = txtCUSTISSUEDATE.Text;
+        tempCUSTOMER.CUSTEXPIREDATE = txtCUSTEXPIREDATE.Text;
+        tempCUSTOMER.ISOFACVERIFIED = txtISOFACVERIFIED.Text;
+        tempCUSTOMER.CUSTREMARKS = txtCUSTREMARKS.Text;
+        tempCUSTOMER.CREATEDBY = Int32.Parse(txtCREATEDBY.Text);
+        tempCUSTOMER.CREATEDON = txtCREATEDON.Text;
+        tempCUSTOMER.UPDATEDBY = Int32.Parse(txtUPDATEDBY.Text);
+        tempCUSTOMER.UPDATEDON = txtUPDATEDON.Text;
+        bool result = CUSTOMERManager.UpdateCUSTOMER(tempCUSTOMER);
+        Response.Redirect("AdminCUSTOMERDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        ddlEMT.SelectedIndex = 0;
+        txtUSERNAME.Text = "";
+        txtCUSTFNAME.Text = "";
+        txtCUSTMNAME.Text = "";
+        txtCUSTLNAME.Text = "";
+        txtCUSTADDRESS1.Text = "";
+        txtCUSTADDRESS2.Text = "";
+        txtCUSTCITY.Text = "";
+        txtCUSTSTATE.Text = "";
+        txtCUSTZIP.Text = "";
+        txtCUSTHPHONE.Text = "";
+        txtCUSTCPHONE.Text = "";
+        txtCUSTWPHONE.Text = "";
+        txtCUSTSSN.Text = "";
+        ddlCUST.SelectedIndex = 0;
+        ddlCUST.SelectedIndex = 0;
+        txtCUSTDOB.Text = "";
+        txtCUSTISSUEDATE.Text = "";
+        txtCUSTEXPIREDATE.Text = "";
+        txtISOFACVERIFIED.Text = "";
+        txtCUSTREMARKS.Text = "";
+        txtCREATEDBY.Text = "";
+        txtCREATEDON.Text = "";
+        txtUPDATEDBY.Text = "";
+        txtUPDATEDON.Text = "";
+    }
+    private void showCUSTOMERData()
+    {
+        CUSTOMER cUSTOMER = new CUSTOMER();
+        cUSTOMER = CUSTOMERManager.GetCUSTOMERByID(Int32.Parse(Request.QueryString["cUSTOMERID"]));
+
+        ddlEMT.SelectedValue = cUSTOMER.EMTID.ToString();
+        txtUSERNAME.Text = cUSTOMER.USERNAME;
+        txtCUSTFNAME.Text = cUSTOMER.CUSTFNAME;
+        txtCUSTMNAME.Text = cUSTOMER.CUSTMNAME;
+        txtCUSTLNAME.Text = cUSTOMER.CUSTLNAME;
+        txtCUSTADDRESS1.Text = cUSTOMER.CUSTADDRESS1;
+        txtCUSTADDRESS2.Text = cUSTOMER.CUSTADDRESS2;
+        txtCUSTCITY.Text = cUSTOMER.CUSTCITY;
+        txtCUSTSTATE.Text = cUSTOMER.CUSTSTATE;
+        txtCUSTZIP.Text = cUSTOMER.CUSTZIP;
+        txtCUSTHPHONE.Text = cUSTOMER.CUSTHPHONE;
+        txtCUSTCPHONE.Text = cUSTOMER.CUSTCPHONE;
+        txtCUSTWPHONE.Text = cUSTOMER.CUSTWPHONE;
+        txtCUSTSSN.Text = cUSTOMER.CUSTSSN;
+        ddlCUST.SelectedValue = cUSTOMER.CUSTIDTYPE.ToString();
+        ddlCUST.SelectedValue = cUSTOMER.CUSTIDNUMBER.ToString();
+        txtCUSTDOB.Text = cUSTOMER.CUSTDOB;
+        txtCUSTISSUEDATE.Text = cUSTOMER.CUSTISSUEDATE;
+        txtCUSTEXPIREDATE.Text = cUSTOMER.CUSTEXPIREDATE;
+        txtISOFACVERIFIED.Text = cUSTOMER.ISOFACVERIFIED;
+        txtCUSTREMARKS.Text = cUSTOMER.CUSTREMARKS;
+        txtCREATEDBY.Text = cUSTOMER.CREATEDBY.ToString();
+        txtCREATEDON.Text = cUSTOMER.CREATEDON;
+        txtUPDATEDBY.Text = cUSTOMER.UPDATEDBY.ToString();
+        txtUPDATEDON.Text = cUSTOMER.UPDATEDON;
+    }
+    private void loadEMT()
+    {
+        ListItem li = new ListItem("Select EMT...", "0");
+        ddlEMT.Items.Add(li);
+
+        List<EMT> eMTs = new List<EMT>();
+        eMTs = EMTManager.GetAllEMTs();
+        foreach (EMT eMT in eMTs)
+        {
+            ListItem item = new ListItem(eMT.EMTName.ToString(), eMT.EMTID.ToString());
+            ddlEMT.Items.Add(item);
+        }
+    }
+    private void loadCUST()
+    {
+        ListItem li = new ListItem("Select CUST...", "0");
+        ddlCUST.Items.Add(li);
+
+        List<CUST> cUSTs = new List<CUST>();
+        cUSTs = CUSTManager.GetAllCUSTs();
+        foreach (CUST cUST in cUSTs)
+        {
+            ListItem item = new ListItem(cUST.CUSTName.ToString(), cUST.CUSTIDTYPE.ToString());
+            ddlCUST.Items.Add(item);
+        }
+    }
+    private void loadCUST()
+    {
+        ListItem li = new ListItem("Select CUST...", "0");
+        ddlCUST.Items.Add(li);
+
+        List<CUST> cUSTs = new List<CUST>();
+        cUSTs = CUSTManager.GetAllCUSTs();
+        foreach (CUST cUST in cUSTs)
+        {
+            ListItem item = new ListItem(cUST.CUSTName.ToString(), cUST.CUSTIDNUMBER.ToString());
+            ddlCUST.Items.Add(item);
+        }
+    }
+}
