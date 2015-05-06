@@ -1,0 +1,132 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminEMPLOYEEInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            if (Request.QueryString["eMPLOYEEID"] != null)
+            {
+                int eMPLOYEEID = Int32.Parse(Request.QueryString["eMPLOYEEID"]);
+                if (eMPLOYEEID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showEMPLOYEEData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        EMPLOYEE eMPLOYEE = new EMPLOYEE();
+
+        eMPLOYEE.EMPNAME = txtEMPNAME.Text;
+        eMPLOYEE.EMPADDRESS1 = txtEMPADDRESS1.Text;
+        eMPLOYEE.EMPADDRESS2 = txtEMPADDRESS2.Text;
+        eMPLOYEE.EMPCITY = txtEMPCITY.Text;
+        eMPLOYEE.EMPSTATE = txtEMPSTATE.Text;
+        eMPLOYEE.EMPZIP = txtEMPZIP.Text;
+        eMPLOYEE.EMPHPHONE = txtEMPHPHONE.Text;
+        eMPLOYEE.EMPCPHONE = txtEMPCPHONE.Text;
+        eMPLOYEE.EMPSTORE = txtEMPSTORE.Text;
+        eMPLOYEE.EMPPASSWORD = txtEMPPASSWORD.Text;
+        eMPLOYEE.ISACTIVE = txtISACTIVE.Text;
+        eMPLOYEE.ISMANAGER = txtISMANAGER.Text;
+        eMPLOYEE.ISCOMPLIANCEOFFICER = txtISCOMPLIANCEOFFICER.Text;
+        eMPLOYEE.CREATEDBY = Int32.Parse(txtCREATEDBY.Text);
+        eMPLOYEE.CREATEDON = txtCREATEDON.Text;
+        eMPLOYEE.UPDATEDBY = Int32.Parse(txtUPDATEDBY.Text);
+        eMPLOYEE.UPDATEDON = txtUPDATEDON.Text;
+        int resutl = EMPLOYEEManager.InsertEMPLOYEE(eMPLOYEE);
+        Response.Redirect("AdminEMPLOYEEDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        EMPLOYEE eMPLOYEE = new EMPLOYEE();
+        eMPLOYEE = EMPLOYEEManager.GetEMPLOYEEByID(Int32.Parse(Request.QueryString["eMPLOYEEID"]));
+        EMPLOYEE tempEMPLOYEE = new EMPLOYEE();
+        tempEMPLOYEE.EMPLOYEEID = eMPLOYEE.EMPLOYEEID;
+
+        tempEMPLOYEE.EMPNAME = txtEMPNAME.Text;
+        tempEMPLOYEE.EMPADDRESS1 = txtEMPADDRESS1.Text;
+        tempEMPLOYEE.EMPADDRESS2 = txtEMPADDRESS2.Text;
+        tempEMPLOYEE.EMPCITY = txtEMPCITY.Text;
+        tempEMPLOYEE.EMPSTATE = txtEMPSTATE.Text;
+        tempEMPLOYEE.EMPZIP = txtEMPZIP.Text;
+        tempEMPLOYEE.EMPHPHONE = txtEMPHPHONE.Text;
+        tempEMPLOYEE.EMPCPHONE = txtEMPCPHONE.Text;
+        tempEMPLOYEE.EMPSTORE = txtEMPSTORE.Text;
+        tempEMPLOYEE.EMPPASSWORD = txtEMPPASSWORD.Text;
+        tempEMPLOYEE.ISACTIVE = txtISACTIVE.Text;
+        tempEMPLOYEE.ISMANAGER = txtISMANAGER.Text;
+        tempEMPLOYEE.ISCOMPLIANCEOFFICER = txtISCOMPLIANCEOFFICER.Text;
+        tempEMPLOYEE.CREATEDBY = Int32.Parse(txtCREATEDBY.Text);
+        tempEMPLOYEE.CREATEDON = txtCREATEDON.Text;
+        tempEMPLOYEE.UPDATEDBY = Int32.Parse(txtUPDATEDBY.Text);
+        tempEMPLOYEE.UPDATEDON = txtUPDATEDON.Text;
+        bool result = EMPLOYEEManager.UpdateEMPLOYEE(tempEMPLOYEE);
+        Response.Redirect("AdminEMPLOYEEDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        txtEMPNAME.Text = "";
+        txtEMPADDRESS1.Text = "";
+        txtEMPADDRESS2.Text = "";
+        txtEMPCITY.Text = "";
+        txtEMPSTATE.Text = "";
+        txtEMPZIP.Text = "";
+        txtEMPHPHONE.Text = "";
+        txtEMPCPHONE.Text = "";
+        txtEMPSTORE.Text = "";
+        txtEMPPASSWORD.Text = "";
+        txtISACTIVE.Text = "";
+        txtISMANAGER.Text = "";
+        txtISCOMPLIANCEOFFICER.Text = "";
+        txtCREATEDBY.Text = "";
+        txtCREATEDON.Text = "";
+        txtUPDATEDBY.Text = "";
+        txtUPDATEDON.Text = "";
+    }
+    private void showEMPLOYEEData()
+    {
+        EMPLOYEE eMPLOYEE = new EMPLOYEE();
+        eMPLOYEE = EMPLOYEEManager.GetEMPLOYEEByID(Int32.Parse(Request.QueryString["eMPLOYEEID"]));
+
+        txtEMPNAME.Text = eMPLOYEE.EMPNAME;
+        txtEMPADDRESS1.Text = eMPLOYEE.EMPADDRESS1;
+        txtEMPADDRESS2.Text = eMPLOYEE.EMPADDRESS2;
+        txtEMPCITY.Text = eMPLOYEE.EMPCITY;
+        txtEMPSTATE.Text = eMPLOYEE.EMPSTATE;
+        txtEMPZIP.Text = eMPLOYEE.EMPZIP;
+        txtEMPHPHONE.Text = eMPLOYEE.EMPHPHONE;
+        txtEMPCPHONE.Text = eMPLOYEE.EMPCPHONE;
+        txtEMPSTORE.Text = eMPLOYEE.EMPSTORE;
+        txtEMPPASSWORD.Text = eMPLOYEE.EMPPASSWORD;
+        txtISACTIVE.Text = eMPLOYEE.ISACTIVE;
+        txtISMANAGER.Text = eMPLOYEE.ISMANAGER;
+        txtISCOMPLIANCEOFFICER.Text = eMPLOYEE.ISCOMPLIANCEOFFICER;
+        txtCREATEDBY.Text = eMPLOYEE.CREATEDBY.ToString();
+        txtCREATEDON.Text = eMPLOYEE.CREATEDON;
+        txtUPDATEDBY.Text = eMPLOYEE.UPDATEDBY.ToString();
+        txtUPDATEDON.Text = eMPLOYEE.UPDATEDON;
+    }
+}

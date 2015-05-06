@@ -1,0 +1,96 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminSPR_COMMISSIONInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            if (Request.QueryString["sPR_COMMISSIONID"] != null)
+            {
+                int sPR_COMMISSIONID = Int32.Parse(Request.QueryString["sPR_COMMISSIONID"]);
+                if (sPR_COMMISSIONID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showSPR_COMMISSIONData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        SPR_COMMISSION sPR_COMMISSION = new SPR_COMMISSION();
+
+        sPR_COMMISSION.STYPE = txtSTYPE.Text;
+        sPR_COMMISSION.SPLAN = txtSPLAN.Text;
+        sPR_COMMISSION.SASL = txtSASL.Text;
+        sPR_COMMISSION.SYEAR = Int32.Parse(txtSYEAR.Text);
+        sPR_COMMISSION.BASECOMM = Int32.Parse(txtBASECOMM.Text);
+        sPR_COMMISSION.ASLCOMM = Int32.Parse(txtASLCOMM.Text);
+        sPR_COMMISSION.TYPECOMM = Int32.Parse(txtTYPECOMM.Text);
+        sPR_COMMISSION.YEARCOMM = Int32.Parse(txtYEARCOMM.Text);
+        int resutl = SPR_COMMISSIONManager.InsertSPR_COMMISSION(sPR_COMMISSION);
+        Response.Redirect("AdminSPR_COMMISSIONDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        SPR_COMMISSION sPR_COMMISSION = new SPR_COMMISSION();
+        sPR_COMMISSION = SPR_COMMISSIONManager.GetSPR_COMMISSIONByID(Int32.Parse(Request.QueryString["sPR_COMMISSIONID"]));
+        SPR_COMMISSION tempSPR_COMMISSION = new SPR_COMMISSION();
+        tempSPR_COMMISSION.SPR_COMMISSIONID = sPR_COMMISSION.SPR_COMMISSIONID;
+
+        tempSPR_COMMISSION.STYPE = txtSTYPE.Text;
+        tempSPR_COMMISSION.SPLAN = txtSPLAN.Text;
+        tempSPR_COMMISSION.SASL = txtSASL.Text;
+        tempSPR_COMMISSION.SYEAR = Int32.Parse(txtSYEAR.Text);
+        tempSPR_COMMISSION.BASECOMM = Int32.Parse(txtBASECOMM.Text);
+        tempSPR_COMMISSION.ASLCOMM = Int32.Parse(txtASLCOMM.Text);
+        tempSPR_COMMISSION.TYPECOMM = Int32.Parse(txtTYPECOMM.Text);
+        tempSPR_COMMISSION.YEARCOMM = Int32.Parse(txtYEARCOMM.Text);
+        bool result = SPR_COMMISSIONManager.UpdateSPR_COMMISSION(tempSPR_COMMISSION);
+        Response.Redirect("AdminSPR_COMMISSIONDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        txtSTYPE.Text = "";
+        txtSPLAN.Text = "";
+        txtSASL.Text = "";
+        txtSYEAR.Text = "";
+        txtBASECOMM.Text = "";
+        txtASLCOMM.Text = "";
+        txtTYPECOMM.Text = "";
+        txtYEARCOMM.Text = "";
+    }
+    private void showSPR_COMMISSIONData()
+    {
+        SPR_COMMISSION sPR_COMMISSION = new SPR_COMMISSION();
+        sPR_COMMISSION = SPR_COMMISSIONManager.GetSPR_COMMISSIONByID(Int32.Parse(Request.QueryString["sPR_COMMISSIONID"]));
+
+        txtSTYPE.Text = sPR_COMMISSION.STYPE;
+        txtSPLAN.Text = sPR_COMMISSION.SPLAN;
+        txtSASL.Text = sPR_COMMISSION.SASL;
+        txtSYEAR.Text = sPR_COMMISSION.SYEAR.ToString();
+        txtBASECOMM.Text = sPR_COMMISSION.BASECOMM.ToString();
+        txtASLCOMM.Text = sPR_COMMISSION.ASLCOMM.ToString();
+        txtTYPECOMM.Text = sPR_COMMISSION.TYPECOMM.ToString();
+        txtYEARCOMM.Text = sPR_COMMISSION.YEARCOMM.ToString();
+    }
+}

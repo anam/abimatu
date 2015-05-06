@@ -1,0 +1,117 @@
+<%@ Page Language="C#" MasterPageFile="~/Admin/AdminMaster.master" AutoEventWireup="true" 
+CodeFile="AdminGLOBALPAYMENTInsertUpdate.aspx.cs" Inherits="AdminGLOBALPAYMENTInsertUpdate" Title="GLOBALPAYMENT Insert/Update By Admin" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <style type="text/css">
+        .tableCss
+        {
+        	text-align: left;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <div class="tableCss">
+        <table>
+            <tr>
+                <td>
+                    <asp:Label ID="lblID" runat="server" Text="ID: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtID" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblUTILITYNAME" runat="server" Text="UTILITYNAME: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtUTILITYNAME" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblUTILITYFEES" runat="server" Text="UTILITYFEES: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtUTILITYFEES" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblSTORECOMM" runat="server" Text="STORECOMM: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtSTORECOMM" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblGLOBALCOMM" runat="server" Text="GLOBALCOMM: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtGLOBALCOMM" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblACCOUNTLENGTH" runat="server" Text="ACCOUNTLENGTH: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtACCOUNTLENGTH" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblACCOUNTSTART" runat="server" Text="ACCOUNTSTART: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtACCOUNTSTART" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblSCALELINEFROMBOTTON" runat="server" Text="SCALELINEFROMBOTTON: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtSCALELINEFROMBOTTON" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblSCALELINEWIDTH" runat="server" Text="SCALELINEWIDTH: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlSCALELINEW" runat="server">
+                    </asp:DropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+                    <asp:Button ID="btnUpdate" runat="server" Text="Update" 
+                        OnClick="btnUpdate_Click" />
+                </td>
+                <td>
+                    <asp:Button ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_Click" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</asp:Content>

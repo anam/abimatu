@@ -1,0 +1,128 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminSALESSTORESERVICESInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            if (Request.QueryString["sALESSTORESERVICESID"] != null)
+            {
+                int sALESSTORESERVICESID = Int32.Parse(Request.QueryString["sALESSTORESERVICESID"]);
+                if (sALESSTORESERVICESID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showSALESSTORESERVICESData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        SALESSTORESERVICES sALESSTORESERVICES = new SALESSTORESERVICES();
+
+        sALESSTORESERVICES.SERVICETYPE = txtSERVICETYPE.Text;
+        sALESSTORESERVICES.SERVICENAME = txtSERVICENAME.Text;
+        sALESSTORESERVICES.SERVICEFEE = Int32.Parse(txtSERVICEFEE.Text);
+        sALESSTORESERVICES.ISQUICKACCESS = txtISQUICKACCESS.Text;
+        sALESSTORESERVICES.ISTAXABLE = txtISTAXABLE.Text;
+        sALESSTORESERVICES.PAYMENTMODE = txtPAYMENTMODE.Text;
+        sALESSTORESERVICES.ITEMINSTOCK = Int32.Parse(txtITEMINSTOCK.Text);
+        sALESSTORESERVICES.REORDERLEVEL = Int32.Parse(txtREORDERLEVEL.Text);
+        sALESSTORESERVICES.COSTPRICE = Int32.Parse(txtCOSTPRICE.Text);
+        sALESSTORESERVICES.RETAILPRICE = Int32.Parse(txtRETAILPRICE.Text);
+        sALESSTORESERVICES.CREATEDON = txtCREATEDON.Text;
+        sALESSTORESERVICES.CREATEDBY = txtCREATEDBY.Text;
+        sALESSTORESERVICES.UPDATEDON = txtUPDATEDON.Text;
+        sALESSTORESERVICES.UPDATEDBY = txtUPDATEDBY.Text;
+        sALESSTORESERVICES.COMM = Int32.Parse(txtCOMM.Text);
+        sALESSTORESERVICES.ISCOMMCOUNTED = txtISCOMMCOUNTED.Text;
+        int resutl = SALESSTORESERVICESManager.InsertSALESSTORESERVICES(sALESSTORESERVICES);
+        Response.Redirect("AdminSALESSTORESERVICESDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        SALESSTORESERVICES sALESSTORESERVICES = new SALESSTORESERVICES();
+        sALESSTORESERVICES = SALESSTORESERVICESManager.GetSALESSTORESERVICESByID(Int32.Parse(Request.QueryString["sALESSTORESERVICESID"]));
+        SALESSTORESERVICES tempSALESSTORESERVICES = new SALESSTORESERVICES();
+        tempSALESSTORESERVICES.SALESSTORESERVICESID = sALESSTORESERVICES.SALESSTORESERVICESID;
+
+        tempSALESSTORESERVICES.SERVICETYPE = txtSERVICETYPE.Text;
+        tempSALESSTORESERVICES.SERVICENAME = txtSERVICENAME.Text;
+        tempSALESSTORESERVICES.SERVICEFEE = Int32.Parse(txtSERVICEFEE.Text);
+        tempSALESSTORESERVICES.ISQUICKACCESS = txtISQUICKACCESS.Text;
+        tempSALESSTORESERVICES.ISTAXABLE = txtISTAXABLE.Text;
+        tempSALESSTORESERVICES.PAYMENTMODE = txtPAYMENTMODE.Text;
+        tempSALESSTORESERVICES.ITEMINSTOCK = Int32.Parse(txtITEMINSTOCK.Text);
+        tempSALESSTORESERVICES.REORDERLEVEL = Int32.Parse(txtREORDERLEVEL.Text);
+        tempSALESSTORESERVICES.COSTPRICE = Int32.Parse(txtCOSTPRICE.Text);
+        tempSALESSTORESERVICES.RETAILPRICE = Int32.Parse(txtRETAILPRICE.Text);
+        tempSALESSTORESERVICES.CREATEDON = txtCREATEDON.Text;
+        tempSALESSTORESERVICES.CREATEDBY = txtCREATEDBY.Text;
+        tempSALESSTORESERVICES.UPDATEDON = txtUPDATEDON.Text;
+        tempSALESSTORESERVICES.UPDATEDBY = txtUPDATEDBY.Text;
+        tempSALESSTORESERVICES.COMM = Int32.Parse(txtCOMM.Text);
+        tempSALESSTORESERVICES.ISCOMMCOUNTED = txtISCOMMCOUNTED.Text;
+        bool result = SALESSTORESERVICESManager.UpdateSALESSTORESERVICES(tempSALESSTORESERVICES);
+        Response.Redirect("AdminSALESSTORESERVICESDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        txtSERVICETYPE.Text = "";
+        txtSERVICENAME.Text = "";
+        txtSERVICEFEE.Text = "";
+        txtISQUICKACCESS.Text = "";
+        txtISTAXABLE.Text = "";
+        txtPAYMENTMODE.Text = "";
+        txtITEMINSTOCK.Text = "";
+        txtREORDERLEVEL.Text = "";
+        txtCOSTPRICE.Text = "";
+        txtRETAILPRICE.Text = "";
+        txtCREATEDON.Text = "";
+        txtCREATEDBY.Text = "";
+        txtUPDATEDON.Text = "";
+        txtUPDATEDBY.Text = "";
+        txtCOMM.Text = "";
+        txtISCOMMCOUNTED.Text = "";
+    }
+    private void showSALESSTORESERVICESData()
+    {
+        SALESSTORESERVICES sALESSTORESERVICES = new SALESSTORESERVICES();
+        sALESSTORESERVICES = SALESSTORESERVICESManager.GetSALESSTORESERVICESByID(Int32.Parse(Request.QueryString["sALESSTORESERVICESID"]));
+
+        txtSERVICETYPE.Text = sALESSTORESERVICES.SERVICETYPE;
+        txtSERVICENAME.Text = sALESSTORESERVICES.SERVICENAME;
+        txtSERVICEFEE.Text = sALESSTORESERVICES.SERVICEFEE.ToString();
+        txtISQUICKACCESS.Text = sALESSTORESERVICES.ISQUICKACCESS;
+        txtISTAXABLE.Text = sALESSTORESERVICES.ISTAXABLE;
+        txtPAYMENTMODE.Text = sALESSTORESERVICES.PAYMENTMODE;
+        txtITEMINSTOCK.Text = sALESSTORESERVICES.ITEMINSTOCK.ToString();
+        txtREORDERLEVEL.Text = sALESSTORESERVICES.REORDERLEVEL.ToString();
+        txtCOSTPRICE.Text = sALESSTORESERVICES.COSTPRICE.ToString();
+        txtRETAILPRICE.Text = sALESSTORESERVICES.RETAILPRICE.ToString();
+        txtCREATEDON.Text = sALESSTORESERVICES.CREATEDON;
+        txtCREATEDBY.Text = sALESSTORESERVICES.CREATEDBY;
+        txtUPDATEDON.Text = sALESSTORESERVICES.UPDATEDON;
+        txtUPDATEDBY.Text = sALESSTORESERVICES.UPDATEDBY;
+        txtCOMM.Text = sALESSTORESERVICES.COMM.ToString();
+        txtISCOMMCOUNTED.Text = sALESSTORESERVICES.ISCOMMCOUNTED;
+    }
+}

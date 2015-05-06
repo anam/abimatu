@@ -1,0 +1,160 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminUSERINFOInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            loadAgent_Location();
+            if (Request.QueryString["uSERINFOID"] != null)
+            {
+                int uSERINFOID = Int32.Parse(Request.QueryString["uSERINFOID"]);
+                if (uSERINFOID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showUSERINFOData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        USERINFO uSERINFO = new USERINFO();
+
+        uSERINFO.AddedDate = DateTime.Now;
+        uSERINFO.AddedBy = txtAddedBy.Text;
+        uSERINFO.ModifyDate = txtModifyDate.Text;
+        uSERINFO.ModifyBy = txtModifyBy.Text;
+        uSERINFO.Type = txtType.Text;
+        uSERINFO.UserName = txtUserName.Text;
+        uSERINFO.Agent_LocationID = Int32.Parse(ddlAgent_Location.SelectedValue);
+        uSERINFO.FirstName = txtFirstName.Text;
+        uSERINFO.LastName = txtLastName.Text;
+        uSERINFO.MiddleName = txtMiddleName.Text;
+        uSERINFO.Address = txtAddress.Text;
+        uSERINFO.City = txtCity.Text;
+        uSERINFO.State = txtState.Text;
+        uSERINFO.Country = txtCountry.Text;
+        uSERINFO.PostalCode = txtPostalCode.Text;
+        uSERINFO.ExpDate = txtExpDate.Text;
+        uSERINFO.Status = Int32.Parse(txtStatus.Text);
+        uSERINFO.HomePhone = txtHomePhone.Text;
+        uSERINFO.WorkPhone = txtWorkPhone.Text;
+        uSERINFO.Mobile = txtMobile.Text;
+        uSERINFO.Comm = txtComm.Text;
+        int resutl = USERINFOManager.InsertUSERINFO(uSERINFO);
+        Response.Redirect("AdminUSERINFODisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        USERINFO uSERINFO = new USERINFO();
+        uSERINFO = USERINFOManager.GetUSERINFOByID(Int32.Parse(Request.QueryString["uSERINFOID"]));
+        USERINFO tempUSERINFO = new USERINFO();
+        tempUSERINFO.USERINFOID = uSERINFO.USERINFOID;
+
+        tempUSERINFO.AddedDate = DateTime.Now;
+        tempUSERINFO.AddedBy = txtAddedBy.Text;
+        tempUSERINFO.ModifyDate = txtModifyDate.Text;
+        tempUSERINFO.ModifyBy = txtModifyBy.Text;
+        tempUSERINFO.Type = txtType.Text;
+        tempUSERINFO.UserName = txtUserName.Text;
+        tempUSERINFO.Agent_LocationID = Int32.Parse(ddlAgent_Location.SelectedValue);
+        tempUSERINFO.FirstName = txtFirstName.Text;
+        tempUSERINFO.LastName = txtLastName.Text;
+        tempUSERINFO.MiddleName = txtMiddleName.Text;
+        tempUSERINFO.Address = txtAddress.Text;
+        tempUSERINFO.City = txtCity.Text;
+        tempUSERINFO.State = txtState.Text;
+        tempUSERINFO.Country = txtCountry.Text;
+        tempUSERINFO.PostalCode = txtPostalCode.Text;
+        tempUSERINFO.ExpDate = txtExpDate.Text;
+        tempUSERINFO.Status = Int32.Parse(txtStatus.Text);
+        tempUSERINFO.HomePhone = txtHomePhone.Text;
+        tempUSERINFO.WorkPhone = txtWorkPhone.Text;
+        tempUSERINFO.Mobile = txtMobile.Text;
+        tempUSERINFO.Comm = txtComm.Text;
+        bool result = USERINFOManager.UpdateUSERINFO(tempUSERINFO);
+        Response.Redirect("AdminUSERINFODisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        txtAddedBy.Text = "";
+        txtModifyDate.Text = "";
+        txtModifyBy.Text = "";
+        txtType.Text = "";
+        txtUserName.Text = "";
+        ddlAgent_Location.SelectedIndex = 0;
+        txtFirstName.Text = "";
+        txtLastName.Text = "";
+        txtMiddleName.Text = "";
+        txtAddress.Text = "";
+        txtCity.Text = "";
+        txtState.Text = "";
+        txtCountry.Text = "";
+        txtPostalCode.Text = "";
+        txtExpDate.Text = "";
+        txtStatus.Text = "";
+        txtHomePhone.Text = "";
+        txtWorkPhone.Text = "";
+        txtMobile.Text = "";
+        txtComm.Text = "";
+    }
+    private void showUSERINFOData()
+    {
+        USERINFO uSERINFO = new USERINFO();
+        uSERINFO = USERINFOManager.GetUSERINFOByID(Int32.Parse(Request.QueryString["uSERINFOID"]));
+
+        txtAddedBy.Text = uSERINFO.AddedBy;
+        txtModifyDate.Text = uSERINFO.ModifyDate;
+        txtModifyBy.Text = uSERINFO.ModifyBy;
+        txtType.Text = uSERINFO.Type;
+        txtUserName.Text = uSERINFO.UserName;
+        ddlAgent_Location.SelectedValue = uSERINFO.Agent_LocationID.ToString();
+        txtFirstName.Text = uSERINFO.FirstName;
+        txtLastName.Text = uSERINFO.LastName;
+        txtMiddleName.Text = uSERINFO.MiddleName;
+        txtAddress.Text = uSERINFO.Address;
+        txtCity.Text = uSERINFO.City;
+        txtState.Text = uSERINFO.State;
+        txtCountry.Text = uSERINFO.Country;
+        txtPostalCode.Text = uSERINFO.PostalCode;
+        txtExpDate.Text = uSERINFO.ExpDate;
+        txtStatus.Text = uSERINFO.Status.ToString();
+        txtHomePhone.Text = uSERINFO.HomePhone;
+        txtWorkPhone.Text = uSERINFO.WorkPhone;
+        txtMobile.Text = uSERINFO.Mobile;
+        txtComm.Text = uSERINFO.Comm;
+    }
+    private void loadAgent_Location()
+    {
+        ListItem li = new ListItem("Select Agent_Location...", "0");
+        ddlAgent_Location.Items.Add(li);
+
+        List<Agent_Location> agent_Locations = new List<Agent_Location>();
+        agent_Locations = Agent_LocationManager.GetAllAgent_Locations();
+        foreach (Agent_Location agent_Location in agent_Locations)
+        {
+            ListItem item = new ListItem(agent_Location.Agent_LocationName.ToString(), agent_Location.Agent_LocationID.ToString());
+            ddlAgent_Location.Items.Add(item);
+        }
+    }
+}

@@ -1,0 +1,630 @@
+<%@ Page Language="C#" MasterPageFile="~/Admin/AdminMaster.master" AutoEventWireup="true"
+    CodeFile="AdminREPORTDisplay.aspx.cs" Inherits="AdminREPORTDisplay" Title="Display REPORT By Admin" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style type="text/css">
+        .gridCss
+        {
+            width: 100%;
+            padding: 20px 10px 10px 10px;
+            text-align: center;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <div>
+        <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+        <asp:GridView ID="gvREPORT" runat="server" AutoGenerateColumns="false" CssClass="gridCss">
+            <Columns>
+                <asp:TemplateField HeaderText="Select">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="lbSelect" runat="server" CommandArgument='<%#Eval("REPORTID") %>' OnClick="lbSelect_Click">
+                            Select
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="DT">
+                    <ItemTemplate>
+                        <asp:Label ID="lblDT" runat="server" Text='<%#Eval("DT") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="BEGININGBALANCE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblBEGININGBALANCE" runat="server" Text='<%#Eval("BEGININGBALANCE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHFROM1">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHFROM1" runat="server" Text='<%#Eval("CASHFROM1") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHFROM1REMARKS">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHFROM1REMARKS" runat="server" Text='<%#Eval("CASHFROM1REMARKS") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHFROM2">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHFROM2" runat="server" Text='<%#Eval("CASHFROM2") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHFROM2REMARKS">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHFROM2REMARKS" runat="server" Text='<%#Eval("CASHFROM2REMARKS") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHFROM3">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHFROM3" runat="server" Text='<%#Eval("CASHFROM3") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHFROM3REMARKS">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHFROM3REMARKS" runat="server" Text='<%#Eval("CASHFROM3REMARKS") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHFROM4">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHFROM4" runat="server" Text='<%#Eval("CASHFROM4") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHFROM4REMARKS">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHFROM4REMARKS" runat="server" Text='<%#Eval("CASHFROM4REMARKS") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHFROM5">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHFROM5" runat="server" Text='<%#Eval("CASHFROM5") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHFROM5REMARKS">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHFROM5REMARKS" runat="server" Text='<%#Eval("CASHFROM5REMARKS") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHFROM6">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHFROM6" runat="server" Text='<%#Eval("CASHFROM6") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHFROM6REMARKS">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHFROM6REMARKS" runat="server" Text='<%#Eval("CASHFROM6REMARKS") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHFROM7">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHFROM7" runat="server" Text='<%#Eval("CASHFROM7") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHFROM7REMARKS">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHFROM7REMARKS" runat="server" Text='<%#Eval("CASHFROM7REMARKS") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHFROM8">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHFROM8" runat="server" Text='<%#Eval("CASHFROM8") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHFROM8REMARKS">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHFROM8REMARKS" runat="server" Text='<%#Eval("CASHFROM8REMARKS") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHFROM9">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHFROM9" runat="server" Text='<%#Eval("CASHFROM9") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHFROM9REMARKS">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHFROM9REMARKS" runat="server" Text='<%#Eval("CASHFROM9REMARKS") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHFROM10">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHFROM10" runat="server" Text='<%#Eval("CASHFROM10") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHFROM10REMARKS">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHFROM10REMARKS" runat="server" Text='<%#Eval("CASHFROM10REMARKS") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHFROM11">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHFROM11" runat="server" Text='<%#Eval("CASHFROM11") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHFROM11REMARKS">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHFROM11REMARKS" runat="server" Text='<%#Eval("CASHFROM11REMARKS") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHFROM12">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHFROM12" runat="server" Text='<%#Eval("CASHFROM12") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHFROM12REMARKS">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHFROM12REMARKS" runat="server" Text='<%#Eval("CASHFROM12REMARKS") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="WU">
+                    <ItemTemplate>
+                        <asp:Label ID="lblWU" runat="server" Text='<%#Eval("WU") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="WUCOUNT">
+                    <ItemTemplate>
+                        <asp:Label ID="lblWUCOUNT" runat="server" Text='<%#Eval("WUCOUNT") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CONVPAY">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCONVPAY" runat="server" Text='<%#Eval("CONVPAY") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CONVPAYCOUNT">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCONVPAYCOUNT" runat="server" Text='<%#Eval("CONVPAYCOUNT") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="MO">
+                    <ItemTemplate>
+                        <asp:Label ID="lblMO" runat="server" Text='<%#Eval("MO") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="MOCOMM">
+                    <ItemTemplate>
+                        <asp:Label ID="lblMOCOMM" runat="server" Text='<%#Eval("MOCOMM") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="MOCOUNT">
+                    <ItemTemplate>
+                        <asp:Label ID="lblMOCOUNT" runat="server" Text='<%#Eval("MOCOUNT") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="FEDILITY">
+                    <ItemTemplate>
+                        <asp:Label ID="lblFEDILITY" runat="server" Text='<%#Eval("FEDILITY") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="FEDILITYCOMM">
+                    <ItemTemplate>
+                        <asp:Label ID="lblFEDILITYCOMM" runat="server" Text='<%#Eval("FEDILITYCOMM") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="FEDILITYCOUNT">
+                    <ItemTemplate>
+                        <asp:Label ID="lblFEDILITYCOUNT" runat="server" Text='<%#Eval("FEDILITYCOUNT") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="GLOBALEXPRESS">
+                    <ItemTemplate>
+                        <asp:Label ID="lblGLOBALEXPRESS" runat="server" Text='<%#Eval("GLOBALEXPRESS") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="GLOBALEXPRESSCOMM">
+                    <ItemTemplate>
+                        <asp:Label ID="lblGLOBALEXPRESSCOMM" runat="server" Text='<%#Eval("GLOBALEXPRESSCOMM") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="GLOBALEXPRESSCOUNT">
+                    <ItemTemplate>
+                        <asp:Label ID="lblGLOBALEXPRESSCOUNT" runat="server" Text='<%#Eval("GLOBALEXPRESSCOUNT") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CHECKFREEPAY">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCHECKFREEPAY" runat="server" Text='<%#Eval("CHECKFREEPAY") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CHECKFREEPAYCOMM">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCHECKFREEPAYCOMM" runat="server" Text='<%#Eval("CHECKFREEPAYCOMM") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CHECKFREEPAYCOUNT">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCHECKFREEPAYCOUNT" runat="server" Text='<%#Eval("CHECKFREEPAYCOUNT") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="PRECASH">
+                    <ItemTemplate>
+                        <asp:Label ID="lblPRECASH" runat="server" Text='<%#Eval("PRECASH") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="PRECASHCOMM">
+                    <ItemTemplate>
+                        <asp:Label ID="lblPRECASHCOMM" runat="server" Text='<%#Eval("PRECASHCOMM") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="PRECASHCOUNT">
+                    <ItemTemplate>
+                        <asp:Label ID="lblPRECASHCOUNT" runat="server" Text='<%#Eval("PRECASHCOUNT") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="PHONECARD">
+                    <ItemTemplate>
+                        <asp:Label ID="lblPHONECARD" runat="server" Text='<%#Eval("PHONECARD") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="IDCARD">
+                    <ItemTemplate>
+                        <asp:Label ID="lblIDCARD" runat="server" Text='<%#Eval("IDCARD") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="IDCARDCOUNT">
+                    <ItemTemplate>
+                        <asp:Label ID="lblIDCARDCOUNT" runat="server" Text='<%#Eval("IDCARDCOUNT") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CHECKCOMM">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCHECKCOMM" runat="server" Text='<%#Eval("CHECKCOMM") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CHECKCOUNT">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCHECKCOUNT" runat="server" Text='<%#Eval("CHECKCOUNT") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="TOTALCASHIN">
+                    <ItemTemplate>
+                        <asp:Label ID="lblTOTALCASHIN" runat="server" Text='<%#Eval("TOTALCASHIN") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHDEPOSIT1">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHDEPOSIT1" runat="server" Text='<%#Eval("CASHDEPOSIT1") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHDEPOSIT2">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHDEPOSIT2" runat="server" Text='<%#Eval("CASHDEPOSIT2") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHDEPOSIT3">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHDEPOSIT3" runat="server" Text='<%#Eval("CASHDEPOSIT3") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHDEPOSIT4">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHDEPOSIT4" runat="server" Text='<%#Eval("CASHDEPOSIT4") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHDEPOSIT5">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHDEPOSIT5" runat="server" Text='<%#Eval("CASHDEPOSIT5") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CHECKDEPOSIT1">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCHECKDEPOSIT1" runat="server" Text='<%#Eval("CHECKDEPOSIT1") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CHECKDEPOSIT2">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCHECKDEPOSIT2" runat="server" Text='<%#Eval("CHECKDEPOSIT2") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CHECKDEPOSIT3">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCHECKDEPOSIT3" runat="server" Text='<%#Eval("CHECKDEPOSIT3") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CHECKDEPOSIT4">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCHECKDEPOSIT4" runat="server" Text='<%#Eval("CHECKDEPOSIT4") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CHECKDEPOSIT5">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCHECKDEPOSIT5" runat="server" Text='<%#Eval("CHECKDEPOSIT5") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CHECKDEPOSIT6">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCHECKDEPOSIT6" runat="server" Text='<%#Eval("CHECKDEPOSIT6") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CHECKDEPOSIT7">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCHECKDEPOSIT7" runat="server" Text='<%#Eval("CHECKDEPOSIT7") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CHECKDEPOSIT8">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCHECKDEPOSIT8" runat="server" Text='<%#Eval("CHECKDEPOSIT8") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CHECKDEPOSIT9">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCHECKDEPOSIT9" runat="server" Text='<%#Eval("CHECKDEPOSIT9") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CHECKDEPOSIT10">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCHECKDEPOSIT10" runat="server" Text='<%#Eval("CHECKDEPOSIT10") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CHECKDEPOSIT11">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCHECKDEPOSIT11" runat="server" Text='<%#Eval("CHECKDEPOSIT11") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CHECKDEPOSIT12">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCHECKDEPOSIT12" runat="server" Text='<%#Eval("CHECKDEPOSIT12") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHTRANSFER1">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHTRANSFER1" runat="server" Text='<%#Eval("CASHTRANSFER1") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHTRANSFER1REMARKS">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHTRANSFER1REMARKS" runat="server" Text='<%#Eval("CASHTRANSFER1REMARKS") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHTRANSFER2">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHTRANSFER2" runat="server" Text='<%#Eval("CASHTRANSFER2") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHTRANSFER2REMARKS">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHTRANSFER2REMARKS" runat="server" Text='<%#Eval("CASHTRANSFER2REMARKS") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHTRANSFER3">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHTRANSFER3" runat="server" Text='<%#Eval("CASHTRANSFER3") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHTRANSFER3REMARKS">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHTRANSFER3REMARKS" runat="server" Text='<%#Eval("CASHTRANSFER3REMARKS") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHTRANSFER4">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHTRANSFER4" runat="server" Text='<%#Eval("CASHTRANSFER4") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHTRANSFER4REMARKS">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHTRANSFER4REMARKS" runat="server" Text='<%#Eval("CASHTRANSFER4REMARKS") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHTRANSFER5">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHTRANSFER5" runat="server" Text='<%#Eval("CASHTRANSFER5") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHTRANSFER5REMARKS">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHTRANSFER5REMARKS" runat="server" Text='<%#Eval("CASHTRANSFER5REMARKS") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHTRANSFER6">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHTRANSFER6" runat="server" Text='<%#Eval("CASHTRANSFER6") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHTRANSFER6REMARKS">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHTRANSFER6REMARKS" runat="server" Text='<%#Eval("CASHTRANSFER6REMARKS") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHTRANSFER7">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHTRANSFER7" runat="server" Text='<%#Eval("CASHTRANSFER7") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHTRANSFER7REMARKS">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHTRANSFER7REMARKS" runat="server" Text='<%#Eval("CASHTRANSFER7REMARKS") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHTRANSFER8">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHTRANSFER8" runat="server" Text='<%#Eval("CASHTRANSFER8") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CASHTRANSFER8REMARKS">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCASHTRANSFER8REMARKS" runat="server" Text='<%#Eval("CASHTRANSFER8REMARKS") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="FEDILITYDEPOSIT">
+                    <ItemTemplate>
+                        <asp:Label ID="lblFEDILITYDEPOSIT" runat="server" Text='<%#Eval("FEDILITYDEPOSIT") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CHECKFREEPAYDEPOSIT">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCHECKFREEPAYDEPOSIT" runat="server" Text='<%#Eval("CHECKFREEPAYDEPOSIT") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CONVPAYDEPOSIT">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCONVPAYDEPOSIT" runat="server" Text='<%#Eval("CONVPAYDEPOSIT") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="WUPAYOUT">
+                    <ItemTemplate>
+                        <asp:Label ID="lblWUPAYOUT" runat="server" Text='<%#Eval("WUPAYOUT") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CREDITCARD">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCREDITCARD" runat="server" Text='<%#Eval("CREDITCARD") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="EXPENSES">
+                    <ItemTemplate>
+                        <asp:Label ID="lblEXPENSES" runat="server" Text='<%#Eval("EXPENSES") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="TOTALCASHOUT">
+                    <ItemTemplate>
+                        <asp:Label ID="lblTOTALCASHOUT" runat="server" Text='<%#Eval("TOTALCASHOUT") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="TOTALBALANCE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblTOTALBALANCE" runat="server" Text='<%#Eval("TOTALBALANCE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="ACTUALBALACE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblACTUALBALACE" runat="server" Text='<%#Eval("ACTUALBALACE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="SHORTOVER">
+                    <ItemTemplate>
+                        <asp:Label ID="lblSHORTOVER" runat="server" Text='<%#Eval("SHORTOVER") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="EMP_ID">
+                    <ItemTemplate>
+                        <asp:Label ID="lblEMP_ID" runat="server" Text='<%#Eval("EMP_ID") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="STATION_ID">
+                    <ItemTemplate>
+                        <asp:Label ID="lblSTATION_ID" runat="server" Text='<%#Eval("STATION_ID") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="SHIFT_ID">
+                    <ItemTemplate>
+                        <asp:Label ID="lblSHIFT_ID" runat="server" Text='<%#Eval("SHIFT_ID") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="SHIFTOPEN">
+                    <ItemTemplate>
+                        <asp:Label ID="lblSHIFTOPEN" runat="server" Text='<%#Eval("SHIFTOPEN") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="SHIFTCLOSE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblSHIFTCLOSE" runat="server" Text='<%#Eval("SHIFTCLOSE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Delete">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="lbDelete" runat="server" CommandArgument='<%#Eval("REPORTID") %>' OnClick="lbDelete_Click">
+                            Delete
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+    </div>
+</asp:Content>

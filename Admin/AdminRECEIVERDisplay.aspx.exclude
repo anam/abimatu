@@ -1,0 +1,120 @@
+<%@ Page Language="C#" MasterPageFile="~/Admin/AdminMaster.master" AutoEventWireup="true"
+    CodeFile="AdminRECEIVERDisplay.aspx.cs" Inherits="AdminRECEIVERDisplay" Title="Display RECEIVER By Admin" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style type="text/css">
+        .gridCss
+        {
+            width: 100%;
+            padding: 20px 10px 10px 10px;
+            text-align: center;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <div>
+        <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+        <asp:GridView ID="gvRECEIVER" runat="server" AutoGenerateColumns="false" CssClass="gridCss">
+            <Columns>
+                <asp:TemplateField HeaderText="Select">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="lbSelect" runat="server" CommandArgument='<%#Eval("RECEIVERID") %>' OnClick="lbSelect_Click">
+                            Select
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="USERNAME">
+                    <ItemTemplate>
+                        <asp:Label ID="lblUSERNAME" runat="server" Text='<%#Eval("USERNAME") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="RECEIVERFNAME">
+                    <ItemTemplate>
+                        <asp:Label ID="lblRECEIVERFNAME" runat="server" Text='<%#Eval("RECEIVERFNAME") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="RECEIVERMNAME">
+                    <ItemTemplate>
+                        <asp:Label ID="lblRECEIVERMNAME" runat="server" Text='<%#Eval("RECEIVERMNAME") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="RECEIVERLNAME">
+                    <ItemTemplate>
+                        <asp:Label ID="lblRECEIVERLNAME" runat="server" Text='<%#Eval("RECEIVERLNAME") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="RECEIVERADDRESS1">
+                    <ItemTemplate>
+                        <asp:Label ID="lblRECEIVERADDRESS1" runat="server" Text='<%#Eval("RECEIVERADDRESS1") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="RECEIVERADDRESS2">
+                    <ItemTemplate>
+                        <asp:Label ID="lblRECEIVERADDRESS2" runat="server" Text='<%#Eval("RECEIVERADDRESS2") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="RECEIVERCITY">
+                    <ItemTemplate>
+                        <asp:Label ID="lblRECEIVERCITY" runat="server" Text='<%#Eval("RECEIVERCITY") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="RECEIVERSTATE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblRECEIVERSTATE" runat="server" Text='<%#Eval("RECEIVERSTATE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="RECEIVERZIP">
+                    <ItemTemplate>
+                        <asp:Label ID="lblRECEIVERZIP" runat="server" Text='<%#Eval("RECEIVERZIP") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="RECEIVERPHONE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblRECEIVERPHONE" runat="server" Text='<%#Eval("RECEIVERPHONE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CREATEDBY">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCREATEDBY" runat="server" Text='<%#Eval("CREATEDBY") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CREATEDON">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCREATEDON" runat="server" Text='<%#Eval("CREATEDON") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="UPDATEDBY">
+                    <ItemTemplate>
+                        <asp:Label ID="lblUPDATEDBY" runat="server" Text='<%#Eval("UPDATEDBY") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="UPDATEDON">
+                    <ItemTemplate>
+                        <asp:Label ID="lblUPDATEDON" runat="server" Text='<%#Eval("UPDATEDON") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Delete">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="lbDelete" runat="server" CommandArgument='<%#Eval("RECEIVERID") %>' OnClick="lbDelete_Click">
+                            Delete
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+    </div>
+</asp:Content>

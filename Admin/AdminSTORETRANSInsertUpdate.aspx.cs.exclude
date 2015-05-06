@@ -1,0 +1,158 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminSTORETRANSInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            loadEMP_();
+            loadSHIFT_();
+            loadSTATION_();
+            if (Request.QueryString["sTORETRANSID"] != null)
+            {
+                int sTORETRANSID = Int32.Parse(Request.QueryString["sTORETRANSID"]);
+                if (sTORETRANSID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showSTORETRANSData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        STORETRANS sTORETRANS = new STORETRANS();
+
+        sTORETRANS.DT = txtDT.Text;
+        sTORETRANS.EMP_ID = Int32.Parse(ddlEMP_.SelectedValue);
+        sTORETRANS.SHIFT_ID = Int32.Parse(ddlSHIFT_.SelectedValue);
+        sTORETRANS.STATION_ID = Int32.Parse(ddlSTATION_.SelectedValue);
+        sTORETRANS.CURRREG = Int32.Parse(txtCURRREG.Text);
+        sTORETRANS.REGOPEN = Int32.Parse(txtREGOPEN.Text);
+        sTORETRANS.REGCLOSE = Int32.Parse(txtREGCLOSE.Text);
+        sTORETRANS.REGOPENSTATUS = txtREGOPENSTATUS.Text;
+        sTORETRANS.REGCLOSESTATUS = txtREGCLOSESTATUS.Text;
+        sTORETRANS.CLOSEDT = txtCLOSEDT.Text;
+        sTORETRANS.TOTTIME = txtTOTTIME.Text;
+        sTORETRANS.TOTSECONDS = Int32.Parse(txtTOTSECONDS.Text);
+        sTORETRANS.DIFF = Int32.Parse(txtDIFF.Text);
+        int resutl = STORETRANSManager.InsertSTORETRANS(sTORETRANS);
+        Response.Redirect("AdminSTORETRANSDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        STORETRANS sTORETRANS = new STORETRANS();
+        sTORETRANS = STORETRANSManager.GetSTORETRANSByID(Int32.Parse(Request.QueryString["sTORETRANSID"]));
+        STORETRANS tempSTORETRANS = new STORETRANS();
+        tempSTORETRANS.STORETRANSID = sTORETRANS.STORETRANSID;
+
+        tempSTORETRANS.DT = txtDT.Text;
+        tempSTORETRANS.EMP_ID = Int32.Parse(ddlEMP_.SelectedValue);
+        tempSTORETRANS.SHIFT_ID = Int32.Parse(ddlSHIFT_.SelectedValue);
+        tempSTORETRANS.STATION_ID = Int32.Parse(ddlSTATION_.SelectedValue);
+        tempSTORETRANS.CURRREG = Int32.Parse(txtCURRREG.Text);
+        tempSTORETRANS.REGOPEN = Int32.Parse(txtREGOPEN.Text);
+        tempSTORETRANS.REGCLOSE = Int32.Parse(txtREGCLOSE.Text);
+        tempSTORETRANS.REGOPENSTATUS = txtREGOPENSTATUS.Text;
+        tempSTORETRANS.REGCLOSESTATUS = txtREGCLOSESTATUS.Text;
+        tempSTORETRANS.CLOSEDT = txtCLOSEDT.Text;
+        tempSTORETRANS.TOTTIME = txtTOTTIME.Text;
+        tempSTORETRANS.TOTSECONDS = Int32.Parse(txtTOTSECONDS.Text);
+        tempSTORETRANS.DIFF = Int32.Parse(txtDIFF.Text);
+        bool result = STORETRANSManager.UpdateSTORETRANS(tempSTORETRANS);
+        Response.Redirect("AdminSTORETRANSDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        txtDT.Text = "";
+        ddlEMP_.SelectedIndex = 0;
+        ddlSHIFT_.SelectedIndex = 0;
+        ddlSTATION_.SelectedIndex = 0;
+        txtCURRREG.Text = "";
+        txtREGOPEN.Text = "";
+        txtREGCLOSE.Text = "";
+        txtREGOPENSTATUS.Text = "";
+        txtREGCLOSESTATUS.Text = "";
+        txtCLOSEDT.Text = "";
+        txtTOTTIME.Text = "";
+        txtTOTSECONDS.Text = "";
+        txtDIFF.Text = "";
+    }
+    private void showSTORETRANSData()
+    {
+        STORETRANS sTORETRANS = new STORETRANS();
+        sTORETRANS = STORETRANSManager.GetSTORETRANSByID(Int32.Parse(Request.QueryString["sTORETRANSID"]));
+
+        txtDT.Text = sTORETRANS.DT;
+        ddlEMP_.SelectedValue = sTORETRANS.EMP_ID.ToString();
+        ddlSHIFT_.SelectedValue = sTORETRANS.SHIFT_ID.ToString();
+        ddlSTATION_.SelectedValue = sTORETRANS.STATION_ID.ToString();
+        txtCURRREG.Text = sTORETRANS.CURRREG.ToString();
+        txtREGOPEN.Text = sTORETRANS.REGOPEN.ToString();
+        txtREGCLOSE.Text = sTORETRANS.REGCLOSE.ToString();
+        txtREGOPENSTATUS.Text = sTORETRANS.REGOPENSTATUS;
+        txtREGCLOSESTATUS.Text = sTORETRANS.REGCLOSESTATUS;
+        txtCLOSEDT.Text = sTORETRANS.CLOSEDT;
+        txtTOTTIME.Text = sTORETRANS.TOTTIME;
+        txtTOTSECONDS.Text = sTORETRANS.TOTSECONDS.ToString();
+        txtDIFF.Text = sTORETRANS.DIFF.ToString();
+    }
+    private void loadEMP_()
+    {
+        ListItem li = new ListItem("Select EMP_...", "0");
+        ddlEMP_.Items.Add(li);
+
+        List<EMP_> eMP_s = new List<EMP_>();
+        eMP_s = EMP_Manager.GetAllEMP_s();
+        foreach (EMP_ eMP_ in eMP_s)
+        {
+            ListItem item = new ListItem(eMP_.EMP_Name.ToString(), eMP_.EMP_ID.ToString());
+            ddlEMP_.Items.Add(item);
+        }
+    }
+    private void loadSHIFT_()
+    {
+        ListItem li = new ListItem("Select SHIFT_...", "0");
+        ddlSHIFT_.Items.Add(li);
+
+        List<SHIFT_> sHIFT_s = new List<SHIFT_>();
+        sHIFT_s = SHIFT_Manager.GetAllSHIFT_s();
+        foreach (SHIFT_ sHIFT_ in sHIFT_s)
+        {
+            ListItem item = new ListItem(sHIFT_.SHIFT_Name.ToString(), sHIFT_.SHIFT_ID.ToString());
+            ddlSHIFT_.Items.Add(item);
+        }
+    }
+    private void loadSTATION_()
+    {
+        ListItem li = new ListItem("Select STATION_...", "0");
+        ddlSTATION_.Items.Add(li);
+
+        List<STATION_> sTATION_s = new List<STATION_>();
+        sTATION_s = STATION_Manager.GetAllSTATION_s();
+        foreach (STATION_ sTATION_ in sTATION_s)
+        {
+            ListItem item = new ListItem(sTATION_.STATION_Name.ToString(), sTATION_.STATION_ID.ToString());
+            ddlSTATION_.Items.Add(item);
+        }
+    }
+}

@@ -1,0 +1,84 @@
+<%@ Page Language="C#" MasterPageFile="~/Admin/AdminMaster.master" AutoEventWireup="true"
+    CodeFile="AdminSQLPLUS_PRODUCT_PROFILEDisplay.aspx.cs" Inherits="AdminSQLPLUS_PRODUCT_PROFILEDisplay" Title="Display SQLPLUS_PRODUCT_PROFILE By Admin" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style type="text/css">
+        .gridCss
+        {
+            width: 100%;
+            padding: 20px 10px 10px 10px;
+            text-align: center;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <div>
+        <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+        <asp:GridView ID="gvSQLPLUS_PRODUCT_PROFILE" runat="server" AutoGenerateColumns="false" CssClass="gridCss">
+            <Columns>
+                <asp:TemplateField HeaderText="Select">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="lbSelect" runat="server" CommandArgument='<%#Eval("SQLPLUS_PRODUCT_PROFILEID") %>' OnClick="lbSelect_Click">
+                            Select
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="PRODUCT">
+                    <ItemTemplate>
+                        <asp:Label ID="lblPRODUCT" runat="server" Text='<%#Eval("PRODUCT") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="USERID">
+                    <ItemTemplate>
+                        <asp:Label ID="lblUSERID" runat="server" Text='<%#Eval("USERID") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="ATTRIBUTE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblATTRIBUTE" runat="server" Text='<%#Eval("ATTRIBUTE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="SCOPE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblSCOPE" runat="server" Text='<%#Eval("SCOPE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="NUMERIC_VALUE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblNUMERIC_VALUE" runat="server" Text='<%#Eval("NUMERIC_VALUE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CHAR_VALUE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCHAR_VALUE" runat="server" Text='<%#Eval("CHAR_VALUE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="DATE_VALUE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblDATE_VALUE" runat="server" Text='<%#Eval("DATE_VALUE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="LONG_VALUE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblLONG_VALUE" runat="server" Text='<%#Eval("LONG_VALUE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Delete">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="lbDelete" runat="server" CommandArgument='<%#Eval("SQLPLUS_PRODUCT_PROFILEID") %>' OnClick="lbDelete_Click">
+                            Delete
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+    </div>
+</asp:Content>

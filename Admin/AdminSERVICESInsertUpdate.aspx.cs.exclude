@@ -1,0 +1,144 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminSERVICESInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            if (Request.QueryString["sERVICESID"] != null)
+            {
+                int sERVICESID = Int32.Parse(Request.QueryString["sERVICESID"]);
+                if (sERVICESID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showSERVICESData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        SERVICES sERVICES = new SERVICES();
+
+        sERVICES.SERVICETYPE = txtSERVICETYPE.Text;
+        sERVICES.SERVICENAME = txtSERVICENAME.Text;
+        sERVICES.SERVICEFEE = Int32.Parse(txtSERVICEFEE.Text);
+        sERVICES.ISQUICKACCESS = txtISQUICKACCESS.Text;
+        sERVICES.ISTAXABLE = txtISTAXABLE.Text;
+        sERVICES.PAYMENTMODE = txtPAYMENTMODE.Text;
+        sERVICES.ITEMINSTOCK = Int32.Parse(txtITEMINSTOCK.Text);
+        sERVICES.REORDERLEVEL = Int32.Parse(txtREORDERLEVEL.Text);
+        sERVICES.COSTPRICE = Int32.Parse(txtCOSTPRICE.Text);
+        sERVICES.RETAILPRICE = Int32.Parse(txtRETAILPRICE.Text);
+        sERVICES.CREATEDON = txtCREATEDON.Text;
+        sERVICES.CREATEDBY = txtCREATEDBY.Text;
+        sERVICES.UPDATEDON = txtUPDATEDON.Text;
+        sERVICES.UPDATEDBY = txtUPDATEDBY.Text;
+        sERVICES.COMM = Int32.Parse(txtCOMM.Text);
+        sERVICES.ISCOMMCOUNTED = txtISCOMMCOUNTED.Text;
+        sERVICES.SERVICECOMM = Int32.Parse(txtSERVICECOMM.Text);
+        sERVICES.STORECOMM = Int32.Parse(txtSTORECOMM.Text);
+        sERVICES.QUICKBOOKSERVICENAME = txtQUICKBOOKSERVICENAME.Text;
+        sERVICES.QUICKBOOKSERVICEACCOUNT = txtQUICKBOOKSERVICEACCOUNT.Text;
+        int resutl = SERVICESManager.InsertSERVICES(sERVICES);
+        Response.Redirect("AdminSERVICESDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        SERVICES sERVICES = new SERVICES();
+        sERVICES = SERVICESManager.GetSERVICESByID(Int32.Parse(Request.QueryString["sERVICESID"]));
+        SERVICES tempSERVICES = new SERVICES();
+        tempSERVICES.SERVICESID = sERVICES.SERVICESID;
+
+        tempSERVICES.SERVICETYPE = txtSERVICETYPE.Text;
+        tempSERVICES.SERVICENAME = txtSERVICENAME.Text;
+        tempSERVICES.SERVICEFEE = Int32.Parse(txtSERVICEFEE.Text);
+        tempSERVICES.ISQUICKACCESS = txtISQUICKACCESS.Text;
+        tempSERVICES.ISTAXABLE = txtISTAXABLE.Text;
+        tempSERVICES.PAYMENTMODE = txtPAYMENTMODE.Text;
+        tempSERVICES.ITEMINSTOCK = Int32.Parse(txtITEMINSTOCK.Text);
+        tempSERVICES.REORDERLEVEL = Int32.Parse(txtREORDERLEVEL.Text);
+        tempSERVICES.COSTPRICE = Int32.Parse(txtCOSTPRICE.Text);
+        tempSERVICES.RETAILPRICE = Int32.Parse(txtRETAILPRICE.Text);
+        tempSERVICES.CREATEDON = txtCREATEDON.Text;
+        tempSERVICES.CREATEDBY = txtCREATEDBY.Text;
+        tempSERVICES.UPDATEDON = txtUPDATEDON.Text;
+        tempSERVICES.UPDATEDBY = txtUPDATEDBY.Text;
+        tempSERVICES.COMM = Int32.Parse(txtCOMM.Text);
+        tempSERVICES.ISCOMMCOUNTED = txtISCOMMCOUNTED.Text;
+        tempSERVICES.SERVICECOMM = Int32.Parse(txtSERVICECOMM.Text);
+        tempSERVICES.STORECOMM = Int32.Parse(txtSTORECOMM.Text);
+        tempSERVICES.QUICKBOOKSERVICENAME = txtQUICKBOOKSERVICENAME.Text;
+        tempSERVICES.QUICKBOOKSERVICEACCOUNT = txtQUICKBOOKSERVICEACCOUNT.Text;
+        bool result = SERVICESManager.UpdateSERVICES(tempSERVICES);
+        Response.Redirect("AdminSERVICESDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        txtSERVICETYPE.Text = "";
+        txtSERVICENAME.Text = "";
+        txtSERVICEFEE.Text = "";
+        txtISQUICKACCESS.Text = "";
+        txtISTAXABLE.Text = "";
+        txtPAYMENTMODE.Text = "";
+        txtITEMINSTOCK.Text = "";
+        txtREORDERLEVEL.Text = "";
+        txtCOSTPRICE.Text = "";
+        txtRETAILPRICE.Text = "";
+        txtCREATEDON.Text = "";
+        txtCREATEDBY.Text = "";
+        txtUPDATEDON.Text = "";
+        txtUPDATEDBY.Text = "";
+        txtCOMM.Text = "";
+        txtISCOMMCOUNTED.Text = "";
+        txtSERVICECOMM.Text = "";
+        txtSTORECOMM.Text = "";
+        txtQUICKBOOKSERVICENAME.Text = "";
+        txtQUICKBOOKSERVICEACCOUNT.Text = "";
+    }
+    private void showSERVICESData()
+    {
+        SERVICES sERVICES = new SERVICES();
+        sERVICES = SERVICESManager.GetSERVICESByID(Int32.Parse(Request.QueryString["sERVICESID"]));
+
+        txtSERVICETYPE.Text = sERVICES.SERVICETYPE;
+        txtSERVICENAME.Text = sERVICES.SERVICENAME;
+        txtSERVICEFEE.Text = sERVICES.SERVICEFEE.ToString();
+        txtISQUICKACCESS.Text = sERVICES.ISQUICKACCESS;
+        txtISTAXABLE.Text = sERVICES.ISTAXABLE;
+        txtPAYMENTMODE.Text = sERVICES.PAYMENTMODE;
+        txtITEMINSTOCK.Text = sERVICES.ITEMINSTOCK.ToString();
+        txtREORDERLEVEL.Text = sERVICES.REORDERLEVEL.ToString();
+        txtCOSTPRICE.Text = sERVICES.COSTPRICE.ToString();
+        txtRETAILPRICE.Text = sERVICES.RETAILPRICE.ToString();
+        txtCREATEDON.Text = sERVICES.CREATEDON;
+        txtCREATEDBY.Text = sERVICES.CREATEDBY;
+        txtUPDATEDON.Text = sERVICES.UPDATEDON;
+        txtUPDATEDBY.Text = sERVICES.UPDATEDBY;
+        txtCOMM.Text = sERVICES.COMM.ToString();
+        txtISCOMMCOUNTED.Text = sERVICES.ISCOMMCOUNTED;
+        txtSERVICECOMM.Text = sERVICES.SERVICECOMM.ToString();
+        txtSTORECOMM.Text = sERVICES.STORECOMM.ToString();
+        txtQUICKBOOKSERVICENAME.Text = sERVICES.QUICKBOOKSERVICENAME;
+        txtQUICKBOOKSERVICEACCOUNT.Text = sERVICES.QUICKBOOKSERVICEACCOUNT;
+    }
+}

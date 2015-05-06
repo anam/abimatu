@@ -1,0 +1,168 @@
+<%@ Page Language="C#" MasterPageFile="~/Admin/AdminMaster.master" AutoEventWireup="true"
+    CodeFile="AdminMAKERDisplay.aspx.cs" Inherits="AdminMAKERDisplay" Title="Display MAKER By Admin" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style type="text/css">
+        .gridCss
+        {
+            width: 100%;
+            padding: 20px 10px 10px 10px;
+            text-align: center;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <div>
+        <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+        <asp:GridView ID="gvMAKER" runat="server" AutoGenerateColumns="false" CssClass="gridCss">
+            <Columns>
+                <asp:TemplateField HeaderText="Select">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="lbSelect" runat="server" CommandArgument='<%#Eval("MAKERID") %>' OnClick="lbSelect_Click">
+                            Select
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="MAKERNAME">
+                    <ItemTemplate>
+                        <asp:Label ID="lblMAKERNAME" runat="server" Text='<%#Eval("MAKERNAME") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="MAKERADDRESS1">
+                    <ItemTemplate>
+                        <asp:Label ID="lblMAKERADDRESS1" runat="server" Text='<%#Eval("MAKERADDRESS1") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="MAKERADDRESS2">
+                    <ItemTemplate>
+                        <asp:Label ID="lblMAKERADDRESS2" runat="server" Text='<%#Eval("MAKERADDRESS2") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="MAKERCITY">
+                    <ItemTemplate>
+                        <asp:Label ID="lblMAKERCITY" runat="server" Text='<%#Eval("MAKERCITY") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="MAKERSTATE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblMAKERSTATE" runat="server" Text='<%#Eval("MAKERSTATE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="MAKERZIP">
+                    <ItemTemplate>
+                        <asp:Label ID="lblMAKERZIP" runat="server" Text='<%#Eval("MAKERZIP") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="MAKERPHONE1">
+                    <ItemTemplate>
+                        <asp:Label ID="lblMAKERPHONE1" runat="server" Text='<%#Eval("MAKERPHONE1") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="MAKERPHONE2">
+                    <ItemTemplate>
+                        <asp:Label ID="lblMAKERPHONE2" runat="server" Text='<%#Eval("MAKERPHONE2") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="MANAGER">
+                    <ItemTemplate>
+                        <asp:Label ID="lblMANAGER" runat="server" Text='<%#Eval("MANAGER") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="ACCOUNTNO">
+                    <ItemTemplate>
+                        <asp:Label ID="lblACCOUNTNO" runat="server" Text='<%#Eval("ACCOUNTNO") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="ROUTINGNO">
+                    <ItemTemplate>
+                        <asp:Label ID="lblROUTINGNO" runat="server" Text='<%#Eval("ROUTINGNO") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CHECKCOUNT">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCHECKCOUNT" runat="server" Text='<%#Eval("CHECKCOUNT") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CHECKAMOUNT">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCHECKAMOUNT" runat="server" Text='<%#Eval("CHECKAMOUNT") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="BADCHECKCOUNT">
+                    <ItemTemplate>
+                        <asp:Label ID="lblBADCHECKCOUNT" runat="server" Text='<%#Eval("BADCHECKCOUNT") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="BADCHECKAMOUNT">
+                    <ItemTemplate>
+                        <asp:Label ID="lblBADCHECKAMOUNT" runat="server" Text='<%#Eval("BADCHECKAMOUNT") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="AMOUNTDUE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblAMOUNTDUE" runat="server" Text='<%#Eval("AMOUNTDUE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CREATEDBY">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCREATEDBY" runat="server" Text='<%#Eval("CREATEDBY") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CREATEDON">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCREATEDON" runat="server" Text='<%#Eval("CREATEDON") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="UPDATEDBY">
+                    <ItemTemplate>
+                        <asp:Label ID="lblUPDATEDBY" runat="server" Text='<%#Eval("UPDATEDBY") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="UPDATEDON">
+                    <ItemTemplate>
+                        <asp:Label ID="lblUPDATEDON" runat="server" Text='<%#Eval("UPDATEDON") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="ISOFACVERIFIED">
+                    <ItemTemplate>
+                        <asp:Label ID="lblISOFACVERIFIED" runat="server" Text='<%#Eval("ISOFACVERIFIED") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="MAKERREMARKS">
+                    <ItemTemplate>
+                        <asp:Label ID="lblMAKERREMARKS" runat="server" Text='<%#Eval("MAKERREMARKS") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Delete">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="lbDelete" runat="server" CommandArgument='<%#Eval("MAKERID") %>' OnClick="lbDelete_Click">
+                            Delete
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+    </div>
+</asp:Content>

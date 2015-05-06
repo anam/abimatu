@@ -1,0 +1,68 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminVAULTInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            if (Request.QueryString["vAULTID"] != null)
+            {
+                int vAULTID = Int32.Parse(Request.QueryString["vAULTID"]);
+                if (vAULTID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showVAULTData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        VAULT vAULT = new VAULT();
+
+        vAULT.VAULTAMOUNT = Int32.Parse(txtVAULTAMOUNT.Text);
+        int resutl = VAULTManager.InsertVAULT(vAULT);
+        Response.Redirect("AdminVAULTDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        VAULT vAULT = new VAULT();
+        vAULT = VAULTManager.GetVAULTByID(Int32.Parse(Request.QueryString["vAULTID"]));
+        VAULT tempVAULT = new VAULT();
+        tempVAULT.VAULTID = vAULT.VAULTID;
+
+        tempVAULT.VAULTAMOUNT = Int32.Parse(txtVAULTAMOUNT.Text);
+        bool result = VAULTManager.UpdateVAULT(tempVAULT);
+        Response.Redirect("AdminVAULTDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        txtVAULTAMOUNT.Text = "";
+    }
+    private void showVAULTData()
+    {
+        VAULT vAULT = new VAULT();
+        vAULT = VAULTManager.GetVAULTByID(Int32.Parse(Request.QueryString["vAULTID"]));
+
+        txtVAULTAMOUNT.Text = vAULT.VAULTAMOUNT.ToString();
+    }
+}

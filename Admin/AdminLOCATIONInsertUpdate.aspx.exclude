@@ -1,0 +1,97 @@
+<%@ Page Language="C#" MasterPageFile="~/Admin/AdminMaster.master" AutoEventWireup="true" 
+CodeFile="AdminLOCATIONInsertUpdate.aspx.cs" Inherits="AdminLOCATIONInsertUpdate" Title="LOCATION Insert/Update By Admin" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <style type="text/css">
+        .tableCss
+        {
+        	text-align: left;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <div class="tableCss">
+        <table>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCOUNTRY" runat="server" Text="COUNTRY: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCOUNTRY" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCITY" runat="server" Text="CITY: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCITY" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblBRANCH" runat="server" Text="BRANCH: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtBRANCH" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblBRANCH_CODE" runat="server" Text="BRANCH_CODE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtBRANCH_CODE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblSEQUENCE" runat="server" Text="SEQUENCE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtSEQUENCE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblAGENTID" runat="server" Text="AGENTID: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlAGENT" runat="server">
+                    </asp:DropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblAGENTRATE" runat="server" Text="AGENTRATE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtAGENTRATE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+                    <asp:Button ID="btnUpdate" runat="server" Text="Update" 
+                        OnClick="btnUpdate_Click" />
+                </td>
+                <td>
+                    <asp:Button ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_Click" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</asp:Content>

@@ -1,0 +1,502 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminREPORTInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            loadEMP_();
+            loadSTATION_();
+            loadSHIFT_();
+            if (Request.QueryString["rEPORTID"] != null)
+            {
+                int rEPORTID = Int32.Parse(Request.QueryString["rEPORTID"]);
+                if (rEPORTID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showREPORTData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        REPORT rEPORT = new REPORT();
+
+        rEPORT.DT = txtDT.Text;
+        rEPORT.BEGININGBALANCE = Int32.Parse(txtBEGININGBALANCE.Text);
+        rEPORT.CASHFROM1 = Int32.Parse(txtCASHFROM1.Text);
+        rEPORT.CASHFROM1REMARKS = txtCASHFROM1REMARKS.Text;
+        rEPORT.CASHFROM2 = Int32.Parse(txtCASHFROM2.Text);
+        rEPORT.CASHFROM2REMARKS = txtCASHFROM2REMARKS.Text;
+        rEPORT.CASHFROM3 = Int32.Parse(txtCASHFROM3.Text);
+        rEPORT.CASHFROM3REMARKS = txtCASHFROM3REMARKS.Text;
+        rEPORT.CASHFROM4 = Int32.Parse(txtCASHFROM4.Text);
+        rEPORT.CASHFROM4REMARKS = txtCASHFROM4REMARKS.Text;
+        rEPORT.CASHFROM5 = Int32.Parse(txtCASHFROM5.Text);
+        rEPORT.CASHFROM5REMARKS = txtCASHFROM5REMARKS.Text;
+        rEPORT.CASHFROM6 = Int32.Parse(txtCASHFROM6.Text);
+        rEPORT.CASHFROM6REMARKS = txtCASHFROM6REMARKS.Text;
+        rEPORT.CASHFROM7 = Int32.Parse(txtCASHFROM7.Text);
+        rEPORT.CASHFROM7REMARKS = txtCASHFROM7REMARKS.Text;
+        rEPORT.CASHFROM8 = Int32.Parse(txtCASHFROM8.Text);
+        rEPORT.CASHFROM8REMARKS = txtCASHFROM8REMARKS.Text;
+        rEPORT.CASHFROM9 = Int32.Parse(txtCASHFROM9.Text);
+        rEPORT.CASHFROM9REMARKS = txtCASHFROM9REMARKS.Text;
+        rEPORT.CASHFROM10 = Int32.Parse(txtCASHFROM10.Text);
+        rEPORT.CASHFROM10REMARKS = txtCASHFROM10REMARKS.Text;
+        rEPORT.CASHFROM11 = Int32.Parse(txtCASHFROM11.Text);
+        rEPORT.CASHFROM11REMARKS = txtCASHFROM11REMARKS.Text;
+        rEPORT.CASHFROM12 = Int32.Parse(txtCASHFROM12.Text);
+        rEPORT.CASHFROM12REMARKS = txtCASHFROM12REMARKS.Text;
+        rEPORT.WU = Int32.Parse(txtWU.Text);
+        rEPORT.WUCOUNT = Int32.Parse(txtWUCOUNT.Text);
+        rEPORT.CONVPAY = Int32.Parse(txtCONVPAY.Text);
+        rEPORT.CONVPAYCOUNT = Int32.Parse(txtCONVPAYCOUNT.Text);
+        rEPORT.MO = Int32.Parse(txtMO.Text);
+        rEPORT.MOCOMM = Int32.Parse(txtMOCOMM.Text);
+        rEPORT.MOCOUNT = Int32.Parse(txtMOCOUNT.Text);
+        rEPORT.FEDILITY = Int32.Parse(txtFEDILITY.Text);
+        rEPORT.FEDILITYCOMM = Int32.Parse(txtFEDILITYCOMM.Text);
+        rEPORT.FEDILITYCOUNT = Int32.Parse(txtFEDILITYCOUNT.Text);
+        rEPORT.GLOBALEXPRESS = Int32.Parse(txtGLOBALEXPRESS.Text);
+        rEPORT.GLOBALEXPRESSCOMM = Int32.Parse(txtGLOBALEXPRESSCOMM.Text);
+        rEPORT.GLOBALEXPRESSCOUNT = Int32.Parse(txtGLOBALEXPRESSCOUNT.Text);
+        rEPORT.CHECKFREEPAY = Int32.Parse(txtCHECKFREEPAY.Text);
+        rEPORT.CHECKFREEPAYCOMM = Int32.Parse(txtCHECKFREEPAYCOMM.Text);
+        rEPORT.CHECKFREEPAYCOUNT = Int32.Parse(txtCHECKFREEPAYCOUNT.Text);
+        rEPORT.PRECASH = Int32.Parse(txtPRECASH.Text);
+        rEPORT.PRECASHCOMM = Int32.Parse(txtPRECASHCOMM.Text);
+        rEPORT.PRECASHCOUNT = Int32.Parse(txtPRECASHCOUNT.Text);
+        rEPORT.PHONECARD = Int32.Parse(txtPHONECARD.Text);
+        rEPORT.IDCARD = Int32.Parse(txtIDCARD.Text);
+        rEPORT.IDCARDCOUNT = Int32.Parse(txtIDCARDCOUNT.Text);
+        rEPORT.CHECKCOMM = Int32.Parse(txtCHECKCOMM.Text);
+        rEPORT.CHECKCOUNT = Int32.Parse(txtCHECKCOUNT.Text);
+        rEPORT.TOTALCASHIN = Int32.Parse(txtTOTALCASHIN.Text);
+        rEPORT.CASHDEPOSIT1 = Int32.Parse(txtCASHDEPOSIT1.Text);
+        rEPORT.CASHDEPOSIT2 = Int32.Parse(txtCASHDEPOSIT2.Text);
+        rEPORT.CASHDEPOSIT3 = Int32.Parse(txtCASHDEPOSIT3.Text);
+        rEPORT.CASHDEPOSIT4 = Int32.Parse(txtCASHDEPOSIT4.Text);
+        rEPORT.CASHDEPOSIT5 = Int32.Parse(txtCASHDEPOSIT5.Text);
+        rEPORT.CHECKDEPOSIT1 = Int32.Parse(txtCHECKDEPOSIT1.Text);
+        rEPORT.CHECKDEPOSIT2 = Int32.Parse(txtCHECKDEPOSIT2.Text);
+        rEPORT.CHECKDEPOSIT3 = Int32.Parse(txtCHECKDEPOSIT3.Text);
+        rEPORT.CHECKDEPOSIT4 = Int32.Parse(txtCHECKDEPOSIT4.Text);
+        rEPORT.CHECKDEPOSIT5 = Int32.Parse(txtCHECKDEPOSIT5.Text);
+        rEPORT.CHECKDEPOSIT6 = Int32.Parse(txtCHECKDEPOSIT6.Text);
+        rEPORT.CHECKDEPOSIT7 = Int32.Parse(txtCHECKDEPOSIT7.Text);
+        rEPORT.CHECKDEPOSIT8 = Int32.Parse(txtCHECKDEPOSIT8.Text);
+        rEPORT.CHECKDEPOSIT9 = Int32.Parse(txtCHECKDEPOSIT9.Text);
+        rEPORT.CHECKDEPOSIT10 = Int32.Parse(txtCHECKDEPOSIT10.Text);
+        rEPORT.CHECKDEPOSIT11 = Int32.Parse(txtCHECKDEPOSIT11.Text);
+        rEPORT.CHECKDEPOSIT12 = Int32.Parse(txtCHECKDEPOSIT12.Text);
+        rEPORT.CASHTRANSFER1 = Int32.Parse(txtCASHTRANSFER1.Text);
+        rEPORT.CASHTRANSFER1REMARKS = txtCASHTRANSFER1REMARKS.Text;
+        rEPORT.CASHTRANSFER2 = Int32.Parse(txtCASHTRANSFER2.Text);
+        rEPORT.CASHTRANSFER2REMARKS = txtCASHTRANSFER2REMARKS.Text;
+        rEPORT.CASHTRANSFER3 = Int32.Parse(txtCASHTRANSFER3.Text);
+        rEPORT.CASHTRANSFER3REMARKS = txtCASHTRANSFER3REMARKS.Text;
+        rEPORT.CASHTRANSFER4 = Int32.Parse(txtCASHTRANSFER4.Text);
+        rEPORT.CASHTRANSFER4REMARKS = txtCASHTRANSFER4REMARKS.Text;
+        rEPORT.CASHTRANSFER5 = Int32.Parse(txtCASHTRANSFER5.Text);
+        rEPORT.CASHTRANSFER5REMARKS = txtCASHTRANSFER5REMARKS.Text;
+        rEPORT.CASHTRANSFER6 = Int32.Parse(txtCASHTRANSFER6.Text);
+        rEPORT.CASHTRANSFER6REMARKS = txtCASHTRANSFER6REMARKS.Text;
+        rEPORT.CASHTRANSFER7 = Int32.Parse(txtCASHTRANSFER7.Text);
+        rEPORT.CASHTRANSFER7REMARKS = txtCASHTRANSFER7REMARKS.Text;
+        rEPORT.CASHTRANSFER8 = Int32.Parse(txtCASHTRANSFER8.Text);
+        rEPORT.CASHTRANSFER8REMARKS = txtCASHTRANSFER8REMARKS.Text;
+        rEPORT.FEDILITYDEPOSIT = Int32.Parse(txtFEDILITYDEPOSIT.Text);
+        rEPORT.CHECKFREEPAYDEPOSIT = Int32.Parse(txtCHECKFREEPAYDEPOSIT.Text);
+        rEPORT.CONVPAYDEPOSIT = Int32.Parse(txtCONVPAYDEPOSIT.Text);
+        rEPORT.WUPAYOUT = Int32.Parse(txtWUPAYOUT.Text);
+        rEPORT.CREDITCARD = Int32.Parse(txtCREDITCARD.Text);
+        rEPORT.EXPENSES = Int32.Parse(txtEXPENSES.Text);
+        rEPORT.TOTALCASHOUT = Int32.Parse(txtTOTALCASHOUT.Text);
+        rEPORT.TOTALBALANCE = Int32.Parse(txtTOTALBALANCE.Text);
+        rEPORT.ACTUALBALACE = Int32.Parse(txtACTUALBALACE.Text);
+        rEPORT.SHORTOVER = Int32.Parse(txtSHORTOVER.Text);
+        rEPORT.EMP_ID = Int32.Parse(ddlEMP_.SelectedValue);
+        rEPORT.STATION_ID = Int32.Parse(ddlSTATION_.SelectedValue);
+        rEPORT.SHIFT_ID = Int32.Parse(ddlSHIFT_.SelectedValue);
+        rEPORT.SHIFTOPEN = txtSHIFTOPEN.Text;
+        rEPORT.SHIFTCLOSE = txtSHIFTCLOSE.Text;
+        int resutl = REPORTManager.InsertREPORT(rEPORT);
+        Response.Redirect("AdminREPORTDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        REPORT rEPORT = new REPORT();
+        rEPORT = REPORTManager.GetREPORTByID(Int32.Parse(Request.QueryString["rEPORTID"]));
+        REPORT tempREPORT = new REPORT();
+        tempREPORT.REPORTID = rEPORT.REPORTID;
+
+        tempREPORT.DT = txtDT.Text;
+        tempREPORT.BEGININGBALANCE = Int32.Parse(txtBEGININGBALANCE.Text);
+        tempREPORT.CASHFROM1 = Int32.Parse(txtCASHFROM1.Text);
+        tempREPORT.CASHFROM1REMARKS = txtCASHFROM1REMARKS.Text;
+        tempREPORT.CASHFROM2 = Int32.Parse(txtCASHFROM2.Text);
+        tempREPORT.CASHFROM2REMARKS = txtCASHFROM2REMARKS.Text;
+        tempREPORT.CASHFROM3 = Int32.Parse(txtCASHFROM3.Text);
+        tempREPORT.CASHFROM3REMARKS = txtCASHFROM3REMARKS.Text;
+        tempREPORT.CASHFROM4 = Int32.Parse(txtCASHFROM4.Text);
+        tempREPORT.CASHFROM4REMARKS = txtCASHFROM4REMARKS.Text;
+        tempREPORT.CASHFROM5 = Int32.Parse(txtCASHFROM5.Text);
+        tempREPORT.CASHFROM5REMARKS = txtCASHFROM5REMARKS.Text;
+        tempREPORT.CASHFROM6 = Int32.Parse(txtCASHFROM6.Text);
+        tempREPORT.CASHFROM6REMARKS = txtCASHFROM6REMARKS.Text;
+        tempREPORT.CASHFROM7 = Int32.Parse(txtCASHFROM7.Text);
+        tempREPORT.CASHFROM7REMARKS = txtCASHFROM7REMARKS.Text;
+        tempREPORT.CASHFROM8 = Int32.Parse(txtCASHFROM8.Text);
+        tempREPORT.CASHFROM8REMARKS = txtCASHFROM8REMARKS.Text;
+        tempREPORT.CASHFROM9 = Int32.Parse(txtCASHFROM9.Text);
+        tempREPORT.CASHFROM9REMARKS = txtCASHFROM9REMARKS.Text;
+        tempREPORT.CASHFROM10 = Int32.Parse(txtCASHFROM10.Text);
+        tempREPORT.CASHFROM10REMARKS = txtCASHFROM10REMARKS.Text;
+        tempREPORT.CASHFROM11 = Int32.Parse(txtCASHFROM11.Text);
+        tempREPORT.CASHFROM11REMARKS = txtCASHFROM11REMARKS.Text;
+        tempREPORT.CASHFROM12 = Int32.Parse(txtCASHFROM12.Text);
+        tempREPORT.CASHFROM12REMARKS = txtCASHFROM12REMARKS.Text;
+        tempREPORT.WU = Int32.Parse(txtWU.Text);
+        tempREPORT.WUCOUNT = Int32.Parse(txtWUCOUNT.Text);
+        tempREPORT.CONVPAY = Int32.Parse(txtCONVPAY.Text);
+        tempREPORT.CONVPAYCOUNT = Int32.Parse(txtCONVPAYCOUNT.Text);
+        tempREPORT.MO = Int32.Parse(txtMO.Text);
+        tempREPORT.MOCOMM = Int32.Parse(txtMOCOMM.Text);
+        tempREPORT.MOCOUNT = Int32.Parse(txtMOCOUNT.Text);
+        tempREPORT.FEDILITY = Int32.Parse(txtFEDILITY.Text);
+        tempREPORT.FEDILITYCOMM = Int32.Parse(txtFEDILITYCOMM.Text);
+        tempREPORT.FEDILITYCOUNT = Int32.Parse(txtFEDILITYCOUNT.Text);
+        tempREPORT.GLOBALEXPRESS = Int32.Parse(txtGLOBALEXPRESS.Text);
+        tempREPORT.GLOBALEXPRESSCOMM = Int32.Parse(txtGLOBALEXPRESSCOMM.Text);
+        tempREPORT.GLOBALEXPRESSCOUNT = Int32.Parse(txtGLOBALEXPRESSCOUNT.Text);
+        tempREPORT.CHECKFREEPAY = Int32.Parse(txtCHECKFREEPAY.Text);
+        tempREPORT.CHECKFREEPAYCOMM = Int32.Parse(txtCHECKFREEPAYCOMM.Text);
+        tempREPORT.CHECKFREEPAYCOUNT = Int32.Parse(txtCHECKFREEPAYCOUNT.Text);
+        tempREPORT.PRECASH = Int32.Parse(txtPRECASH.Text);
+        tempREPORT.PRECASHCOMM = Int32.Parse(txtPRECASHCOMM.Text);
+        tempREPORT.PRECASHCOUNT = Int32.Parse(txtPRECASHCOUNT.Text);
+        tempREPORT.PHONECARD = Int32.Parse(txtPHONECARD.Text);
+        tempREPORT.IDCARD = Int32.Parse(txtIDCARD.Text);
+        tempREPORT.IDCARDCOUNT = Int32.Parse(txtIDCARDCOUNT.Text);
+        tempREPORT.CHECKCOMM = Int32.Parse(txtCHECKCOMM.Text);
+        tempREPORT.CHECKCOUNT = Int32.Parse(txtCHECKCOUNT.Text);
+        tempREPORT.TOTALCASHIN = Int32.Parse(txtTOTALCASHIN.Text);
+        tempREPORT.CASHDEPOSIT1 = Int32.Parse(txtCASHDEPOSIT1.Text);
+        tempREPORT.CASHDEPOSIT2 = Int32.Parse(txtCASHDEPOSIT2.Text);
+        tempREPORT.CASHDEPOSIT3 = Int32.Parse(txtCASHDEPOSIT3.Text);
+        tempREPORT.CASHDEPOSIT4 = Int32.Parse(txtCASHDEPOSIT4.Text);
+        tempREPORT.CASHDEPOSIT5 = Int32.Parse(txtCASHDEPOSIT5.Text);
+        tempREPORT.CHECKDEPOSIT1 = Int32.Parse(txtCHECKDEPOSIT1.Text);
+        tempREPORT.CHECKDEPOSIT2 = Int32.Parse(txtCHECKDEPOSIT2.Text);
+        tempREPORT.CHECKDEPOSIT3 = Int32.Parse(txtCHECKDEPOSIT3.Text);
+        tempREPORT.CHECKDEPOSIT4 = Int32.Parse(txtCHECKDEPOSIT4.Text);
+        tempREPORT.CHECKDEPOSIT5 = Int32.Parse(txtCHECKDEPOSIT5.Text);
+        tempREPORT.CHECKDEPOSIT6 = Int32.Parse(txtCHECKDEPOSIT6.Text);
+        tempREPORT.CHECKDEPOSIT7 = Int32.Parse(txtCHECKDEPOSIT7.Text);
+        tempREPORT.CHECKDEPOSIT8 = Int32.Parse(txtCHECKDEPOSIT8.Text);
+        tempREPORT.CHECKDEPOSIT9 = Int32.Parse(txtCHECKDEPOSIT9.Text);
+        tempREPORT.CHECKDEPOSIT10 = Int32.Parse(txtCHECKDEPOSIT10.Text);
+        tempREPORT.CHECKDEPOSIT11 = Int32.Parse(txtCHECKDEPOSIT11.Text);
+        tempREPORT.CHECKDEPOSIT12 = Int32.Parse(txtCHECKDEPOSIT12.Text);
+        tempREPORT.CASHTRANSFER1 = Int32.Parse(txtCASHTRANSFER1.Text);
+        tempREPORT.CASHTRANSFER1REMARKS = txtCASHTRANSFER1REMARKS.Text;
+        tempREPORT.CASHTRANSFER2 = Int32.Parse(txtCASHTRANSFER2.Text);
+        tempREPORT.CASHTRANSFER2REMARKS = txtCASHTRANSFER2REMARKS.Text;
+        tempREPORT.CASHTRANSFER3 = Int32.Parse(txtCASHTRANSFER3.Text);
+        tempREPORT.CASHTRANSFER3REMARKS = txtCASHTRANSFER3REMARKS.Text;
+        tempREPORT.CASHTRANSFER4 = Int32.Parse(txtCASHTRANSFER4.Text);
+        tempREPORT.CASHTRANSFER4REMARKS = txtCASHTRANSFER4REMARKS.Text;
+        tempREPORT.CASHTRANSFER5 = Int32.Parse(txtCASHTRANSFER5.Text);
+        tempREPORT.CASHTRANSFER5REMARKS = txtCASHTRANSFER5REMARKS.Text;
+        tempREPORT.CASHTRANSFER6 = Int32.Parse(txtCASHTRANSFER6.Text);
+        tempREPORT.CASHTRANSFER6REMARKS = txtCASHTRANSFER6REMARKS.Text;
+        tempREPORT.CASHTRANSFER7 = Int32.Parse(txtCASHTRANSFER7.Text);
+        tempREPORT.CASHTRANSFER7REMARKS = txtCASHTRANSFER7REMARKS.Text;
+        tempREPORT.CASHTRANSFER8 = Int32.Parse(txtCASHTRANSFER8.Text);
+        tempREPORT.CASHTRANSFER8REMARKS = txtCASHTRANSFER8REMARKS.Text;
+        tempREPORT.FEDILITYDEPOSIT = Int32.Parse(txtFEDILITYDEPOSIT.Text);
+        tempREPORT.CHECKFREEPAYDEPOSIT = Int32.Parse(txtCHECKFREEPAYDEPOSIT.Text);
+        tempREPORT.CONVPAYDEPOSIT = Int32.Parse(txtCONVPAYDEPOSIT.Text);
+        tempREPORT.WUPAYOUT = Int32.Parse(txtWUPAYOUT.Text);
+        tempREPORT.CREDITCARD = Int32.Parse(txtCREDITCARD.Text);
+        tempREPORT.EXPENSES = Int32.Parse(txtEXPENSES.Text);
+        tempREPORT.TOTALCASHOUT = Int32.Parse(txtTOTALCASHOUT.Text);
+        tempREPORT.TOTALBALANCE = Int32.Parse(txtTOTALBALANCE.Text);
+        tempREPORT.ACTUALBALACE = Int32.Parse(txtACTUALBALACE.Text);
+        tempREPORT.SHORTOVER = Int32.Parse(txtSHORTOVER.Text);
+        tempREPORT.EMP_ID = Int32.Parse(ddlEMP_.SelectedValue);
+        tempREPORT.STATION_ID = Int32.Parse(ddlSTATION_.SelectedValue);
+        tempREPORT.SHIFT_ID = Int32.Parse(ddlSHIFT_.SelectedValue);
+        tempREPORT.SHIFTOPEN = txtSHIFTOPEN.Text;
+        tempREPORT.SHIFTCLOSE = txtSHIFTCLOSE.Text;
+        bool result = REPORTManager.UpdateREPORT(tempREPORT);
+        Response.Redirect("AdminREPORTDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        txtDT.Text = "";
+        txtBEGININGBALANCE.Text = "";
+        txtCASHFROM1.Text = "";
+        txtCASHFROM1REMARKS.Text = "";
+        txtCASHFROM2.Text = "";
+        txtCASHFROM2REMARKS.Text = "";
+        txtCASHFROM3.Text = "";
+        txtCASHFROM3REMARKS.Text = "";
+        txtCASHFROM4.Text = "";
+        txtCASHFROM4REMARKS.Text = "";
+        txtCASHFROM5.Text = "";
+        txtCASHFROM5REMARKS.Text = "";
+        txtCASHFROM6.Text = "";
+        txtCASHFROM6REMARKS.Text = "";
+        txtCASHFROM7.Text = "";
+        txtCASHFROM7REMARKS.Text = "";
+        txtCASHFROM8.Text = "";
+        txtCASHFROM8REMARKS.Text = "";
+        txtCASHFROM9.Text = "";
+        txtCASHFROM9REMARKS.Text = "";
+        txtCASHFROM10.Text = "";
+        txtCASHFROM10REMARKS.Text = "";
+        txtCASHFROM11.Text = "";
+        txtCASHFROM11REMARKS.Text = "";
+        txtCASHFROM12.Text = "";
+        txtCASHFROM12REMARKS.Text = "";
+        txtWU.Text = "";
+        txtWUCOUNT.Text = "";
+        txtCONVPAY.Text = "";
+        txtCONVPAYCOUNT.Text = "";
+        txtMO.Text = "";
+        txtMOCOMM.Text = "";
+        txtMOCOUNT.Text = "";
+        txtFEDILITY.Text = "";
+        txtFEDILITYCOMM.Text = "";
+        txtFEDILITYCOUNT.Text = "";
+        txtGLOBALEXPRESS.Text = "";
+        txtGLOBALEXPRESSCOMM.Text = "";
+        txtGLOBALEXPRESSCOUNT.Text = "";
+        txtCHECKFREEPAY.Text = "";
+        txtCHECKFREEPAYCOMM.Text = "";
+        txtCHECKFREEPAYCOUNT.Text = "";
+        txtPRECASH.Text = "";
+        txtPRECASHCOMM.Text = "";
+        txtPRECASHCOUNT.Text = "";
+        txtPHONECARD.Text = "";
+        txtIDCARD.Text = "";
+        txtIDCARDCOUNT.Text = "";
+        txtCHECKCOMM.Text = "";
+        txtCHECKCOUNT.Text = "";
+        txtTOTALCASHIN.Text = "";
+        txtCASHDEPOSIT1.Text = "";
+        txtCASHDEPOSIT2.Text = "";
+        txtCASHDEPOSIT3.Text = "";
+        txtCASHDEPOSIT4.Text = "";
+        txtCASHDEPOSIT5.Text = "";
+        txtCHECKDEPOSIT1.Text = "";
+        txtCHECKDEPOSIT2.Text = "";
+        txtCHECKDEPOSIT3.Text = "";
+        txtCHECKDEPOSIT4.Text = "";
+        txtCHECKDEPOSIT5.Text = "";
+        txtCHECKDEPOSIT6.Text = "";
+        txtCHECKDEPOSIT7.Text = "";
+        txtCHECKDEPOSIT8.Text = "";
+        txtCHECKDEPOSIT9.Text = "";
+        txtCHECKDEPOSIT10.Text = "";
+        txtCHECKDEPOSIT11.Text = "";
+        txtCHECKDEPOSIT12.Text = "";
+        txtCASHTRANSFER1.Text = "";
+        txtCASHTRANSFER1REMARKS.Text = "";
+        txtCASHTRANSFER2.Text = "";
+        txtCASHTRANSFER2REMARKS.Text = "";
+        txtCASHTRANSFER3.Text = "";
+        txtCASHTRANSFER3REMARKS.Text = "";
+        txtCASHTRANSFER4.Text = "";
+        txtCASHTRANSFER4REMARKS.Text = "";
+        txtCASHTRANSFER5.Text = "";
+        txtCASHTRANSFER5REMARKS.Text = "";
+        txtCASHTRANSFER6.Text = "";
+        txtCASHTRANSFER6REMARKS.Text = "";
+        txtCASHTRANSFER7.Text = "";
+        txtCASHTRANSFER7REMARKS.Text = "";
+        txtCASHTRANSFER8.Text = "";
+        txtCASHTRANSFER8REMARKS.Text = "";
+        txtFEDILITYDEPOSIT.Text = "";
+        txtCHECKFREEPAYDEPOSIT.Text = "";
+        txtCONVPAYDEPOSIT.Text = "";
+        txtWUPAYOUT.Text = "";
+        txtCREDITCARD.Text = "";
+        txtEXPENSES.Text = "";
+        txtTOTALCASHOUT.Text = "";
+        txtTOTALBALANCE.Text = "";
+        txtACTUALBALACE.Text = "";
+        txtSHORTOVER.Text = "";
+        ddlEMP_.SelectedIndex = 0;
+        ddlSTATION_.SelectedIndex = 0;
+        ddlSHIFT_.SelectedIndex = 0;
+        txtSHIFTOPEN.Text = "";
+        txtSHIFTCLOSE.Text = "";
+    }
+    private void showREPORTData()
+    {
+        REPORT rEPORT = new REPORT();
+        rEPORT = REPORTManager.GetREPORTByID(Int32.Parse(Request.QueryString["rEPORTID"]));
+
+        txtDT.Text = rEPORT.DT;
+        txtBEGININGBALANCE.Text = rEPORT.BEGININGBALANCE.ToString();
+        txtCASHFROM1.Text = rEPORT.CASHFROM1.ToString();
+        txtCASHFROM1REMARKS.Text = rEPORT.CASHFROM1REMARKS;
+        txtCASHFROM2.Text = rEPORT.CASHFROM2.ToString();
+        txtCASHFROM2REMARKS.Text = rEPORT.CASHFROM2REMARKS;
+        txtCASHFROM3.Text = rEPORT.CASHFROM3.ToString();
+        txtCASHFROM3REMARKS.Text = rEPORT.CASHFROM3REMARKS;
+        txtCASHFROM4.Text = rEPORT.CASHFROM4.ToString();
+        txtCASHFROM4REMARKS.Text = rEPORT.CASHFROM4REMARKS;
+        txtCASHFROM5.Text = rEPORT.CASHFROM5.ToString();
+        txtCASHFROM5REMARKS.Text = rEPORT.CASHFROM5REMARKS;
+        txtCASHFROM6.Text = rEPORT.CASHFROM6.ToString();
+        txtCASHFROM6REMARKS.Text = rEPORT.CASHFROM6REMARKS;
+        txtCASHFROM7.Text = rEPORT.CASHFROM7.ToString();
+        txtCASHFROM7REMARKS.Text = rEPORT.CASHFROM7REMARKS;
+        txtCASHFROM8.Text = rEPORT.CASHFROM8.ToString();
+        txtCASHFROM8REMARKS.Text = rEPORT.CASHFROM8REMARKS;
+        txtCASHFROM9.Text = rEPORT.CASHFROM9.ToString();
+        txtCASHFROM9REMARKS.Text = rEPORT.CASHFROM9REMARKS;
+        txtCASHFROM10.Text = rEPORT.CASHFROM10.ToString();
+        txtCASHFROM10REMARKS.Text = rEPORT.CASHFROM10REMARKS;
+        txtCASHFROM11.Text = rEPORT.CASHFROM11.ToString();
+        txtCASHFROM11REMARKS.Text = rEPORT.CASHFROM11REMARKS;
+        txtCASHFROM12.Text = rEPORT.CASHFROM12.ToString();
+        txtCASHFROM12REMARKS.Text = rEPORT.CASHFROM12REMARKS;
+        txtWU.Text = rEPORT.WU.ToString();
+        txtWUCOUNT.Text = rEPORT.WUCOUNT.ToString();
+        txtCONVPAY.Text = rEPORT.CONVPAY.ToString();
+        txtCONVPAYCOUNT.Text = rEPORT.CONVPAYCOUNT.ToString();
+        txtMO.Text = rEPORT.MO.ToString();
+        txtMOCOMM.Text = rEPORT.MOCOMM.ToString();
+        txtMOCOUNT.Text = rEPORT.MOCOUNT.ToString();
+        txtFEDILITY.Text = rEPORT.FEDILITY.ToString();
+        txtFEDILITYCOMM.Text = rEPORT.FEDILITYCOMM.ToString();
+        txtFEDILITYCOUNT.Text = rEPORT.FEDILITYCOUNT.ToString();
+        txtGLOBALEXPRESS.Text = rEPORT.GLOBALEXPRESS.ToString();
+        txtGLOBALEXPRESSCOMM.Text = rEPORT.GLOBALEXPRESSCOMM.ToString();
+        txtGLOBALEXPRESSCOUNT.Text = rEPORT.GLOBALEXPRESSCOUNT.ToString();
+        txtCHECKFREEPAY.Text = rEPORT.CHECKFREEPAY.ToString();
+        txtCHECKFREEPAYCOMM.Text = rEPORT.CHECKFREEPAYCOMM.ToString();
+        txtCHECKFREEPAYCOUNT.Text = rEPORT.CHECKFREEPAYCOUNT.ToString();
+        txtPRECASH.Text = rEPORT.PRECASH.ToString();
+        txtPRECASHCOMM.Text = rEPORT.PRECASHCOMM.ToString();
+        txtPRECASHCOUNT.Text = rEPORT.PRECASHCOUNT.ToString();
+        txtPHONECARD.Text = rEPORT.PHONECARD.ToString();
+        txtIDCARD.Text = rEPORT.IDCARD.ToString();
+        txtIDCARDCOUNT.Text = rEPORT.IDCARDCOUNT.ToString();
+        txtCHECKCOMM.Text = rEPORT.CHECKCOMM.ToString();
+        txtCHECKCOUNT.Text = rEPORT.CHECKCOUNT.ToString();
+        txtTOTALCASHIN.Text = rEPORT.TOTALCASHIN.ToString();
+        txtCASHDEPOSIT1.Text = rEPORT.CASHDEPOSIT1.ToString();
+        txtCASHDEPOSIT2.Text = rEPORT.CASHDEPOSIT2.ToString();
+        txtCASHDEPOSIT3.Text = rEPORT.CASHDEPOSIT3.ToString();
+        txtCASHDEPOSIT4.Text = rEPORT.CASHDEPOSIT4.ToString();
+        txtCASHDEPOSIT5.Text = rEPORT.CASHDEPOSIT5.ToString();
+        txtCHECKDEPOSIT1.Text = rEPORT.CHECKDEPOSIT1.ToString();
+        txtCHECKDEPOSIT2.Text = rEPORT.CHECKDEPOSIT2.ToString();
+        txtCHECKDEPOSIT3.Text = rEPORT.CHECKDEPOSIT3.ToString();
+        txtCHECKDEPOSIT4.Text = rEPORT.CHECKDEPOSIT4.ToString();
+        txtCHECKDEPOSIT5.Text = rEPORT.CHECKDEPOSIT5.ToString();
+        txtCHECKDEPOSIT6.Text = rEPORT.CHECKDEPOSIT6.ToString();
+        txtCHECKDEPOSIT7.Text = rEPORT.CHECKDEPOSIT7.ToString();
+        txtCHECKDEPOSIT8.Text = rEPORT.CHECKDEPOSIT8.ToString();
+        txtCHECKDEPOSIT9.Text = rEPORT.CHECKDEPOSIT9.ToString();
+        txtCHECKDEPOSIT10.Text = rEPORT.CHECKDEPOSIT10.ToString();
+        txtCHECKDEPOSIT11.Text = rEPORT.CHECKDEPOSIT11.ToString();
+        txtCHECKDEPOSIT12.Text = rEPORT.CHECKDEPOSIT12.ToString();
+        txtCASHTRANSFER1.Text = rEPORT.CASHTRANSFER1.ToString();
+        txtCASHTRANSFER1REMARKS.Text = rEPORT.CASHTRANSFER1REMARKS;
+        txtCASHTRANSFER2.Text = rEPORT.CASHTRANSFER2.ToString();
+        txtCASHTRANSFER2REMARKS.Text = rEPORT.CASHTRANSFER2REMARKS;
+        txtCASHTRANSFER3.Text = rEPORT.CASHTRANSFER3.ToString();
+        txtCASHTRANSFER3REMARKS.Text = rEPORT.CASHTRANSFER3REMARKS;
+        txtCASHTRANSFER4.Text = rEPORT.CASHTRANSFER4.ToString();
+        txtCASHTRANSFER4REMARKS.Text = rEPORT.CASHTRANSFER4REMARKS;
+        txtCASHTRANSFER5.Text = rEPORT.CASHTRANSFER5.ToString();
+        txtCASHTRANSFER5REMARKS.Text = rEPORT.CASHTRANSFER5REMARKS;
+        txtCASHTRANSFER6.Text = rEPORT.CASHTRANSFER6.ToString();
+        txtCASHTRANSFER6REMARKS.Text = rEPORT.CASHTRANSFER6REMARKS;
+        txtCASHTRANSFER7.Text = rEPORT.CASHTRANSFER7.ToString();
+        txtCASHTRANSFER7REMARKS.Text = rEPORT.CASHTRANSFER7REMARKS;
+        txtCASHTRANSFER8.Text = rEPORT.CASHTRANSFER8.ToString();
+        txtCASHTRANSFER8REMARKS.Text = rEPORT.CASHTRANSFER8REMARKS;
+        txtFEDILITYDEPOSIT.Text = rEPORT.FEDILITYDEPOSIT.ToString();
+        txtCHECKFREEPAYDEPOSIT.Text = rEPORT.CHECKFREEPAYDEPOSIT.ToString();
+        txtCONVPAYDEPOSIT.Text = rEPORT.CONVPAYDEPOSIT.ToString();
+        txtWUPAYOUT.Text = rEPORT.WUPAYOUT.ToString();
+        txtCREDITCARD.Text = rEPORT.CREDITCARD.ToString();
+        txtEXPENSES.Text = rEPORT.EXPENSES.ToString();
+        txtTOTALCASHOUT.Text = rEPORT.TOTALCASHOUT.ToString();
+        txtTOTALBALANCE.Text = rEPORT.TOTALBALANCE.ToString();
+        txtACTUALBALACE.Text = rEPORT.ACTUALBALACE.ToString();
+        txtSHORTOVER.Text = rEPORT.SHORTOVER.ToString();
+        ddlEMP_.SelectedValue = rEPORT.EMP_ID.ToString();
+        ddlSTATION_.SelectedValue = rEPORT.STATION_ID.ToString();
+        ddlSHIFT_.SelectedValue = rEPORT.SHIFT_ID.ToString();
+        txtSHIFTOPEN.Text = rEPORT.SHIFTOPEN;
+        txtSHIFTCLOSE.Text = rEPORT.SHIFTCLOSE;
+    }
+    private void loadEMP_()
+    {
+        ListItem li = new ListItem("Select EMP_...", "0");
+        ddlEMP_.Items.Add(li);
+
+        List<EMP_> eMP_s = new List<EMP_>();
+        eMP_s = EMP_Manager.GetAllEMP_s();
+        foreach (EMP_ eMP_ in eMP_s)
+        {
+            ListItem item = new ListItem(eMP_.EMP_Name.ToString(), eMP_.EMP_ID.ToString());
+            ddlEMP_.Items.Add(item);
+        }
+    }
+    private void loadSTATION_()
+    {
+        ListItem li = new ListItem("Select STATION_...", "0");
+        ddlSTATION_.Items.Add(li);
+
+        List<STATION_> sTATION_s = new List<STATION_>();
+        sTATION_s = STATION_Manager.GetAllSTATION_s();
+        foreach (STATION_ sTATION_ in sTATION_s)
+        {
+            ListItem item = new ListItem(sTATION_.STATION_Name.ToString(), sTATION_.STATION_ID.ToString());
+            ddlSTATION_.Items.Add(item);
+        }
+    }
+    private void loadSHIFT_()
+    {
+        ListItem li = new ListItem("Select SHIFT_...", "0");
+        ddlSHIFT_.Items.Add(li);
+
+        List<SHIFT_> sHIFT_s = new List<SHIFT_>();
+        sHIFT_s = SHIFT_Manager.GetAllSHIFT_s();
+        foreach (SHIFT_ sHIFT_ in sHIFT_s)
+        {
+            ListItem item = new ListItem(sHIFT_.SHIFT_Name.ToString(), sHIFT_.SHIFT_ID.ToString());
+            ddlSHIFT_.Items.Add(item);
+        }
+    }
+}

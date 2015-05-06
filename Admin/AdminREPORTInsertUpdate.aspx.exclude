@@ -1,0 +1,1017 @@
+<%@ Page Language="C#" MasterPageFile="~/Admin/AdminMaster.master" AutoEventWireup="true" 
+CodeFile="AdminREPORTInsertUpdate.aspx.cs" Inherits="AdminREPORTInsertUpdate" Title="REPORT Insert/Update By Admin" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <style type="text/css">
+        .tableCss
+        {
+        	text-align: left;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <div class="tableCss">
+        <table>
+            <tr>
+                <td>
+                    <asp:Label ID="lblDT" runat="server" Text="DT: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtDT" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblBEGININGBALANCE" runat="server" Text="BEGININGBALANCE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtBEGININGBALANCE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHFROM1" runat="server" Text="CASHFROM1: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHFROM1" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHFROM1REMARKS" runat="server" Text="CASHFROM1REMARKS: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHFROM1REMARKS" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHFROM2" runat="server" Text="CASHFROM2: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHFROM2" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHFROM2REMARKS" runat="server" Text="CASHFROM2REMARKS: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHFROM2REMARKS" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHFROM3" runat="server" Text="CASHFROM3: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHFROM3" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHFROM3REMARKS" runat="server" Text="CASHFROM3REMARKS: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHFROM3REMARKS" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHFROM4" runat="server" Text="CASHFROM4: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHFROM4" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHFROM4REMARKS" runat="server" Text="CASHFROM4REMARKS: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHFROM4REMARKS" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHFROM5" runat="server" Text="CASHFROM5: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHFROM5" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHFROM5REMARKS" runat="server" Text="CASHFROM5REMARKS: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHFROM5REMARKS" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHFROM6" runat="server" Text="CASHFROM6: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHFROM6" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHFROM6REMARKS" runat="server" Text="CASHFROM6REMARKS: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHFROM6REMARKS" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHFROM7" runat="server" Text="CASHFROM7: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHFROM7" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHFROM7REMARKS" runat="server" Text="CASHFROM7REMARKS: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHFROM7REMARKS" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHFROM8" runat="server" Text="CASHFROM8: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHFROM8" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHFROM8REMARKS" runat="server" Text="CASHFROM8REMARKS: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHFROM8REMARKS" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHFROM9" runat="server" Text="CASHFROM9: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHFROM9" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHFROM9REMARKS" runat="server" Text="CASHFROM9REMARKS: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHFROM9REMARKS" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHFROM10" runat="server" Text="CASHFROM10: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHFROM10" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHFROM10REMARKS" runat="server" Text="CASHFROM10REMARKS: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHFROM10REMARKS" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHFROM11" runat="server" Text="CASHFROM11: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHFROM11" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHFROM11REMARKS" runat="server" Text="CASHFROM11REMARKS: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHFROM11REMARKS" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHFROM12" runat="server" Text="CASHFROM12: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHFROM12" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHFROM12REMARKS" runat="server" Text="CASHFROM12REMARKS: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHFROM12REMARKS" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblWU" runat="server" Text="WU: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtWU" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblWUCOUNT" runat="server" Text="WUCOUNT: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtWUCOUNT" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCONVPAY" runat="server" Text="CONVPAY: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCONVPAY" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCONVPAYCOUNT" runat="server" Text="CONVPAYCOUNT: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCONVPAYCOUNT" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblMO" runat="server" Text="MO: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtMO" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblMOCOMM" runat="server" Text="MOCOMM: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtMOCOMM" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblMOCOUNT" runat="server" Text="MOCOUNT: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtMOCOUNT" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblFEDILITY" runat="server" Text="FEDILITY: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtFEDILITY" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblFEDILITYCOMM" runat="server" Text="FEDILITYCOMM: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtFEDILITYCOMM" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblFEDILITYCOUNT" runat="server" Text="FEDILITYCOUNT: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtFEDILITYCOUNT" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblGLOBALEXPRESS" runat="server" Text="GLOBALEXPRESS: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtGLOBALEXPRESS" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblGLOBALEXPRESSCOMM" runat="server" Text="GLOBALEXPRESSCOMM: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtGLOBALEXPRESSCOMM" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblGLOBALEXPRESSCOUNT" runat="server" Text="GLOBALEXPRESSCOUNT: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtGLOBALEXPRESSCOUNT" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCHECKFREEPAY" runat="server" Text="CHECKFREEPAY: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCHECKFREEPAY" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCHECKFREEPAYCOMM" runat="server" Text="CHECKFREEPAYCOMM: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCHECKFREEPAYCOMM" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCHECKFREEPAYCOUNT" runat="server" Text="CHECKFREEPAYCOUNT: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCHECKFREEPAYCOUNT" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblPRECASH" runat="server" Text="PRECASH: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtPRECASH" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblPRECASHCOMM" runat="server" Text="PRECASHCOMM: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtPRECASHCOMM" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblPRECASHCOUNT" runat="server" Text="PRECASHCOUNT: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtPRECASHCOUNT" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblPHONECARD" runat="server" Text="PHONECARD: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtPHONECARD" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblIDCARD" runat="server" Text="IDCARD: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtIDCARD" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblIDCARDCOUNT" runat="server" Text="IDCARDCOUNT: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtIDCARDCOUNT" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCHECKCOMM" runat="server" Text="CHECKCOMM: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCHECKCOMM" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCHECKCOUNT" runat="server" Text="CHECKCOUNT: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCHECKCOUNT" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblTOTALCASHIN" runat="server" Text="TOTALCASHIN: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtTOTALCASHIN" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHDEPOSIT1" runat="server" Text="CASHDEPOSIT1: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHDEPOSIT1" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHDEPOSIT2" runat="server" Text="CASHDEPOSIT2: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHDEPOSIT2" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHDEPOSIT3" runat="server" Text="CASHDEPOSIT3: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHDEPOSIT3" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHDEPOSIT4" runat="server" Text="CASHDEPOSIT4: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHDEPOSIT4" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHDEPOSIT5" runat="server" Text="CASHDEPOSIT5: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHDEPOSIT5" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCHECKDEPOSIT1" runat="server" Text="CHECKDEPOSIT1: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCHECKDEPOSIT1" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCHECKDEPOSIT2" runat="server" Text="CHECKDEPOSIT2: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCHECKDEPOSIT2" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCHECKDEPOSIT3" runat="server" Text="CHECKDEPOSIT3: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCHECKDEPOSIT3" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCHECKDEPOSIT4" runat="server" Text="CHECKDEPOSIT4: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCHECKDEPOSIT4" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCHECKDEPOSIT5" runat="server" Text="CHECKDEPOSIT5: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCHECKDEPOSIT5" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCHECKDEPOSIT6" runat="server" Text="CHECKDEPOSIT6: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCHECKDEPOSIT6" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCHECKDEPOSIT7" runat="server" Text="CHECKDEPOSIT7: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCHECKDEPOSIT7" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCHECKDEPOSIT8" runat="server" Text="CHECKDEPOSIT8: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCHECKDEPOSIT8" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCHECKDEPOSIT9" runat="server" Text="CHECKDEPOSIT9: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCHECKDEPOSIT9" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCHECKDEPOSIT10" runat="server" Text="CHECKDEPOSIT10: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCHECKDEPOSIT10" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCHECKDEPOSIT11" runat="server" Text="CHECKDEPOSIT11: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCHECKDEPOSIT11" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCHECKDEPOSIT12" runat="server" Text="CHECKDEPOSIT12: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCHECKDEPOSIT12" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHTRANSFER1" runat="server" Text="CASHTRANSFER1: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHTRANSFER1" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHTRANSFER1REMARKS" runat="server" Text="CASHTRANSFER1REMARKS: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHTRANSFER1REMARKS" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHTRANSFER2" runat="server" Text="CASHTRANSFER2: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHTRANSFER2" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHTRANSFER2REMARKS" runat="server" Text="CASHTRANSFER2REMARKS: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHTRANSFER2REMARKS" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHTRANSFER3" runat="server" Text="CASHTRANSFER3: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHTRANSFER3" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHTRANSFER3REMARKS" runat="server" Text="CASHTRANSFER3REMARKS: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHTRANSFER3REMARKS" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHTRANSFER4" runat="server" Text="CASHTRANSFER4: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHTRANSFER4" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHTRANSFER4REMARKS" runat="server" Text="CASHTRANSFER4REMARKS: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHTRANSFER4REMARKS" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHTRANSFER5" runat="server" Text="CASHTRANSFER5: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHTRANSFER5" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHTRANSFER5REMARKS" runat="server" Text="CASHTRANSFER5REMARKS: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHTRANSFER5REMARKS" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHTRANSFER6" runat="server" Text="CASHTRANSFER6: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHTRANSFER6" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHTRANSFER6REMARKS" runat="server" Text="CASHTRANSFER6REMARKS: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHTRANSFER6REMARKS" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHTRANSFER7" runat="server" Text="CASHTRANSFER7: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHTRANSFER7" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHTRANSFER7REMARKS" runat="server" Text="CASHTRANSFER7REMARKS: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHTRANSFER7REMARKS" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHTRANSFER8" runat="server" Text="CASHTRANSFER8: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHTRANSFER8" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCASHTRANSFER8REMARKS" runat="server" Text="CASHTRANSFER8REMARKS: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCASHTRANSFER8REMARKS" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblFEDILITYDEPOSIT" runat="server" Text="FEDILITYDEPOSIT: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtFEDILITYDEPOSIT" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCHECKFREEPAYDEPOSIT" runat="server" Text="CHECKFREEPAYDEPOSIT: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCHECKFREEPAYDEPOSIT" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCONVPAYDEPOSIT" runat="server" Text="CONVPAYDEPOSIT: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCONVPAYDEPOSIT" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblWUPAYOUT" runat="server" Text="WUPAYOUT: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtWUPAYOUT" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCREDITCARD" runat="server" Text="CREDITCARD: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCREDITCARD" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblEXPENSES" runat="server" Text="EXPENSES: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtEXPENSES" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblTOTALCASHOUT" runat="server" Text="TOTALCASHOUT: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtTOTALCASHOUT" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblTOTALBALANCE" runat="server" Text="TOTALBALANCE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtTOTALBALANCE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblACTUALBALACE" runat="server" Text="ACTUALBALACE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtACTUALBALACE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblSHORTOVER" runat="server" Text="SHORTOVER: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtSHORTOVER" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblEMP_ID" runat="server" Text="EMP_ID: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlEMP_" runat="server">
+                    </asp:DropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblSTATION_ID" runat="server" Text="STATION_ID: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlSTATION_" runat="server">
+                    </asp:DropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblSHIFT_ID" runat="server" Text="SHIFT_ID: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlSHIFT_" runat="server">
+                    </asp:DropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblSHIFTOPEN" runat="server" Text="SHIFTOPEN: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtSHIFTOPEN" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblSHIFTCLOSE" runat="server" Text="SHIFTCLOSE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtSHIFTCLOSE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+                    <asp:Button ID="btnUpdate" runat="server" Text="Update" 
+                        OnClick="btnUpdate_Click" />
+                </td>
+                <td>
+                    <asp:Button ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_Click" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</asp:Content>

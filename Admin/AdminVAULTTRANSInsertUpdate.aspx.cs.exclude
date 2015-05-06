@@ -1,0 +1,90 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminVAULTTRANSInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            loadSTATION();
+            if (Request.QueryString["vAULTTRANSID"] != null)
+            {
+                int vAULTTRANSID = Int32.Parse(Request.QueryString["vAULTTRANSID"]);
+                if (vAULTTRANSID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showVAULTTRANSData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        VAULTTRANS vAULTTRANS = new VAULTTRANS();
+
+        vAULTTRANS.DT = txtDT.Text;
+        vAULTTRANS.STATIONID = Int32.Parse(ddlSTATION.SelectedValue);
+        vAULTTRANS.AMOUNT = Int32.Parse(txtAMOUNT.Text);
+        int resutl = VAULTTRANSManager.InsertVAULTTRANS(vAULTTRANS);
+        Response.Redirect("AdminVAULTTRANSDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        VAULTTRANS vAULTTRANS = new VAULTTRANS();
+        vAULTTRANS = VAULTTRANSManager.GetVAULTTRANSByID(Int32.Parse(Request.QueryString["vAULTTRANSID"]));
+        VAULTTRANS tempVAULTTRANS = new VAULTTRANS();
+        tempVAULTTRANS.VAULTTRANSID = vAULTTRANS.VAULTTRANSID;
+
+        tempVAULTTRANS.DT = txtDT.Text;
+        tempVAULTTRANS.STATIONID = Int32.Parse(ddlSTATION.SelectedValue);
+        tempVAULTTRANS.AMOUNT = Int32.Parse(txtAMOUNT.Text);
+        bool result = VAULTTRANSManager.UpdateVAULTTRANS(tempVAULTTRANS);
+        Response.Redirect("AdminVAULTTRANSDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        txtDT.Text = "";
+        ddlSTATION.SelectedIndex = 0;
+        txtAMOUNT.Text = "";
+    }
+    private void showVAULTTRANSData()
+    {
+        VAULTTRANS vAULTTRANS = new VAULTTRANS();
+        vAULTTRANS = VAULTTRANSManager.GetVAULTTRANSByID(Int32.Parse(Request.QueryString["vAULTTRANSID"]));
+
+        txtDT.Text = vAULTTRANS.DT;
+        ddlSTATION.SelectedValue = vAULTTRANS.STATIONID.ToString();
+        txtAMOUNT.Text = vAULTTRANS.AMOUNT.ToString();
+    }
+    private void loadSTATION()
+    {
+        ListItem li = new ListItem("Select STATION...", "0");
+        ddlSTATION.Items.Add(li);
+
+        List<STATION> sTATIONs = new List<STATION>();
+        sTATIONs = STATIONManager.GetAllSTATIONs();
+        foreach (STATION sTATION in sTATIONs)
+        {
+            ListItem item = new ListItem(sTATION.STATIONName.ToString(), sTATION.STATIONID.ToString());
+            ddlSTATION.Items.Add(item);
+        }
+    }
+}

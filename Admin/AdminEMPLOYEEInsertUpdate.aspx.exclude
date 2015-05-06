@@ -1,0 +1,197 @@
+<%@ Page Language="C#" MasterPageFile="~/Admin/AdminMaster.master" AutoEventWireup="true" 
+CodeFile="AdminEMPLOYEEInsertUpdate.aspx.cs" Inherits="AdminEMPLOYEEInsertUpdate" Title="EMPLOYEE Insert/Update By Admin" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <style type="text/css">
+        .tableCss
+        {
+        	text-align: left;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <div class="tableCss">
+        <table>
+            <tr>
+                <td>
+                    <asp:Label ID="lblEMPNAME" runat="server" Text="EMPNAME: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtEMPNAME" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblEMPADDRESS1" runat="server" Text="EMPADDRESS1: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtEMPADDRESS1" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblEMPADDRESS2" runat="server" Text="EMPADDRESS2: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtEMPADDRESS2" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblEMPCITY" runat="server" Text="EMPCITY: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtEMPCITY" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblEMPSTATE" runat="server" Text="EMPSTATE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtEMPSTATE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblEMPZIP" runat="server" Text="EMPZIP: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtEMPZIP" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblEMPHPHONE" runat="server" Text="EMPHPHONE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtEMPHPHONE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblEMPCPHONE" runat="server" Text="EMPCPHONE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtEMPCPHONE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblEMPSTORE" runat="server" Text="EMPSTORE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtEMPSTORE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblEMPPASSWORD" runat="server" Text="EMPPASSWORD: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtEMPPASSWORD" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblISACTIVE" runat="server" Text="ISACTIVE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtISACTIVE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblISMANAGER" runat="server" Text="ISMANAGER: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtISMANAGER" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblISCOMPLIANCEOFFICER" runat="server" Text="ISCOMPLIANCEOFFICER: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtISCOMPLIANCEOFFICER" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCREATEDBY" runat="server" Text="CREATEDBY: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCREATEDBY" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCREATEDON" runat="server" Text="CREATEDON: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCREATEDON" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblUPDATEDBY" runat="server" Text="UPDATEDBY: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtUPDATEDBY" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblUPDATEDON" runat="server" Text="UPDATEDON: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtUPDATEDON" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+                    <asp:Button ID="btnUpdate" runat="server" Text="Update" 
+                        OnClick="btnUpdate_Click" />
+                </td>
+                <td>
+                    <asp:Button ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_Click" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</asp:Content>

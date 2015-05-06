@@ -1,0 +1,72 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminTRANSFERACCOUNTInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            if (Request.QueryString["tRANSFERACCOUNTID"] != null)
+            {
+                int tRANSFERACCOUNTID = Int32.Parse(Request.QueryString["tRANSFERACCOUNTID"]);
+                if (tRANSFERACCOUNTID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showTRANSFERACCOUNTData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        TRANSFERACCOUNT tRANSFERACCOUNT = new TRANSFERACCOUNT();
+
+        tRANSFERACCOUNT.ACCTYPE = txtACCTYPE.Text;
+        tRANSFERACCOUNT.ACCNAME = txtACCNAME.Text;
+        int resutl = TRANSFERACCOUNTManager.InsertTRANSFERACCOUNT(tRANSFERACCOUNT);
+        Response.Redirect("AdminTRANSFERACCOUNTDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        TRANSFERACCOUNT tRANSFERACCOUNT = new TRANSFERACCOUNT();
+        tRANSFERACCOUNT = TRANSFERACCOUNTManager.GetTRANSFERACCOUNTByID(Int32.Parse(Request.QueryString["tRANSFERACCOUNTID"]));
+        TRANSFERACCOUNT tempTRANSFERACCOUNT = new TRANSFERACCOUNT();
+        tempTRANSFERACCOUNT.TRANSFERACCOUNTID = tRANSFERACCOUNT.TRANSFERACCOUNTID;
+
+        tempTRANSFERACCOUNT.ACCTYPE = txtACCTYPE.Text;
+        tempTRANSFERACCOUNT.ACCNAME = txtACCNAME.Text;
+        bool result = TRANSFERACCOUNTManager.UpdateTRANSFERACCOUNT(tempTRANSFERACCOUNT);
+        Response.Redirect("AdminTRANSFERACCOUNTDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        txtACCTYPE.Text = "";
+        txtACCNAME.Text = "";
+    }
+    private void showTRANSFERACCOUNTData()
+    {
+        TRANSFERACCOUNT tRANSFERACCOUNT = new TRANSFERACCOUNT();
+        tRANSFERACCOUNT = TRANSFERACCOUNTManager.GetTRANSFERACCOUNTByID(Int32.Parse(Request.QueryString["tRANSFERACCOUNTID"]));
+
+        txtACCTYPE.Text = tRANSFERACCOUNT.ACCTYPE;
+        txtACCNAME.Text = tRANSFERACCOUNT.ACCNAME;
+    }
+}

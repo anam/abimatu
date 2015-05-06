@@ -1,0 +1,108 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminSUPPLIERInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            if (Request.QueryString["sUPPLIERID"] != null)
+            {
+                int sUPPLIERID = Int32.Parse(Request.QueryString["sUPPLIERID"]);
+                if (sUPPLIERID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showSUPPLIERData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        SUPPLIER sUPPLIER = new SUPPLIER();
+
+        sUPPLIER.SUPPLIERNAME = txtSUPPLIERNAME.Text;
+        sUPPLIER.SUPPLIERADDRESS1 = txtSUPPLIERADDRESS1.Text;
+        sUPPLIER.SUPPLIERADDRESS2 = txtSUPPLIERADDRESS2.Text;
+        sUPPLIER.SUPPLIERCITY = txtSUPPLIERCITY.Text;
+        sUPPLIER.SUPPLIERSTATE = txtSUPPLIERSTATE.Text;
+        sUPPLIER.SUPPLIERZIP = txtSUPPLIERZIP.Text;
+        sUPPLIER.SUPPLIERPHONE = txtSUPPLIERPHONE.Text;
+        sUPPLIER.CREATED_ON = txtCREATED_ON.Text;
+        sUPPLIER.CREATED_BY = txtCREATED_BY.Text;
+        sUPPLIER.UPDATED_ON = txtUPDATED_ON.Text;
+        sUPPLIER.UPDATED_BY = txtUPDATED_BY.Text;
+        int resutl = SUPPLIERManager.InsertSUPPLIER(sUPPLIER);
+        Response.Redirect("AdminSUPPLIERDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        SUPPLIER sUPPLIER = new SUPPLIER();
+        sUPPLIER = SUPPLIERManager.GetSUPPLIERByID(Int32.Parse(Request.QueryString["sUPPLIERID"]));
+        SUPPLIER tempSUPPLIER = new SUPPLIER();
+        tempSUPPLIER.SUPPLIERID = sUPPLIER.SUPPLIERID;
+
+        tempSUPPLIER.SUPPLIERNAME = txtSUPPLIERNAME.Text;
+        tempSUPPLIER.SUPPLIERADDRESS1 = txtSUPPLIERADDRESS1.Text;
+        tempSUPPLIER.SUPPLIERADDRESS2 = txtSUPPLIERADDRESS2.Text;
+        tempSUPPLIER.SUPPLIERCITY = txtSUPPLIERCITY.Text;
+        tempSUPPLIER.SUPPLIERSTATE = txtSUPPLIERSTATE.Text;
+        tempSUPPLIER.SUPPLIERZIP = txtSUPPLIERZIP.Text;
+        tempSUPPLIER.SUPPLIERPHONE = txtSUPPLIERPHONE.Text;
+        tempSUPPLIER.CREATED_ON = txtCREATED_ON.Text;
+        tempSUPPLIER.CREATED_BY = txtCREATED_BY.Text;
+        tempSUPPLIER.UPDATED_ON = txtUPDATED_ON.Text;
+        tempSUPPLIER.UPDATED_BY = txtUPDATED_BY.Text;
+        bool result = SUPPLIERManager.UpdateSUPPLIER(tempSUPPLIER);
+        Response.Redirect("AdminSUPPLIERDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        txtSUPPLIERNAME.Text = "";
+        txtSUPPLIERADDRESS1.Text = "";
+        txtSUPPLIERADDRESS2.Text = "";
+        txtSUPPLIERCITY.Text = "";
+        txtSUPPLIERSTATE.Text = "";
+        txtSUPPLIERZIP.Text = "";
+        txtSUPPLIERPHONE.Text = "";
+        txtCREATED_ON.Text = "";
+        txtCREATED_BY.Text = "";
+        txtUPDATED_ON.Text = "";
+        txtUPDATED_BY.Text = "";
+    }
+    private void showSUPPLIERData()
+    {
+        SUPPLIER sUPPLIER = new SUPPLIER();
+        sUPPLIER = SUPPLIERManager.GetSUPPLIERByID(Int32.Parse(Request.QueryString["sUPPLIERID"]));
+
+        txtSUPPLIERNAME.Text = sUPPLIER.SUPPLIERNAME;
+        txtSUPPLIERADDRESS1.Text = sUPPLIER.SUPPLIERADDRESS1;
+        txtSUPPLIERADDRESS2.Text = sUPPLIER.SUPPLIERADDRESS2;
+        txtSUPPLIERCITY.Text = sUPPLIER.SUPPLIERCITY;
+        txtSUPPLIERSTATE.Text = sUPPLIER.SUPPLIERSTATE;
+        txtSUPPLIERZIP.Text = sUPPLIER.SUPPLIERZIP;
+        txtSUPPLIERPHONE.Text = sUPPLIER.SUPPLIERPHONE;
+        txtCREATED_ON.Text = sUPPLIER.CREATED_ON;
+        txtCREATED_BY.Text = sUPPLIER.CREATED_BY;
+        txtUPDATED_ON.Text = sUPPLIER.UPDATED_ON;
+        txtUPDATED_BY.Text = sUPPLIER.UPDATED_BY;
+    }
+}

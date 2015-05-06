@@ -1,0 +1,138 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminSTATIONTRANSInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            loadEMP_();
+            loadSHIFT_();
+            loadTRANSFER_EMP_();
+            if (Request.QueryString["sTATIONTRANSID"] != null)
+            {
+                int sTATIONTRANSID = Int32.Parse(Request.QueryString["sTATIONTRANSID"]);
+                if (sTATIONTRANSID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showSTATIONTRANSData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        STATIONTRANS sTATIONTRANS = new STATIONTRANS();
+
+        sTATIONTRANS.DT = txtDT.Text;
+        sTATIONTRANS.STATIONFROM = txtSTATIONFROM.Text;
+        sTATIONTRANS.STATIONTO = txtSTATIONTO.Text;
+        sTATIONTRANS.AMOUNT = Int32.Parse(txtAMOUNT.Text);
+        sTATIONTRANS.ISACCEPTED = txtISACCEPTED.Text;
+        sTATIONTRANS.EMP_ID = Int32.Parse(ddlEMP_.SelectedValue);
+        sTATIONTRANS.SHIFT_ID = Int32.Parse(ddlSHIFT_.SelectedValue);
+        sTATIONTRANS.TRANSFER_EMP_ID = Int32.Parse(ddlTRANSFER_EMP_.SelectedValue);
+        int resutl = STATIONTRANSManager.InsertSTATIONTRANS(sTATIONTRANS);
+        Response.Redirect("AdminSTATIONTRANSDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        STATIONTRANS sTATIONTRANS = new STATIONTRANS();
+        sTATIONTRANS = STATIONTRANSManager.GetSTATIONTRANSByID(Int32.Parse(Request.QueryString["sTATIONTRANSID"]));
+        STATIONTRANS tempSTATIONTRANS = new STATIONTRANS();
+        tempSTATIONTRANS.STATIONTRANSID = sTATIONTRANS.STATIONTRANSID;
+
+        tempSTATIONTRANS.DT = txtDT.Text;
+        tempSTATIONTRANS.STATIONFROM = txtSTATIONFROM.Text;
+        tempSTATIONTRANS.STATIONTO = txtSTATIONTO.Text;
+        tempSTATIONTRANS.AMOUNT = Int32.Parse(txtAMOUNT.Text);
+        tempSTATIONTRANS.ISACCEPTED = txtISACCEPTED.Text;
+        tempSTATIONTRANS.EMP_ID = Int32.Parse(ddlEMP_.SelectedValue);
+        tempSTATIONTRANS.SHIFT_ID = Int32.Parse(ddlSHIFT_.SelectedValue);
+        tempSTATIONTRANS.TRANSFER_EMP_ID = Int32.Parse(ddlTRANSFER_EMP_.SelectedValue);
+        bool result = STATIONTRANSManager.UpdateSTATIONTRANS(tempSTATIONTRANS);
+        Response.Redirect("AdminSTATIONTRANSDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        txtDT.Text = "";
+        txtSTATIONFROM.Text = "";
+        txtSTATIONTO.Text = "";
+        txtAMOUNT.Text = "";
+        txtISACCEPTED.Text = "";
+        ddlEMP_.SelectedIndex = 0;
+        ddlSHIFT_.SelectedIndex = 0;
+        ddlTRANSFER_EMP_.SelectedIndex = 0;
+    }
+    private void showSTATIONTRANSData()
+    {
+        STATIONTRANS sTATIONTRANS = new STATIONTRANS();
+        sTATIONTRANS = STATIONTRANSManager.GetSTATIONTRANSByID(Int32.Parse(Request.QueryString["sTATIONTRANSID"]));
+
+        txtDT.Text = sTATIONTRANS.DT;
+        txtSTATIONFROM.Text = sTATIONTRANS.STATIONFROM;
+        txtSTATIONTO.Text = sTATIONTRANS.STATIONTO;
+        txtAMOUNT.Text = sTATIONTRANS.AMOUNT.ToString();
+        txtISACCEPTED.Text = sTATIONTRANS.ISACCEPTED;
+        ddlEMP_.SelectedValue = sTATIONTRANS.EMP_ID.ToString();
+        ddlSHIFT_.SelectedValue = sTATIONTRANS.SHIFT_ID.ToString();
+        ddlTRANSFER_EMP_.SelectedValue = sTATIONTRANS.TRANSFER_EMP_ID.ToString();
+    }
+    private void loadEMP_()
+    {
+        ListItem li = new ListItem("Select EMP_...", "0");
+        ddlEMP_.Items.Add(li);
+
+        List<EMP_> eMP_s = new List<EMP_>();
+        eMP_s = EMP_Manager.GetAllEMP_s();
+        foreach (EMP_ eMP_ in eMP_s)
+        {
+            ListItem item = new ListItem(eMP_.EMP_Name.ToString(), eMP_.EMP_ID.ToString());
+            ddlEMP_.Items.Add(item);
+        }
+    }
+    private void loadSHIFT_()
+    {
+        ListItem li = new ListItem("Select SHIFT_...", "0");
+        ddlSHIFT_.Items.Add(li);
+
+        List<SHIFT_> sHIFT_s = new List<SHIFT_>();
+        sHIFT_s = SHIFT_Manager.GetAllSHIFT_s();
+        foreach (SHIFT_ sHIFT_ in sHIFT_s)
+        {
+            ListItem item = new ListItem(sHIFT_.SHIFT_Name.ToString(), sHIFT_.SHIFT_ID.ToString());
+            ddlSHIFT_.Items.Add(item);
+        }
+    }
+    private void loadTRANSFER_EMP_()
+    {
+        ListItem li = new ListItem("Select TRANSFER_EMP_...", "0");
+        ddlTRANSFER_EMP_.Items.Add(li);
+
+        List<TRANSFER_EMP_> tRANSFER_EMP_s = new List<TRANSFER_EMP_>();
+        tRANSFER_EMP_s = TRANSFER_EMP_Manager.GetAllTRANSFER_EMP_s();
+        foreach (TRANSFER_EMP_ tRANSFER_EMP_ in tRANSFER_EMP_s)
+        {
+            ListItem item = new ListItem(tRANSFER_EMP_.TRANSFER_EMP_Name.ToString(), tRANSFER_EMP_.TRANSFER_EMP_ID.ToString());
+            ddlTRANSFER_EMP_.Items.Add(item);
+        }
+    }
+}

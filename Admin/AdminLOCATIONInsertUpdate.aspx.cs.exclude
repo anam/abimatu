@@ -1,0 +1,106 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminLOCATIONInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            loadAGENT();
+            if (Request.QueryString["lOCATIONID"] != null)
+            {
+                int lOCATIONID = Int32.Parse(Request.QueryString["lOCATIONID"]);
+                if (lOCATIONID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showLOCATIONData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        LOCATION lOCATION = new LOCATION();
+
+        lOCATION.COUNTRY = txtCOUNTRY.Text;
+        lOCATION.CITY = txtCITY.Text;
+        lOCATION.BRANCH = txtBRANCH.Text;
+        lOCATION.BRANCH_CODE = txtBRANCH_CODE.Text;
+        lOCATION.SEQUENCE = Int32.Parse(txtSEQUENCE.Text);
+        lOCATION.AGENTID = Int32.Parse(ddlAGENT.SelectedValue);
+        lOCATION.AGENTRATE = Int32.Parse(txtAGENTRATE.Text);
+        int resutl = LOCATIONManager.InsertLOCATION(lOCATION);
+        Response.Redirect("AdminLOCATIONDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        LOCATION lOCATION = new LOCATION();
+        lOCATION = LOCATIONManager.GetLOCATIONByID(Int32.Parse(Request.QueryString["lOCATIONID"]));
+        LOCATION tempLOCATION = new LOCATION();
+        tempLOCATION.LOCATIONID = lOCATION.LOCATIONID;
+
+        tempLOCATION.COUNTRY = txtCOUNTRY.Text;
+        tempLOCATION.CITY = txtCITY.Text;
+        tempLOCATION.BRANCH = txtBRANCH.Text;
+        tempLOCATION.BRANCH_CODE = txtBRANCH_CODE.Text;
+        tempLOCATION.SEQUENCE = Int32.Parse(txtSEQUENCE.Text);
+        tempLOCATION.AGENTID = Int32.Parse(ddlAGENT.SelectedValue);
+        tempLOCATION.AGENTRATE = Int32.Parse(txtAGENTRATE.Text);
+        bool result = LOCATIONManager.UpdateLOCATION(tempLOCATION);
+        Response.Redirect("AdminLOCATIONDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        txtCOUNTRY.Text = "";
+        txtCITY.Text = "";
+        txtBRANCH.Text = "";
+        txtBRANCH_CODE.Text = "";
+        txtSEQUENCE.Text = "";
+        ddlAGENT.SelectedIndex = 0;
+        txtAGENTRATE.Text = "";
+    }
+    private void showLOCATIONData()
+    {
+        LOCATION lOCATION = new LOCATION();
+        lOCATION = LOCATIONManager.GetLOCATIONByID(Int32.Parse(Request.QueryString["lOCATIONID"]));
+
+        txtCOUNTRY.Text = lOCATION.COUNTRY;
+        txtCITY.Text = lOCATION.CITY;
+        txtBRANCH.Text = lOCATION.BRANCH;
+        txtBRANCH_CODE.Text = lOCATION.BRANCH_CODE;
+        txtSEQUENCE.Text = lOCATION.SEQUENCE.ToString();
+        ddlAGENT.SelectedValue = lOCATION.AGENTID.ToString();
+        txtAGENTRATE.Text = lOCATION.AGENTRATE.ToString();
+    }
+    private void loadAGENT()
+    {
+        ListItem li = new ListItem("Select AGENT...", "0");
+        ddlAGENT.Items.Add(li);
+
+        List<AGENT> aGENTs = new List<AGENT>();
+        aGENTs = AGENTManager.GetAllAGENTs();
+        foreach (AGENT aGENT in aGENTs)
+        {
+            ListItem item = new ListItem(aGENT.AGENTNAME.ToString(), aGENT.AGENTID.ToString());
+            ddlAGENT.Items.Add(item);
+        }
+    }
+}

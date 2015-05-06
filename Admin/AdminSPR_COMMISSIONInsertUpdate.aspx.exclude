@@ -1,0 +1,107 @@
+<%@ Page Language="C#" MasterPageFile="~/Admin/AdminMaster.master" AutoEventWireup="true" 
+CodeFile="AdminSPR_COMMISSIONInsertUpdate.aspx.cs" Inherits="AdminSPR_COMMISSIONInsertUpdate" Title="SPR_COMMISSION Insert/Update By Admin" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <style type="text/css">
+        .tableCss
+        {
+        	text-align: left;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <div class="tableCss">
+        <table>
+            <tr>
+                <td>
+                    <asp:Label ID="lblSTYPE" runat="server" Text="STYPE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtSTYPE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblSPLAN" runat="server" Text="SPLAN: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtSPLAN" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblSASL" runat="server" Text="SASL: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtSASL" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblSYEAR" runat="server" Text="SYEAR: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtSYEAR" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblBASECOMM" runat="server" Text="BASECOMM: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtBASECOMM" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblASLCOMM" runat="server" Text="ASLCOMM: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtASLCOMM" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblTYPECOMM" runat="server" Text="TYPECOMM: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtTYPECOMM" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblYEARCOMM" runat="server" Text="YEARCOMM: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtYEARCOMM" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+                    <asp:Button ID="btnUpdate" runat="server" Text="Update" 
+                        OnClick="btnUpdate_Click" />
+                </td>
+                <td>
+                    <asp:Button ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_Click" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</asp:Content>

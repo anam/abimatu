@@ -1,0 +1,114 @@
+<%@ Page Language="C#" MasterPageFile="~/Admin/AdminMaster.master" AutoEventWireup="true"
+    CodeFile="AdminSTORETRANSDisplay.aspx.cs" Inherits="AdminSTORETRANSDisplay" Title="Display STORETRANS By Admin" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style type="text/css">
+        .gridCss
+        {
+            width: 100%;
+            padding: 20px 10px 10px 10px;
+            text-align: center;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <div>
+        <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+        <asp:GridView ID="gvSTORETRANS" runat="server" AutoGenerateColumns="false" CssClass="gridCss">
+            <Columns>
+                <asp:TemplateField HeaderText="Select">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="lbSelect" runat="server" CommandArgument='<%#Eval("STORETRANSID") %>' OnClick="lbSelect_Click">
+                            Select
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="DT">
+                    <ItemTemplate>
+                        <asp:Label ID="lblDT" runat="server" Text='<%#Eval("DT") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="EMP_ID">
+                    <ItemTemplate>
+                        <asp:Label ID="lblEMP_ID" runat="server" Text='<%#Eval("EMP_ID") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="SHIFT_ID">
+                    <ItemTemplate>
+                        <asp:Label ID="lblSHIFT_ID" runat="server" Text='<%#Eval("SHIFT_ID") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="STATION_ID">
+                    <ItemTemplate>
+                        <asp:Label ID="lblSTATION_ID" runat="server" Text='<%#Eval("STATION_ID") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CURRREG">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCURRREG" runat="server" Text='<%#Eval("CURRREG") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="REGOPEN">
+                    <ItemTemplate>
+                        <asp:Label ID="lblREGOPEN" runat="server" Text='<%#Eval("REGOPEN") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="REGCLOSE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblREGCLOSE" runat="server" Text='<%#Eval("REGCLOSE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="REGOPENSTATUS">
+                    <ItemTemplate>
+                        <asp:Label ID="lblREGOPENSTATUS" runat="server" Text='<%#Eval("REGOPENSTATUS") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="REGCLOSESTATUS">
+                    <ItemTemplate>
+                        <asp:Label ID="lblREGCLOSESTATUS" runat="server" Text='<%#Eval("REGCLOSESTATUS") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CLOSEDT">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCLOSEDT" runat="server" Text='<%#Eval("CLOSEDT") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="TOTTIME">
+                    <ItemTemplate>
+                        <asp:Label ID="lblTOTTIME" runat="server" Text='<%#Eval("TOTTIME") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="TOTSECONDS">
+                    <ItemTemplate>
+                        <asp:Label ID="lblTOTSECONDS" runat="server" Text='<%#Eval("TOTSECONDS") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="DIFF">
+                    <ItemTemplate>
+                        <asp:Label ID="lblDIFF" runat="server" Text='<%#Eval("DIFF") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Delete">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="lbDelete" runat="server" CommandArgument='<%#Eval("STORETRANSID") %>' OnClick="lbDelete_Click">
+                            Delete
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+    </div>
+</asp:Content>

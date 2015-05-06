@@ -1,0 +1,94 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminMOMASTERInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            loadAGENT();
+            if (Request.QueryString["mOMASTERID"] != null)
+            {
+                int mOMASTERID = Int32.Parse(Request.QueryString["mOMASTERID"]);
+                if (mOMASTERID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showMOMASTERData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        MOMASTER mOMASTER = new MOMASTER();
+
+        mOMASTER.AGENTID = Int32.Parse(ddlAGENT.SelectedValue);
+        mOMASTER.STARTMO = Int32.Parse(txtSTARTMO.Text);
+        mOMASTER.ENDMO = Int32.Parse(txtENDMO.Text);
+        mOMASTER.CURRMO = Int32.Parse(txtCURRMO.Text);
+        int resutl = MOMASTERManager.InsertMOMASTER(mOMASTER);
+        Response.Redirect("AdminMOMASTERDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        MOMASTER mOMASTER = new MOMASTER();
+        mOMASTER = MOMASTERManager.GetMOMASTERByID(Int32.Parse(Request.QueryString["mOMASTERID"]));
+        MOMASTER tempMOMASTER = new MOMASTER();
+        tempMOMASTER.MOMASTERID = mOMASTER.MOMASTERID;
+
+        tempMOMASTER.AGENTID = Int32.Parse(ddlAGENT.SelectedValue);
+        tempMOMASTER.STARTMO = Int32.Parse(txtSTARTMO.Text);
+        tempMOMASTER.ENDMO = Int32.Parse(txtENDMO.Text);
+        tempMOMASTER.CURRMO = Int32.Parse(txtCURRMO.Text);
+        bool result = MOMASTERManager.UpdateMOMASTER(tempMOMASTER);
+        Response.Redirect("AdminMOMASTERDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        ddlAGENT.SelectedIndex = 0;
+        txtSTARTMO.Text = "";
+        txtENDMO.Text = "";
+        txtCURRMO.Text = "";
+    }
+    private void showMOMASTERData()
+    {
+        MOMASTER mOMASTER = new MOMASTER();
+        mOMASTER = MOMASTERManager.GetMOMASTERByID(Int32.Parse(Request.QueryString["mOMASTERID"]));
+
+        ddlAGENT.SelectedValue = mOMASTER.AGENTID.ToString();
+        txtSTARTMO.Text = mOMASTER.STARTMO.ToString();
+        txtENDMO.Text = mOMASTER.ENDMO.ToString();
+        txtCURRMO.Text = mOMASTER.CURRMO.ToString();
+    }
+    private void loadAGENT()
+    {
+        ListItem li = new ListItem("Select AGENT...", "0");
+        ddlAGENT.Items.Add(li);
+
+        List<AGENT> aGENTs = new List<AGENT>();
+        aGENTs = AGENTManager.GetAllAGENTs();
+        foreach (AGENT aGENT in aGENTs)
+        {
+            ListItem item = new ListItem(aGENT.AGENTName.ToString(), aGENT.AGENTID.ToString());
+            ddlAGENT.Items.Add(item);
+        }
+    }
+}

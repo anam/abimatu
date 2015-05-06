@@ -1,0 +1,168 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminWUABOVE3000InsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            loadCUST_();
+            loadEMP_();
+            loadSTATION_();
+            loadSHIFT_();
+            if (Request.QueryString["wUABOVE3000ID"] != null)
+            {
+                int wUABOVE3000ID = Int32.Parse(Request.QueryString["wUABOVE3000ID"]);
+                if (wUABOVE3000ID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showWUABOVE3000Data();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        WUABOVE3000 wUABOVE3000 = new WUABOVE3000();
+
+        wUABOVE3000.DT = txtDT.Text;
+        wUABOVE3000.CUST_ID = Int32.Parse(ddlCUST_.SelectedValue);
+        wUABOVE3000.SENDERNAME = txtSENDERNAME.Text;
+        wUABOVE3000.SENDERADDRESS = txtSENDERADDRESS.Text;
+        wUABOVE3000.SENDERCITY = txtSENDERCITY.Text;
+        wUABOVE3000.SENDERSTATE = txtSENDERSTATE.Text;
+        wUABOVE3000.SENDERZIP = txtSENDERZIP.Text;
+        wUABOVE3000.AMOUNT = Int32.Parse(txtAMOUNT.Text);
+        wUABOVE3000.MTCN = txtMTCN.Text;
+        wUABOVE3000.EMP_ID = Int32.Parse(ddlEMP_.SelectedValue);
+        wUABOVE3000.STATION_ID = Int32.Parse(ddlSTATION_.SelectedValue);
+        wUABOVE3000.SHIFT_ID = Int32.Parse(ddlSHIFT_.SelectedValue);
+        int resutl = WUABOVE3000Manager.InsertWUABOVE3000(wUABOVE3000);
+        Response.Redirect("AdminWUABOVE3000Display.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        WUABOVE3000 wUABOVE3000 = new WUABOVE3000();
+        wUABOVE3000 = WUABOVE3000Manager.GetWUABOVE3000ByID(Int32.Parse(Request.QueryString["wUABOVE3000ID"]));
+        WUABOVE3000 tempWUABOVE3000 = new WUABOVE3000();
+        tempWUABOVE3000.WUABOVE3000ID = wUABOVE3000.WUABOVE3000ID;
+
+        tempWUABOVE3000.DT = txtDT.Text;
+        tempWUABOVE3000.CUST_ID = Int32.Parse(ddlCUST_.SelectedValue);
+        tempWUABOVE3000.SENDERNAME = txtSENDERNAME.Text;
+        tempWUABOVE3000.SENDERADDRESS = txtSENDERADDRESS.Text;
+        tempWUABOVE3000.SENDERCITY = txtSENDERCITY.Text;
+        tempWUABOVE3000.SENDERSTATE = txtSENDERSTATE.Text;
+        tempWUABOVE3000.SENDERZIP = txtSENDERZIP.Text;
+        tempWUABOVE3000.AMOUNT = Int32.Parse(txtAMOUNT.Text);
+        tempWUABOVE3000.MTCN = txtMTCN.Text;
+        tempWUABOVE3000.EMP_ID = Int32.Parse(ddlEMP_.SelectedValue);
+        tempWUABOVE3000.STATION_ID = Int32.Parse(ddlSTATION_.SelectedValue);
+        tempWUABOVE3000.SHIFT_ID = Int32.Parse(ddlSHIFT_.SelectedValue);
+        bool result = WUABOVE3000Manager.UpdateWUABOVE3000(tempWUABOVE3000);
+        Response.Redirect("AdminWUABOVE3000Display.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        txtDT.Text = "";
+        ddlCUST_.SelectedIndex = 0;
+        txtSENDERNAME.Text = "";
+        txtSENDERADDRESS.Text = "";
+        txtSENDERCITY.Text = "";
+        txtSENDERSTATE.Text = "";
+        txtSENDERZIP.Text = "";
+        txtAMOUNT.Text = "";
+        txtMTCN.Text = "";
+        ddlEMP_.SelectedIndex = 0;
+        ddlSTATION_.SelectedIndex = 0;
+        ddlSHIFT_.SelectedIndex = 0;
+    }
+    private void showWUABOVE3000Data()
+    {
+        WUABOVE3000 wUABOVE3000 = new WUABOVE3000();
+        wUABOVE3000 = WUABOVE3000Manager.GetWUABOVE3000ByID(Int32.Parse(Request.QueryString["wUABOVE3000ID"]));
+
+        txtDT.Text = wUABOVE3000.DT;
+        ddlCUST_.SelectedValue = wUABOVE3000.CUST_ID.ToString();
+        txtSENDERNAME.Text = wUABOVE3000.SENDERNAME;
+        txtSENDERADDRESS.Text = wUABOVE3000.SENDERADDRESS;
+        txtSENDERCITY.Text = wUABOVE3000.SENDERCITY;
+        txtSENDERSTATE.Text = wUABOVE3000.SENDERSTATE;
+        txtSENDERZIP.Text = wUABOVE3000.SENDERZIP;
+        txtAMOUNT.Text = wUABOVE3000.AMOUNT.ToString();
+        txtMTCN.Text = wUABOVE3000.MTCN;
+        ddlEMP_.SelectedValue = wUABOVE3000.EMP_ID.ToString();
+        ddlSTATION_.SelectedValue = wUABOVE3000.STATION_ID.ToString();
+        ddlSHIFT_.SelectedValue = wUABOVE3000.SHIFT_ID.ToString();
+    }
+    private void loadCUST_()
+    {
+        ListItem li = new ListItem("Select CUST_...", "0");
+        ddlCUST_.Items.Add(li);
+
+        List<CUST_> cUST_s = new List<CUST_>();
+        cUST_s = CUST_Manager.GetAllCUST_s();
+        foreach (CUST_ cUST_ in cUST_s)
+        {
+            ListItem item = new ListItem(cUST_.CUST_Name.ToString(), cUST_.CUST_ID.ToString());
+            ddlCUST_.Items.Add(item);
+        }
+    }
+    private void loadEMP_()
+    {
+        ListItem li = new ListItem("Select EMP_...", "0");
+        ddlEMP_.Items.Add(li);
+
+        List<EMP_> eMP_s = new List<EMP_>();
+        eMP_s = EMP_Manager.GetAllEMP_s();
+        foreach (EMP_ eMP_ in eMP_s)
+        {
+            ListItem item = new ListItem(eMP_.EMP_Name.ToString(), eMP_.EMP_ID.ToString());
+            ddlEMP_.Items.Add(item);
+        }
+    }
+    private void loadSTATION_()
+    {
+        ListItem li = new ListItem("Select STATION_...", "0");
+        ddlSTATION_.Items.Add(li);
+
+        List<STATION_> sTATION_s = new List<STATION_>();
+        sTATION_s = STATION_Manager.GetAllSTATION_s();
+        foreach (STATION_ sTATION_ in sTATION_s)
+        {
+            ListItem item = new ListItem(sTATION_.STATION_Name.ToString(), sTATION_.STATION_ID.ToString());
+            ddlSTATION_.Items.Add(item);
+        }
+    }
+    private void loadSHIFT_()
+    {
+        ListItem li = new ListItem("Select SHIFT_...", "0");
+        ddlSHIFT_.Items.Add(li);
+
+        List<SHIFT_> sHIFT_s = new List<SHIFT_>();
+        sHIFT_s = SHIFT_Manager.GetAllSHIFT_s();
+        foreach (SHIFT_ sHIFT_ in sHIFT_s)
+        {
+            ListItem item = new ListItem(sHIFT_.SHIFT_Name.ToString(), sHIFT_.SHIFT_ID.ToString());
+            ddlSHIFT_.Items.Add(item);
+        }
+    }
+}

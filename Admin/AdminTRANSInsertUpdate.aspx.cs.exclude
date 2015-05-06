@@ -1,0 +1,258 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminTRANSInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            loadCUST();
+            loadRECEIVER();
+            loadLOCATION();
+            loadTRANSRECEIVED();
+            loadAGENT();
+            if (Request.QueryString["tRANSID"] != null)
+            {
+                int tRANSID = Int32.Parse(Request.QueryString["tRANSID"]);
+                if (tRANSID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showTRANSData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        TRANS tRANS = new TRANS();
+
+        tRANS.CUSTID = Int32.Parse(ddlCUST.SelectedValue);
+        tRANS.RECEIVERID = Int32.Parse(ddlRECEIVER.SelectedValue);
+        tRANS.LOCATIONID = Int32.Parse(ddlLOCATION.SelectedValue);
+        tRANS.TRANSDT = txtTRANSDT.Text;
+        tRANS.TRANSAMOUNT = Int32.Parse(txtTRANSAMOUNT.Text);
+        tRANS.TRANSFEES = Int32.Parse(txtTRANSFEES.Text);
+        tRANS.TRANSOTHERFEES = Int32.Parse(txtTRANSOTHERFEES.Text);
+        tRANS.TRANSPROMOCODE = txtTRANSPROMOCODE.Text;
+        tRANS.TRANSPROMO = Int32.Parse(txtTRANSPROMO.Text);
+        tRANS.TRANSTOTALAMOUNT = Int32.Parse(txtTRANSTOTALAMOUNT.Text);
+        tRANS.FLAG_SM_RECEIVER = txtFLAG_SM_RECEIVER.Text;
+        tRANS.SM_RECEIVER = txtSM_RECEIVER.Text;
+        tRANS.FLAG_CALL_RECEIVER = txtFLAG_CALL_RECEIVER.Text;
+        tRANS.RECEIVERPHONENO = txtRECEIVERPHONENO.Text;
+        tRANS.FLAG_DD = txtFLAG_DD.Text;
+        tRANS.FLAG_TESTQUESTION = txtFLAG_TESTQUESTION.Text;
+        tRANS.TESTQUESTION = txtTESTQUESTION.Text;
+        tRANS.TESTANSWER = txtTESTANSWER.Text;
+        tRANS.FLAG_CALLSENDER = txtFLAG_CALLSENDER.Text;
+        tRANS.FLAG_SMSSENDER = txtFLAG_SMSSENDER.Text;
+        tRANS.FLAG_EMAILSENDER = txtFLAG_EMAILSENDER.Text;
+        tRANS.SENDEREMAILADDRESS = txtSENDEREMAILADDRESS.Text;
+        tRANS.TRANSSTATUS = txtTRANSSTATUS.Text;
+        tRANS.TRANSRECEIVEDID = Int32.Parse(ddlTRANSRECEIVED.SelectedValue);
+        tRANS.TRANSRECEIVEDATE = txtTRANSRECEIVEDATE.Text;
+        tRANS.CREATEDBY = Int32.Parse(txtCREATEDBY.Text);
+        tRANS.CREATEDON = txtCREATEDON.Text;
+        tRANS.UPDATEDBY = Int32.Parse(txtUPDATEDBY.Text);
+        tRANS.UPDATEDON = txtUPDATEDON.Text;
+        tRANS.AGENTID = Int32.Parse(ddlAGENT.SelectedValue);
+        tRANS.REFCODE = txtREFCODE.Text;
+        int resutl = TRANSManager.InsertTRANS(tRANS);
+        Response.Redirect("AdminTRANSDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        TRANS tRANS = new TRANS();
+        tRANS = TRANSManager.GetTRANSByID(Int32.Parse(Request.QueryString["tRANSID"]));
+        TRANS tempTRANS = new TRANS();
+        tempTRANS.TRANSID = tRANS.TRANSID;
+
+        tempTRANS.CUSTID = Int32.Parse(ddlCUST.SelectedValue);
+        tempTRANS.RECEIVERID = Int32.Parse(ddlRECEIVER.SelectedValue);
+        tempTRANS.LOCATIONID = Int32.Parse(ddlLOCATION.SelectedValue);
+        tempTRANS.TRANSDT = txtTRANSDT.Text;
+        tempTRANS.TRANSAMOUNT = Int32.Parse(txtTRANSAMOUNT.Text);
+        tempTRANS.TRANSFEES = Int32.Parse(txtTRANSFEES.Text);
+        tempTRANS.TRANSOTHERFEES = Int32.Parse(txtTRANSOTHERFEES.Text);
+        tempTRANS.TRANSPROMOCODE = txtTRANSPROMOCODE.Text;
+        tempTRANS.TRANSPROMO = Int32.Parse(txtTRANSPROMO.Text);
+        tempTRANS.TRANSTOTALAMOUNT = Int32.Parse(txtTRANSTOTALAMOUNT.Text);
+        tempTRANS.FLAG_SM_RECEIVER = txtFLAG_SM_RECEIVER.Text;
+        tempTRANS.SM_RECEIVER = txtSM_RECEIVER.Text;
+        tempTRANS.FLAG_CALL_RECEIVER = txtFLAG_CALL_RECEIVER.Text;
+        tempTRANS.RECEIVERPHONENO = txtRECEIVERPHONENO.Text;
+        tempTRANS.FLAG_DD = txtFLAG_DD.Text;
+        tempTRANS.FLAG_TESTQUESTION = txtFLAG_TESTQUESTION.Text;
+        tempTRANS.TESTQUESTION = txtTESTQUESTION.Text;
+        tempTRANS.TESTANSWER = txtTESTANSWER.Text;
+        tempTRANS.FLAG_CALLSENDER = txtFLAG_CALLSENDER.Text;
+        tempTRANS.FLAG_SMSSENDER = txtFLAG_SMSSENDER.Text;
+        tempTRANS.FLAG_EMAILSENDER = txtFLAG_EMAILSENDER.Text;
+        tempTRANS.SENDEREMAILADDRESS = txtSENDEREMAILADDRESS.Text;
+        tempTRANS.TRANSSTATUS = txtTRANSSTATUS.Text;
+        tempTRANS.TRANSRECEIVEDID = Int32.Parse(ddlTRANSRECEIVED.SelectedValue);
+        tempTRANS.TRANSRECEIVEDATE = txtTRANSRECEIVEDATE.Text;
+        tempTRANS.CREATEDBY = Int32.Parse(txtCREATEDBY.Text);
+        tempTRANS.CREATEDON = txtCREATEDON.Text;
+        tempTRANS.UPDATEDBY = Int32.Parse(txtUPDATEDBY.Text);
+        tempTRANS.UPDATEDON = txtUPDATEDON.Text;
+        tempTRANS.AGENTID = Int32.Parse(ddlAGENT.SelectedValue);
+        tempTRANS.REFCODE = txtREFCODE.Text;
+        bool result = TRANSManager.UpdateTRANS(tempTRANS);
+        Response.Redirect("AdminTRANSDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        ddlCUST.SelectedIndex = 0;
+        ddlRECEIVER.SelectedIndex = 0;
+        ddlLOCATION.SelectedIndex = 0;
+        txtTRANSDT.Text = "";
+        txtTRANSAMOUNT.Text = "";
+        txtTRANSFEES.Text = "";
+        txtTRANSOTHERFEES.Text = "";
+        txtTRANSPROMOCODE.Text = "";
+        txtTRANSPROMO.Text = "";
+        txtTRANSTOTALAMOUNT.Text = "";
+        txtFLAG_SM_RECEIVER.Text = "";
+        txtSM_RECEIVER.Text = "";
+        txtFLAG_CALL_RECEIVER.Text = "";
+        txtRECEIVERPHONENO.Text = "";
+        txtFLAG_DD.Text = "";
+        txtFLAG_TESTQUESTION.Text = "";
+        txtTESTQUESTION.Text = "";
+        txtTESTANSWER.Text = "";
+        txtFLAG_CALLSENDER.Text = "";
+        txtFLAG_SMSSENDER.Text = "";
+        txtFLAG_EMAILSENDER.Text = "";
+        txtSENDEREMAILADDRESS.Text = "";
+        txtTRANSSTATUS.Text = "";
+        ddlTRANSRECEIVED.SelectedIndex = 0;
+        txtTRANSRECEIVEDATE.Text = "";
+        txtCREATEDBY.Text = "";
+        txtCREATEDON.Text = "";
+        txtUPDATEDBY.Text = "";
+        txtUPDATEDON.Text = "";
+        ddlAGENT.SelectedIndex = 0;
+        txtREFCODE.Text = "";
+    }
+    private void showTRANSData()
+    {
+        TRANS tRANS = new TRANS();
+        tRANS = TRANSManager.GetTRANSByID(Int32.Parse(Request.QueryString["tRANSID"]));
+
+        ddlCUST.SelectedValue = tRANS.CUSTID.ToString();
+        ddlRECEIVER.SelectedValue = tRANS.RECEIVERID.ToString();
+        ddlLOCATION.SelectedValue = tRANS.LOCATIONID.ToString();
+        txtTRANSDT.Text = tRANS.TRANSDT;
+        txtTRANSAMOUNT.Text = tRANS.TRANSAMOUNT.ToString();
+        txtTRANSFEES.Text = tRANS.TRANSFEES.ToString();
+        txtTRANSOTHERFEES.Text = tRANS.TRANSOTHERFEES.ToString();
+        txtTRANSPROMOCODE.Text = tRANS.TRANSPROMOCODE;
+        txtTRANSPROMO.Text = tRANS.TRANSPROMO.ToString();
+        txtTRANSTOTALAMOUNT.Text = tRANS.TRANSTOTALAMOUNT.ToString();
+        txtFLAG_SM_RECEIVER.Text = tRANS.FLAG_SM_RECEIVER;
+        txtSM_RECEIVER.Text = tRANS.SM_RECEIVER;
+        txtFLAG_CALL_RECEIVER.Text = tRANS.FLAG_CALL_RECEIVER;
+        txtRECEIVERPHONENO.Text = tRANS.RECEIVERPHONENO;
+        txtFLAG_DD.Text = tRANS.FLAG_DD;
+        txtFLAG_TESTQUESTION.Text = tRANS.FLAG_TESTQUESTION;
+        txtTESTQUESTION.Text = tRANS.TESTQUESTION;
+        txtTESTANSWER.Text = tRANS.TESTANSWER;
+        txtFLAG_CALLSENDER.Text = tRANS.FLAG_CALLSENDER;
+        txtFLAG_SMSSENDER.Text = tRANS.FLAG_SMSSENDER;
+        txtFLAG_EMAILSENDER.Text = tRANS.FLAG_EMAILSENDER;
+        txtSENDEREMAILADDRESS.Text = tRANS.SENDEREMAILADDRESS;
+        txtTRANSSTATUS.Text = tRANS.TRANSSTATUS;
+        ddlTRANSRECEIVED.SelectedValue = tRANS.TRANSRECEIVEDID.ToString();
+        txtTRANSRECEIVEDATE.Text = tRANS.TRANSRECEIVEDATE;
+        txtCREATEDBY.Text = tRANS.CREATEDBY.ToString();
+        txtCREATEDON.Text = tRANS.CREATEDON;
+        txtUPDATEDBY.Text = tRANS.UPDATEDBY.ToString();
+        txtUPDATEDON.Text = tRANS.UPDATEDON;
+        ddlAGENT.SelectedValue = tRANS.AGENTID.ToString();
+        txtREFCODE.Text = tRANS.REFCODE;
+    }
+    private void loadCUST()
+    {
+        ListItem li = new ListItem("Select CUST...", "0");
+        ddlCUST.Items.Add(li);
+
+        List<CUST> cUSTs = new List<CUST>();
+        cUSTs = CUSTManager.GetAllCUSTs();
+        foreach (CUST cUST in cUSTs)
+        {
+            ListItem item = new ListItem(cUST.CUSTName.ToString(), cUST.CUSTID.ToString());
+            ddlCUST.Items.Add(item);
+        }
+    }
+    private void loadRECEIVER()
+    {
+        ListItem li = new ListItem("Select RECEIVER...", "0");
+        ddlRECEIVER.Items.Add(li);
+
+        List<RECEIVER> rECEIVERs = new List<RECEIVER>();
+        rECEIVERs = RECEIVERManager.GetAllRECEIVERs();
+        foreach (RECEIVER rECEIVER in rECEIVERs)
+        {
+            ListItem item = new ListItem(rECEIVER.RECEIVERName.ToString(), rECEIVER.RECEIVERID.ToString());
+            ddlRECEIVER.Items.Add(item);
+        }
+    }
+    private void loadLOCATION()
+    {
+        ListItem li = new ListItem("Select LOCATION...", "0");
+        ddlLOCATION.Items.Add(li);
+
+        List<LOCATION> lOCATIONs = new List<LOCATION>();
+        lOCATIONs = LOCATIONManager.GetAllLOCATIONs();
+        foreach (LOCATION lOCATION in lOCATIONs)
+        {
+            ListItem item = new ListItem(lOCATION.LOCATIONName.ToString(), lOCATION.LOCATIONID.ToString());
+            ddlLOCATION.Items.Add(item);
+        }
+    }
+    private void loadTRANSRECEIVED()
+    {
+        ListItem li = new ListItem("Select TRANSRECEIVED...", "0");
+        ddlTRANSRECEIVED.Items.Add(li);
+
+        List<TRANSRECEIVED> tRANSRECEIVEDs = new List<TRANSRECEIVED>();
+        tRANSRECEIVEDs = TRANSRECEIVEDManager.GetAllTRANSRECEIVEDs();
+        foreach (TRANSRECEIVED tRANSRECEIVED in tRANSRECEIVEDs)
+        {
+            ListItem item = new ListItem(tRANSRECEIVED.TRANSRECEIVEDName.ToString(), tRANSRECEIVED.TRANSRECEIVEDID.ToString());
+            ddlTRANSRECEIVED.Items.Add(item);
+        }
+    }
+    private void loadAGENT()
+    {
+        ListItem li = new ListItem("Select AGENT...", "0");
+        ddlAGENT.Items.Add(li);
+
+        List<AGENT> aGENTs = new List<AGENT>();
+        aGENTs = AGENTManager.GetAllAGENTs();
+        foreach (AGENT aGENT in aGENTs)
+        {
+            ListItem item = new ListItem(aGENT.AGENTName.ToString(), aGENT.AGENTID.ToString());
+            ddlAGENT.Items.Add(item);
+        }
+    }
+}

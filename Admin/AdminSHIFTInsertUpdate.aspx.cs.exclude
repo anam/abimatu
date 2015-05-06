@@ -1,0 +1,96 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminSHIFTInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            if (Request.QueryString["sHIFTID"] != null)
+            {
+                int sHIFTID = Int32.Parse(Request.QueryString["sHIFTID"]);
+                if (sHIFTID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showSHIFTData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        SHIFT sHIFT = new SHIFT();
+
+        sHIFT.SHIFTNAME = txtSHIFTNAME.Text;
+        sHIFT.SHIFTSTART = txtSHIFTSTART.Text;
+        sHIFT.SHIFTEND = txtSHIFTEND.Text;
+        sHIFT.CREATEDON = txtCREATEDON.Text;
+        sHIFT.CREATEDBY = txtCREATEDBY.Text;
+        sHIFT.UPDATEDON = txtUPDATEDON.Text;
+        sHIFT.UPDATEDBY = txtUPDATEDBY.Text;
+        sHIFT.SHIFTTIME = txtSHIFTTIME.Text;
+        int resutl = SHIFTManager.InsertSHIFT(sHIFT);
+        Response.Redirect("AdminSHIFTDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        SHIFT sHIFT = new SHIFT();
+        sHIFT = SHIFTManager.GetSHIFTByID(Int32.Parse(Request.QueryString["sHIFTID"]));
+        SHIFT tempSHIFT = new SHIFT();
+        tempSHIFT.SHIFTID = sHIFT.SHIFTID;
+
+        tempSHIFT.SHIFTNAME = txtSHIFTNAME.Text;
+        tempSHIFT.SHIFTSTART = txtSHIFTSTART.Text;
+        tempSHIFT.SHIFTEND = txtSHIFTEND.Text;
+        tempSHIFT.CREATEDON = txtCREATEDON.Text;
+        tempSHIFT.CREATEDBY = txtCREATEDBY.Text;
+        tempSHIFT.UPDATEDON = txtUPDATEDON.Text;
+        tempSHIFT.UPDATEDBY = txtUPDATEDBY.Text;
+        tempSHIFT.SHIFTTIME = txtSHIFTTIME.Text;
+        bool result = SHIFTManager.UpdateSHIFT(tempSHIFT);
+        Response.Redirect("AdminSHIFTDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        txtSHIFTNAME.Text = "";
+        txtSHIFTSTART.Text = "";
+        txtSHIFTEND.Text = "";
+        txtCREATEDON.Text = "";
+        txtCREATEDBY.Text = "";
+        txtUPDATEDON.Text = "";
+        txtUPDATEDBY.Text = "";
+        txtSHIFTTIME.Text = "";
+    }
+    private void showSHIFTData()
+    {
+        SHIFT sHIFT = new SHIFT();
+        sHIFT = SHIFTManager.GetSHIFTByID(Int32.Parse(Request.QueryString["sHIFTID"]));
+
+        txtSHIFTNAME.Text = sHIFT.SHIFTNAME;
+        txtSHIFTSTART.Text = sHIFT.SHIFTSTART;
+        txtSHIFTEND.Text = sHIFT.SHIFTEND;
+        txtCREATEDON.Text = sHIFT.CREATEDON;
+        txtCREATEDBY.Text = sHIFT.CREATEDBY;
+        txtUPDATEDON.Text = sHIFT.UPDATEDON;
+        txtUPDATEDBY.Text = sHIFT.UPDATEDBY;
+        txtSHIFTTIME.Text = sHIFT.SHIFTTIME;
+    }
+}

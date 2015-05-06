@@ -1,0 +1,177 @@
+<%@ Page Language="C#" MasterPageFile="~/Admin/AdminMaster.master" AutoEventWireup="true" 
+CodeFile="AdminPRODUCTMASTERInsertUpdate.aspx.cs" Inherits="AdminPRODUCTMASTERInsertUpdate" Title="PRODUCTMASTER Insert/Update By Admin" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <style type="text/css">
+        .tableCss
+        {
+        	text-align: left;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <div class="tableCss">
+        <table>
+            <tr>
+                <td>
+                    <asp:Label ID="lblPROD_NAME" runat="server" Text="PROD_NAME: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtPROD_NAME" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblPROD_DESC" runat="server" Text="PROD_DESC: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtPROD_DESC" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblSUPPLIERID" runat="server" Text="SUPPLIERID: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlSUPPLIER" runat="server">
+                    </asp:DropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblPROD_UPCCODE" runat="server" Text="PROD_UPCCODE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtPROD_UPCCODE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblPROD_RETAILPRICE" runat="server" Text="PROD_RETAILPRICE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtPROD_RETAILPRICE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblPROD_STOCKINHAND" runat="server" Text="PROD_STOCKINHAND: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtPROD_STOCKINHAND" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblPROD_REORDERLEVEL" runat="server" Text="PROD_REORDERLEVEL: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtPROD_REORDERLEVEL" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCREATED_ON" runat="server" Text="CREATED_ON: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCREATED_ON" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCREATED_BY" runat="server" Text="CREATED_BY: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCREATED_BY" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblUPDATED_ON" runat="server" Text="UPDATED_ON: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtUPDATED_ON" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblUPDATED_BY" runat="server" Text="UPDATED_BY: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtUPDATED_BY" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblIS_TAXABLE" runat="server" Text="IS_TAXABLE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtIS_TAXABLE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblPROD_COSTPRICE" runat="server" Text="PROD_COSTPRICE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtPROD_COSTPRICE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblDEPT_ID" runat="server" Text="DEPT_ID: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlDEPT_" runat="server">
+                    </asp:DropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblAGENTID" runat="server" Text="AGENTID: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlAGENT" runat="server">
+                    </asp:DropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+                    <asp:Button ID="btnUpdate" runat="server" Text="Update" 
+                        OnClick="btnUpdate_Click" />
+                </td>
+                <td>
+                    <asp:Button ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_Click" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</asp:Content>

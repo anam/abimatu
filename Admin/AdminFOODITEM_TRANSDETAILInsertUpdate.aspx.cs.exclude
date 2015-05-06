@@ -1,0 +1,124 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminFOODITEM_TRANSDETAILInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            loadT();
+            loadF();
+            if (Request.QueryString["fOODITEM_TRANSDETAILID"] != null)
+            {
+                int fOODITEM_TRANSDETAILID = Int32.Parse(Request.QueryString["fOODITEM_TRANSDETAILID"]);
+                if (fOODITEM_TRANSDETAILID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showFOODITEM_TRANSDETAILData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        FOODITEM_TRANSDETAIL fOODITEM_TRANSDETAIL = new FOODITEM_TRANSDETAIL();
+
+        fOODITEM_TRANSDETAIL.TID = Int32.Parse(ddlT.SelectedValue);
+        fOODITEM_TRANSDETAIL.FID = Int32.Parse(ddlF.SelectedValue);
+        fOODITEM_TRANSDETAIL.FRATE = Int32.Parse(txtFRATE.Text);
+        fOODITEM_TRANSDETAIL.FQTY = Int32.Parse(txtFQTY.Text);
+        fOODITEM_TRANSDETAIL.CREATEDON = txtCREATEDON.Text;
+        fOODITEM_TRANSDETAIL.CREATEDBY = Int32.Parse(txtCREATEDBY.Text);
+        fOODITEM_TRANSDETAIL.UPDATEDON = txtUPDATEDON.Text;
+        fOODITEM_TRANSDETAIL.UPDATEDBY = Int32.Parse(txtUPDATEDBY.Text);
+        int resutl = FOODITEM_TRANSDETAILManager.InsertFOODITEM_TRANSDETAIL(fOODITEM_TRANSDETAIL);
+        Response.Redirect("AdminFOODITEM_TRANSDETAILDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        FOODITEM_TRANSDETAIL fOODITEM_TRANSDETAIL = new FOODITEM_TRANSDETAIL();
+        fOODITEM_TRANSDETAIL = FOODITEM_TRANSDETAILManager.GetFOODITEM_TRANSDETAILByID(Int32.Parse(Request.QueryString["fOODITEM_TRANSDETAILID"]));
+        FOODITEM_TRANSDETAIL tempFOODITEM_TRANSDETAIL = new FOODITEM_TRANSDETAIL();
+        tempFOODITEM_TRANSDETAIL.FOODITEM_TRANSDETAILID = fOODITEM_TRANSDETAIL.FOODITEM_TRANSDETAILID;
+
+        tempFOODITEM_TRANSDETAIL.TID = Int32.Parse(ddlT.SelectedValue);
+        tempFOODITEM_TRANSDETAIL.FID = Int32.Parse(ddlF.SelectedValue);
+        tempFOODITEM_TRANSDETAIL.FRATE = Int32.Parse(txtFRATE.Text);
+        tempFOODITEM_TRANSDETAIL.FQTY = Int32.Parse(txtFQTY.Text);
+        tempFOODITEM_TRANSDETAIL.CREATEDON = txtCREATEDON.Text;
+        tempFOODITEM_TRANSDETAIL.CREATEDBY = Int32.Parse(txtCREATEDBY.Text);
+        tempFOODITEM_TRANSDETAIL.UPDATEDON = txtUPDATEDON.Text;
+        tempFOODITEM_TRANSDETAIL.UPDATEDBY = Int32.Parse(txtUPDATEDBY.Text);
+        bool result = FOODITEM_TRANSDETAILManager.UpdateFOODITEM_TRANSDETAIL(tempFOODITEM_TRANSDETAIL);
+        Response.Redirect("AdminFOODITEM_TRANSDETAILDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        ddlT.SelectedIndex = 0;
+        ddlF.SelectedIndex = 0;
+        txtFRATE.Text = "";
+        txtFQTY.Text = "";
+        txtCREATEDON.Text = "";
+        txtCREATEDBY.Text = "";
+        txtUPDATEDON.Text = "";
+        txtUPDATEDBY.Text = "";
+    }
+    private void showFOODITEM_TRANSDETAILData()
+    {
+        FOODITEM_TRANSDETAIL fOODITEM_TRANSDETAIL = new FOODITEM_TRANSDETAIL();
+        fOODITEM_TRANSDETAIL = FOODITEM_TRANSDETAILManager.GetFOODITEM_TRANSDETAILByID(Int32.Parse(Request.QueryString["fOODITEM_TRANSDETAILID"]));
+
+        ddlT.SelectedValue = fOODITEM_TRANSDETAIL.TID.ToString();
+        ddlF.SelectedValue = fOODITEM_TRANSDETAIL.FID.ToString();
+        txtFRATE.Text = fOODITEM_TRANSDETAIL.FRATE.ToString();
+        txtFQTY.Text = fOODITEM_TRANSDETAIL.FQTY.ToString();
+        txtCREATEDON.Text = fOODITEM_TRANSDETAIL.CREATEDON;
+        txtCREATEDBY.Text = fOODITEM_TRANSDETAIL.CREATEDBY.ToString();
+        txtUPDATEDON.Text = fOODITEM_TRANSDETAIL.UPDATEDON;
+        txtUPDATEDBY.Text = fOODITEM_TRANSDETAIL.UPDATEDBY.ToString();
+    }
+    private void loadT()
+    {
+        ListItem li = new ListItem("Select T...", "0");
+        ddlT.Items.Add(li);
+
+        List<T> ts = new List<T>();
+        ts = TManager.GetAllTs();
+        foreach (T t in ts)
+        {
+            ListItem item = new ListItem(t.TName.ToString(), t.TID.ToString());
+            ddlT.Items.Add(item);
+        }
+    }
+    private void loadF()
+    {
+        ListItem li = new ListItem("Select F...", "0");
+        ddlF.Items.Add(li);
+
+        List<F> fs = new List<F>();
+        fs = FManager.GetAllFs();
+        foreach (F f in fs)
+        {
+            ListItem item = new ListItem(f.FName.ToString(), f.FID.ToString());
+            ddlF.Items.Add(item);
+        }
+    }
+}

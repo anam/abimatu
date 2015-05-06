@@ -1,0 +1,110 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminSQLPLUS_PRODUCT_PROFILEInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            loadUSER();
+            if (Request.QueryString["sQLPLUS_PRODUCT_PROFILEID"] != null)
+            {
+                int sQLPLUS_PRODUCT_PROFILEID = Int32.Parse(Request.QueryString["sQLPLUS_PRODUCT_PROFILEID"]);
+                if (sQLPLUS_PRODUCT_PROFILEID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showSQLPLUS_PRODUCT_PROFILEData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        SQLPLUS_PRODUCT_PROFILE sQLPLUS_PRODUCT_PROFILE = new SQLPLUS_PRODUCT_PROFILE();
+
+        sQLPLUS_PRODUCT_PROFILE.PRODUCT = txtPRODUCT.Text;
+        sQLPLUS_PRODUCT_PROFILE.USERID = Int32.Parse(ddlUSER.SelectedValue);
+        sQLPLUS_PRODUCT_PROFILE.ATTRIBUTE = txtATTRIBUTE.Text;
+        sQLPLUS_PRODUCT_PROFILE.SCOPE = txtSCOPE.Text;
+        sQLPLUS_PRODUCT_PROFILE.NUMERIC_VALUE = Int32.Parse(txtNUMERIC_VALUE.Text);
+        sQLPLUS_PRODUCT_PROFILE.CHAR_VALUE = txtCHAR_VALUE.Text;
+        sQLPLUS_PRODUCT_PROFILE.DATE_VALUE = txtDATE_VALUE.Text;
+        sQLPLUS_PRODUCT_PROFILE.LONG_VALUE = Int32.Parse(txtLONG_VALUE.Text);
+        int resutl = SQLPLUS_PRODUCT_PROFILEManager.InsertSQLPLUS_PRODUCT_PROFILE(sQLPLUS_PRODUCT_PROFILE);
+        Response.Redirect("AdminSQLPLUS_PRODUCT_PROFILEDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        SQLPLUS_PRODUCT_PROFILE sQLPLUS_PRODUCT_PROFILE = new SQLPLUS_PRODUCT_PROFILE();
+        sQLPLUS_PRODUCT_PROFILE = SQLPLUS_PRODUCT_PROFILEManager.GetSQLPLUS_PRODUCT_PROFILEByID(Int32.Parse(Request.QueryString["sQLPLUS_PRODUCT_PROFILEID"]));
+        SQLPLUS_PRODUCT_PROFILE tempSQLPLUS_PRODUCT_PROFILE = new SQLPLUS_PRODUCT_PROFILE();
+        tempSQLPLUS_PRODUCT_PROFILE.SQLPLUS_PRODUCT_PROFILEID = sQLPLUS_PRODUCT_PROFILE.SQLPLUS_PRODUCT_PROFILEID;
+
+        tempSQLPLUS_PRODUCT_PROFILE.PRODUCT = txtPRODUCT.Text;
+        tempSQLPLUS_PRODUCT_PROFILE.USERID = Int32.Parse(ddlUSER.SelectedValue);
+        tempSQLPLUS_PRODUCT_PROFILE.ATTRIBUTE = txtATTRIBUTE.Text;
+        tempSQLPLUS_PRODUCT_PROFILE.SCOPE = txtSCOPE.Text;
+        tempSQLPLUS_PRODUCT_PROFILE.NUMERIC_VALUE = Int32.Parse(txtNUMERIC_VALUE.Text);
+        tempSQLPLUS_PRODUCT_PROFILE.CHAR_VALUE = txtCHAR_VALUE.Text;
+        tempSQLPLUS_PRODUCT_PROFILE.DATE_VALUE = txtDATE_VALUE.Text;
+        tempSQLPLUS_PRODUCT_PROFILE.LONG_VALUE = Int32.Parse(txtLONG_VALUE.Text);
+        bool result = SQLPLUS_PRODUCT_PROFILEManager.UpdateSQLPLUS_PRODUCT_PROFILE(tempSQLPLUS_PRODUCT_PROFILE);
+        Response.Redirect("AdminSQLPLUS_PRODUCT_PROFILEDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        txtPRODUCT.Text = "";
+        ddlUSER.SelectedIndex = 0;
+        txtATTRIBUTE.Text = "";
+        txtSCOPE.Text = "";
+        txtNUMERIC_VALUE.Text = "";
+        txtCHAR_VALUE.Text = "";
+        txtDATE_VALUE.Text = "";
+        txtLONG_VALUE.Text = "";
+    }
+    private void showSQLPLUS_PRODUCT_PROFILEData()
+    {
+        SQLPLUS_PRODUCT_PROFILE sQLPLUS_PRODUCT_PROFILE = new SQLPLUS_PRODUCT_PROFILE();
+        sQLPLUS_PRODUCT_PROFILE = SQLPLUS_PRODUCT_PROFILEManager.GetSQLPLUS_PRODUCT_PROFILEByID(Int32.Parse(Request.QueryString["sQLPLUS_PRODUCT_PROFILEID"]));
+
+        txtPRODUCT.Text = sQLPLUS_PRODUCT_PROFILE.PRODUCT;
+        ddlUSER.SelectedValue = sQLPLUS_PRODUCT_PROFILE.USERID.ToString();
+        txtATTRIBUTE.Text = sQLPLUS_PRODUCT_PROFILE.ATTRIBUTE;
+        txtSCOPE.Text = sQLPLUS_PRODUCT_PROFILE.SCOPE;
+        txtNUMERIC_VALUE.Text = sQLPLUS_PRODUCT_PROFILE.NUMERIC_VALUE.ToString();
+        txtCHAR_VALUE.Text = sQLPLUS_PRODUCT_PROFILE.CHAR_VALUE;
+        txtDATE_VALUE.Text = sQLPLUS_PRODUCT_PROFILE.DATE_VALUE;
+        txtLONG_VALUE.Text = sQLPLUS_PRODUCT_PROFILE.LONG_VALUE.ToString();
+    }
+    private void loadUSER()
+    {
+        ListItem li = new ListItem("Select USER...", "0");
+        ddlUSER.Items.Add(li);
+
+        List<USER> uSERs = new List<USER>();
+        uSERs = USERManager.GetAllUSERs();
+        foreach (USER uSER in uSERs)
+        {
+            ListItem item = new ListItem(uSER.USERName.ToString(), uSER.USERID.ToString());
+            ddlUSER.Items.Add(item);
+        }
+    }
+}

@@ -1,0 +1,48 @@
+using System;
+using System.Collections;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminMOABOVE3000Display : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            showMOABOVE3000Grid();
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("AdminMOABOVE3000InsertUpdate.aspx?mOABOVE3000ID=0");
+    }
+    protected void lbSelect_Click(object sender, EventArgs e)
+    {
+        LinkButton linkButton = new LinkButton();
+        linkButton = (LinkButton)sender;
+        int id;
+        id = Convert.ToInt32(linkButton.CommandArgument);
+        Response.Redirect("AdminMOABOVE3000InsertUpdate.aspx?mOABOVE3000ID=" + id);
+    }
+    protected void lbDelete_Click(object sender, EventArgs e)
+    {
+        LinkButton linkButton = new LinkButton();
+        linkButton = (LinkButton)sender;
+        bool result = MOABOVE3000Manager.DeleteMOABOVE3000(Convert.ToInt32(linkButton.CommandArgument));
+        showMOABOVE3000Grid();
+    }
+
+    private void showMOABOVE3000Grid()
+    {
+        gvMOABOVE3000.DataSource = MOABOVE3000Manager.GetAllMOABOVE3000s();
+        gvMOABOVE3000.DataBind();
+    }
+}

@@ -1,0 +1,152 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminMAKERInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            if (Request.QueryString["mAKERID"] != null)
+            {
+                int mAKERID = Int32.Parse(Request.QueryString["mAKERID"]);
+                if (mAKERID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showMAKERData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        MAKER mAKER = new MAKER();
+
+        mAKER.MAKERNAME = txtMAKERNAME.Text;
+        mAKER.MAKERADDRESS1 = txtMAKERADDRESS1.Text;
+        mAKER.MAKERADDRESS2 = txtMAKERADDRESS2.Text;
+        mAKER.MAKERCITY = txtMAKERCITY.Text;
+        mAKER.MAKERSTATE = txtMAKERSTATE.Text;
+        mAKER.MAKERZIP = txtMAKERZIP.Text;
+        mAKER.MAKERPHONE1 = txtMAKERPHONE1.Text;
+        mAKER.MAKERPHONE2 = txtMAKERPHONE2.Text;
+        mAKER.MANAGER = txtMANAGER.Text;
+        mAKER.ACCOUNTNO = txtACCOUNTNO.Text;
+        mAKER.ROUTINGNO = txtROUTINGNO.Text;
+        mAKER.CHECKCOUNT = Int32.Parse(txtCHECKCOUNT.Text);
+        mAKER.CHECKAMOUNT = Int32.Parse(txtCHECKAMOUNT.Text);
+        mAKER.BADCHECKCOUNT = Int32.Parse(txtBADCHECKCOUNT.Text);
+        mAKER.BADCHECKAMOUNT = Int32.Parse(txtBADCHECKAMOUNT.Text);
+        mAKER.AMOUNTDUE = Int32.Parse(txtAMOUNTDUE.Text);
+        mAKER.CREATEDBY = txtCREATEDBY.Text;
+        mAKER.CREATEDON = txtCREATEDON.Text;
+        mAKER.UPDATEDBY = txtUPDATEDBY.Text;
+        mAKER.UPDATEDON = txtUPDATEDON.Text;
+        mAKER.ISOFACVERIFIED = txtISOFACVERIFIED.Text;
+        mAKER.MAKERREMARKS = txtMAKERREMARKS.Text;
+        int resutl = MAKERManager.InsertMAKER(mAKER);
+        Response.Redirect("AdminMAKERDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        MAKER mAKER = new MAKER();
+        mAKER = MAKERManager.GetMAKERByID(Int32.Parse(Request.QueryString["mAKERID"]));
+        MAKER tempMAKER = new MAKER();
+        tempMAKER.MAKERID = mAKER.MAKERID;
+
+        tempMAKER.MAKERNAME = txtMAKERNAME.Text;
+        tempMAKER.MAKERADDRESS1 = txtMAKERADDRESS1.Text;
+        tempMAKER.MAKERADDRESS2 = txtMAKERADDRESS2.Text;
+        tempMAKER.MAKERCITY = txtMAKERCITY.Text;
+        tempMAKER.MAKERSTATE = txtMAKERSTATE.Text;
+        tempMAKER.MAKERZIP = txtMAKERZIP.Text;
+        tempMAKER.MAKERPHONE1 = txtMAKERPHONE1.Text;
+        tempMAKER.MAKERPHONE2 = txtMAKERPHONE2.Text;
+        tempMAKER.MANAGER = txtMANAGER.Text;
+        tempMAKER.ACCOUNTNO = txtACCOUNTNO.Text;
+        tempMAKER.ROUTINGNO = txtROUTINGNO.Text;
+        tempMAKER.CHECKCOUNT = Int32.Parse(txtCHECKCOUNT.Text);
+        tempMAKER.CHECKAMOUNT = Int32.Parse(txtCHECKAMOUNT.Text);
+        tempMAKER.BADCHECKCOUNT = Int32.Parse(txtBADCHECKCOUNT.Text);
+        tempMAKER.BADCHECKAMOUNT = Int32.Parse(txtBADCHECKAMOUNT.Text);
+        tempMAKER.AMOUNTDUE = Int32.Parse(txtAMOUNTDUE.Text);
+        tempMAKER.CREATEDBY = txtCREATEDBY.Text;
+        tempMAKER.CREATEDON = txtCREATEDON.Text;
+        tempMAKER.UPDATEDBY = txtUPDATEDBY.Text;
+        tempMAKER.UPDATEDON = txtUPDATEDON.Text;
+        tempMAKER.ISOFACVERIFIED = txtISOFACVERIFIED.Text;
+        tempMAKER.MAKERREMARKS = txtMAKERREMARKS.Text;
+        bool result = MAKERManager.UpdateMAKER(tempMAKER);
+        Response.Redirect("AdminMAKERDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        txtMAKERNAME.Text = "";
+        txtMAKERADDRESS1.Text = "";
+        txtMAKERADDRESS2.Text = "";
+        txtMAKERCITY.Text = "";
+        txtMAKERSTATE.Text = "";
+        txtMAKERZIP.Text = "";
+        txtMAKERPHONE1.Text = "";
+        txtMAKERPHONE2.Text = "";
+        txtMANAGER.Text = "";
+        txtACCOUNTNO.Text = "";
+        txtROUTINGNO.Text = "";
+        txtCHECKCOUNT.Text = "";
+        txtCHECKAMOUNT.Text = "";
+        txtBADCHECKCOUNT.Text = "";
+        txtBADCHECKAMOUNT.Text = "";
+        txtAMOUNTDUE.Text = "";
+        txtCREATEDBY.Text = "";
+        txtCREATEDON.Text = "";
+        txtUPDATEDBY.Text = "";
+        txtUPDATEDON.Text = "";
+        txtISOFACVERIFIED.Text = "";
+        txtMAKERREMARKS.Text = "";
+    }
+    private void showMAKERData()
+    {
+        MAKER mAKER = new MAKER();
+        mAKER = MAKERManager.GetMAKERByID(Int32.Parse(Request.QueryString["mAKERID"]));
+
+        txtMAKERNAME.Text = mAKER.MAKERNAME;
+        txtMAKERADDRESS1.Text = mAKER.MAKERADDRESS1;
+        txtMAKERADDRESS2.Text = mAKER.MAKERADDRESS2;
+        txtMAKERCITY.Text = mAKER.MAKERCITY;
+        txtMAKERSTATE.Text = mAKER.MAKERSTATE;
+        txtMAKERZIP.Text = mAKER.MAKERZIP;
+        txtMAKERPHONE1.Text = mAKER.MAKERPHONE1;
+        txtMAKERPHONE2.Text = mAKER.MAKERPHONE2;
+        txtMANAGER.Text = mAKER.MANAGER;
+        txtACCOUNTNO.Text = mAKER.ACCOUNTNO;
+        txtROUTINGNO.Text = mAKER.ROUTINGNO;
+        txtCHECKCOUNT.Text = mAKER.CHECKCOUNT.ToString();
+        txtCHECKAMOUNT.Text = mAKER.CHECKAMOUNT.ToString();
+        txtBADCHECKCOUNT.Text = mAKER.BADCHECKCOUNT.ToString();
+        txtBADCHECKAMOUNT.Text = mAKER.BADCHECKAMOUNT.ToString();
+        txtAMOUNTDUE.Text = mAKER.AMOUNTDUE.ToString();
+        txtCREATEDBY.Text = mAKER.CREATEDBY;
+        txtCREATEDON.Text = mAKER.CREATEDON;
+        txtUPDATEDBY.Text = mAKER.UPDATEDBY;
+        txtUPDATEDON.Text = mAKER.UPDATEDON;
+        txtISOFACVERIFIED.Text = mAKER.ISOFACVERIFIED;
+        txtMAKERREMARKS.Text = mAKER.MAKERREMARKS;
+    }
+}

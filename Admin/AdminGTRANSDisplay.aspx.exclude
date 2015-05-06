@@ -1,0 +1,132 @@
+<%@ Page Language="C#" MasterPageFile="~/Admin/AdminMaster.master" AutoEventWireup="true"
+    CodeFile="AdminGTRANSDisplay.aspx.cs" Inherits="AdminGTRANSDisplay" Title="Display GTRANS By Admin" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style type="text/css">
+        .gridCss
+        {
+            width: 100%;
+            padding: 20px 10px 10px 10px;
+            text-align: center;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <div>
+        <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+        <asp:GridView ID="gvGTRANS" runat="server" AutoGenerateColumns="false" CssClass="gridCss">
+            <Columns>
+                <asp:TemplateField HeaderText="Select">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="lbSelect" runat="server" CommandArgument='<%#Eval("GTRANSID") %>' OnClick="lbSelect_Click">
+                            Select
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="UTILITYID">
+                    <ItemTemplate>
+                        <asp:Label ID="lblUTILITYID" runat="server" Text='<%#Eval("UTILITYID") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CUSTID">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCUSTID" runat="server" Text='<%#Eval("CUSTID") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="STOREID">
+                    <ItemTemplate>
+                        <asp:Label ID="lblSTOREID" runat="server" Text='<%#Eval("STOREID") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="LOCATIONID">
+                    <ItemTemplate>
+                        <asp:Label ID="lblLOCATIONID" runat="server" Text='<%#Eval("LOCATIONID") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="TRANSDATE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblTRANSDATE" runat="server" Text='<%#Eval("TRANSDATE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="TRANSACC">
+                    <ItemTemplate>
+                        <asp:Label ID="lblTRANSACC" runat="server" Text='<%#Eval("TRANSACC") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="TRANSAMT">
+                    <ItemTemplate>
+                        <asp:Label ID="lblTRANSAMT" runat="server" Text='<%#Eval("TRANSAMT") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="TRANSFEES">
+                    <ItemTemplate>
+                        <asp:Label ID="lblTRANSFEES" runat="server" Text='<%#Eval("TRANSFEES") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="TRANSCASH">
+                    <ItemTemplate>
+                        <asp:Label ID="lblTRANSCASH" runat="server" Text='<%#Eval("TRANSCASH") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="TRANSCHECK">
+                    <ItemTemplate>
+                        <asp:Label ID="lblTRANSCHECK" runat="server" Text='<%#Eval("TRANSCHECK") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="AUTHCODE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblAUTHCODE" runat="server" Text='<%#Eval("AUTHCODE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="EMPID">
+                    <ItemTemplate>
+                        <asp:Label ID="lblEMPID" runat="server" Text='<%#Eval("EMPID") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="STATIONID">
+                    <ItemTemplate>
+                        <asp:Label ID="lblSTATIONID" runat="server" Text='<%#Eval("STATIONID") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="SHIFTID">
+                    <ItemTemplate>
+                        <asp:Label ID="lblSHIFTID" runat="server" Text='<%#Eval("SHIFTID") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="VOIDFLAG">
+                    <ItemTemplate>
+                        <asp:Label ID="lblVOIDFLAG" runat="server" Text='<%#Eval("VOIDFLAG") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="VOIDAUTHORIZATION">
+                    <ItemTemplate>
+                        <asp:Label ID="lblVOIDAUTHORIZATION" runat="server" Text='<%#Eval("VOIDAUTHORIZATION") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Delete">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="lbDelete" runat="server" CommandArgument='<%#Eval("GTRANSID") %>' OnClick="lbDelete_Click">
+                            Delete
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+    </div>
+</asp:Content>

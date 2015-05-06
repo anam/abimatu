@@ -1,0 +1,84 @@
+<%@ Page Language="C#" MasterPageFile="~/Admin/AdminMaster.master" AutoEventWireup="true"
+    CodeFile="AdminMOABOVE3000Display.aspx.cs" Inherits="AdminMOABOVE3000Display" Title="Display MOABOVE3000 By Admin" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style type="text/css">
+        .gridCss
+        {
+            width: 100%;
+            padding: 20px 10px 10px 10px;
+            text-align: center;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <div>
+        <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+        <asp:GridView ID="gvMOABOVE3000" runat="server" AutoGenerateColumns="false" CssClass="gridCss">
+            <Columns>
+                <asp:TemplateField HeaderText="Select">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="lbSelect" runat="server" CommandArgument='<%#Eval("MOABOVE3000ID") %>' OnClick="lbSelect_Click">
+                            Select
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="DT">
+                    <ItemTemplate>
+                        <asp:Label ID="lblDT" runat="server" Text='<%#Eval("DT") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CUST_ID">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCUST_ID" runat="server" Text='<%#Eval("CUST_ID") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="STARTNO">
+                    <ItemTemplate>
+                        <asp:Label ID="lblSTARTNO" runat="server" Text='<%#Eval("STARTNO") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="ENDNO">
+                    <ItemTemplate>
+                        <asp:Label ID="lblENDNO" runat="server" Text='<%#Eval("ENDNO") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="AMOUNT">
+                    <ItemTemplate>
+                        <asp:Label ID="lblAMOUNT" runat="server" Text='<%#Eval("AMOUNT") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="EMP_ID">
+                    <ItemTemplate>
+                        <asp:Label ID="lblEMP_ID" runat="server" Text='<%#Eval("EMP_ID") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="STATION_ID">
+                    <ItemTemplate>
+                        <asp:Label ID="lblSTATION_ID" runat="server" Text='<%#Eval("STATION_ID") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="SHIFT_ID">
+                    <ItemTemplate>
+                        <asp:Label ID="lblSHIFT_ID" runat="server" Text='<%#Eval("SHIFT_ID") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Delete">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="lbDelete" runat="server" CommandArgument='<%#Eval("MOABOVE3000ID") %>' OnClick="lbDelete_Click">
+                            Delete
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+    </div>
+</asp:Content>

@@ -1,0 +1,157 @@
+<%@ Page Language="C#" MasterPageFile="~/Admin/AdminMaster.master" AutoEventWireup="true" 
+CodeFile="AdminSTORETRANSInsertUpdate.aspx.cs" Inherits="AdminSTORETRANSInsertUpdate" Title="STORETRANS Insert/Update By Admin" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <style type="text/css">
+        .tableCss
+        {
+        	text-align: left;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <div class="tableCss">
+        <table>
+            <tr>
+                <td>
+                    <asp:Label ID="lblDT" runat="server" Text="DT: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtDT" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblEMP_ID" runat="server" Text="EMP_ID: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlEMP_" runat="server">
+                    </asp:DropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblSHIFT_ID" runat="server" Text="SHIFT_ID: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlSHIFT_" runat="server">
+                    </asp:DropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblSTATION_ID" runat="server" Text="STATION_ID: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlSTATION_" runat="server">
+                    </asp:DropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCURRREG" runat="server" Text="CURRREG: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCURRREG" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblREGOPEN" runat="server" Text="REGOPEN: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtREGOPEN" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblREGCLOSE" runat="server" Text="REGCLOSE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtREGCLOSE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblREGOPENSTATUS" runat="server" Text="REGOPENSTATUS: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtREGOPENSTATUS" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblREGCLOSESTATUS" runat="server" Text="REGCLOSESTATUS: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtREGCLOSESTATUS" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCLOSEDT" runat="server" Text="CLOSEDT: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCLOSEDT" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblTOTTIME" runat="server" Text="TOTTIME: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtTOTTIME" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblTOTSECONDS" runat="server" Text="TOTSECONDS: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtTOTSECONDS" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblDIFF" runat="server" Text="DIFF: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtDIFF" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+                    <asp:Button ID="btnUpdate" runat="server" Text="Update" 
+                        OnClick="btnUpdate_Click" />
+                </td>
+                <td>
+                    <asp:Button ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_Click" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</asp:Content>

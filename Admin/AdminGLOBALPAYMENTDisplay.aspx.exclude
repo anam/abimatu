@@ -1,0 +1,90 @@
+<%@ Page Language="C#" MasterPageFile="~/Admin/AdminMaster.master" AutoEventWireup="true"
+    CodeFile="AdminGLOBALPAYMENTDisplay.aspx.cs" Inherits="AdminGLOBALPAYMENTDisplay" Title="Display GLOBALPAYMENT By Admin" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style type="text/css">
+        .gridCss
+        {
+            width: 100%;
+            padding: 20px 10px 10px 10px;
+            text-align: center;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <div>
+        <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+        <asp:GridView ID="gvGLOBALPAYMENT" runat="server" AutoGenerateColumns="false" CssClass="gridCss">
+            <Columns>
+                <asp:TemplateField HeaderText="Select">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="lbSelect" runat="server" CommandArgument='<%#Eval("GLOBALPAYMENTID") %>' OnClick="lbSelect_Click">
+                            Select
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="ID">
+                    <ItemTemplate>
+                        <asp:Label ID="lblID" runat="server" Text='<%#Eval("ID") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="UTILITYNAME">
+                    <ItemTemplate>
+                        <asp:Label ID="lblUTILITYNAME" runat="server" Text='<%#Eval("UTILITYNAME") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="UTILITYFEES">
+                    <ItemTemplate>
+                        <asp:Label ID="lblUTILITYFEES" runat="server" Text='<%#Eval("UTILITYFEES") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="STORECOMM">
+                    <ItemTemplate>
+                        <asp:Label ID="lblSTORECOMM" runat="server" Text='<%#Eval("STORECOMM") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="GLOBALCOMM">
+                    <ItemTemplate>
+                        <asp:Label ID="lblGLOBALCOMM" runat="server" Text='<%#Eval("GLOBALCOMM") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="ACCOUNTLENGTH">
+                    <ItemTemplate>
+                        <asp:Label ID="lblACCOUNTLENGTH" runat="server" Text='<%#Eval("ACCOUNTLENGTH") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="ACCOUNTSTART">
+                    <ItemTemplate>
+                        <asp:Label ID="lblACCOUNTSTART" runat="server" Text='<%#Eval("ACCOUNTSTART") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="SCALELINEFROMBOTTON">
+                    <ItemTemplate>
+                        <asp:Label ID="lblSCALELINEFROMBOTTON" runat="server" Text='<%#Eval("SCALELINEFROMBOTTON") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="SCALELINEWIDTH">
+                    <ItemTemplate>
+                        <asp:Label ID="lblSCALELINEWIDTH" runat="server" Text='<%#Eval("SCALELINEWIDTH") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Delete">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="lbDelete" runat="server" CommandArgument='<%#Eval("GLOBALPAYMENTID") %>' OnClick="lbDelete_Click">
+                            Delete
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+    </div>
+</asp:Content>

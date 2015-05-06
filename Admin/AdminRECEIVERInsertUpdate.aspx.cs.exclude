@@ -1,0 +1,120 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminRECEIVERInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            if (Request.QueryString["rECEIVERID"] != null)
+            {
+                int rECEIVERID = Int32.Parse(Request.QueryString["rECEIVERID"]);
+                if (rECEIVERID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showRECEIVERData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        RECEIVER rECEIVER = new RECEIVER();
+
+        rECEIVER.USERNAME = txtUSERNAME.Text;
+        rECEIVER.RECEIVERFNAME = txtRECEIVERFNAME.Text;
+        rECEIVER.RECEIVERMNAME = txtRECEIVERMNAME.Text;
+        rECEIVER.RECEIVERLNAME = txtRECEIVERLNAME.Text;
+        rECEIVER.RECEIVERADDRESS1 = txtRECEIVERADDRESS1.Text;
+        rECEIVER.RECEIVERADDRESS2 = txtRECEIVERADDRESS2.Text;
+        rECEIVER.RECEIVERCITY = txtRECEIVERCITY.Text;
+        rECEIVER.RECEIVERSTATE = txtRECEIVERSTATE.Text;
+        rECEIVER.RECEIVERZIP = txtRECEIVERZIP.Text;
+        rECEIVER.RECEIVERPHONE = txtRECEIVERPHONE.Text;
+        rECEIVER.CREATEDBY = Int32.Parse(txtCREATEDBY.Text);
+        rECEIVER.CREATEDON = txtCREATEDON.Text;
+        rECEIVER.UPDATEDBY = Int32.Parse(txtUPDATEDBY.Text);
+        rECEIVER.UPDATEDON = txtUPDATEDON.Text;
+        int resutl = RECEIVERManager.InsertRECEIVER(rECEIVER);
+        Response.Redirect("AdminRECEIVERDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        RECEIVER rECEIVER = new RECEIVER();
+        rECEIVER = RECEIVERManager.GetRECEIVERByID(Int32.Parse(Request.QueryString["rECEIVERID"]));
+        RECEIVER tempRECEIVER = new RECEIVER();
+        tempRECEIVER.RECEIVERID = rECEIVER.RECEIVERID;
+
+        tempRECEIVER.USERNAME = txtUSERNAME.Text;
+        tempRECEIVER.RECEIVERFNAME = txtRECEIVERFNAME.Text;
+        tempRECEIVER.RECEIVERMNAME = txtRECEIVERMNAME.Text;
+        tempRECEIVER.RECEIVERLNAME = txtRECEIVERLNAME.Text;
+        tempRECEIVER.RECEIVERADDRESS1 = txtRECEIVERADDRESS1.Text;
+        tempRECEIVER.RECEIVERADDRESS2 = txtRECEIVERADDRESS2.Text;
+        tempRECEIVER.RECEIVERCITY = txtRECEIVERCITY.Text;
+        tempRECEIVER.RECEIVERSTATE = txtRECEIVERSTATE.Text;
+        tempRECEIVER.RECEIVERZIP = txtRECEIVERZIP.Text;
+        tempRECEIVER.RECEIVERPHONE = txtRECEIVERPHONE.Text;
+        tempRECEIVER.CREATEDBY = Int32.Parse(txtCREATEDBY.Text);
+        tempRECEIVER.CREATEDON = txtCREATEDON.Text;
+        tempRECEIVER.UPDATEDBY = Int32.Parse(txtUPDATEDBY.Text);
+        tempRECEIVER.UPDATEDON = txtUPDATEDON.Text;
+        bool result = RECEIVERManager.UpdateRECEIVER(tempRECEIVER);
+        Response.Redirect("AdminRECEIVERDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        txtUSERNAME.Text = "";
+        txtRECEIVERFNAME.Text = "";
+        txtRECEIVERMNAME.Text = "";
+        txtRECEIVERLNAME.Text = "";
+        txtRECEIVERADDRESS1.Text = "";
+        txtRECEIVERADDRESS2.Text = "";
+        txtRECEIVERCITY.Text = "";
+        txtRECEIVERSTATE.Text = "";
+        txtRECEIVERZIP.Text = "";
+        txtRECEIVERPHONE.Text = "";
+        txtCREATEDBY.Text = "";
+        txtCREATEDON.Text = "";
+        txtUPDATEDBY.Text = "";
+        txtUPDATEDON.Text = "";
+    }
+    private void showRECEIVERData()
+    {
+        RECEIVER rECEIVER = new RECEIVER();
+        rECEIVER = RECEIVERManager.GetRECEIVERByID(Int32.Parse(Request.QueryString["rECEIVERID"]));
+
+        txtUSERNAME.Text = rECEIVER.USERNAME;
+        txtRECEIVERFNAME.Text = rECEIVER.RECEIVERFNAME;
+        txtRECEIVERMNAME.Text = rECEIVER.RECEIVERMNAME;
+        txtRECEIVERLNAME.Text = rECEIVER.RECEIVERLNAME;
+        txtRECEIVERADDRESS1.Text = rECEIVER.RECEIVERADDRESS1;
+        txtRECEIVERADDRESS2.Text = rECEIVER.RECEIVERADDRESS2;
+        txtRECEIVERCITY.Text = rECEIVER.RECEIVERCITY;
+        txtRECEIVERSTATE.Text = rECEIVER.RECEIVERSTATE;
+        txtRECEIVERZIP.Text = rECEIVER.RECEIVERZIP;
+        txtRECEIVERPHONE.Text = rECEIVER.RECEIVERPHONE;
+        txtCREATEDBY.Text = rECEIVER.CREATEDBY.ToString();
+        txtCREATEDON.Text = rECEIVER.CREATEDON;
+        txtUPDATEDBY.Text = rECEIVER.UPDATEDBY.ToString();
+        txtUPDATEDON.Text = rECEIVER.UPDATEDON;
+    }
+}

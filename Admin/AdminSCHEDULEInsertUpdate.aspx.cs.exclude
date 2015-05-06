@@ -1,0 +1,118 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminSCHEDULEInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            loadEMP_();
+            if (Request.QueryString["sCHEDULEID"] != null)
+            {
+                int sCHEDULEID = Int32.Parse(Request.QueryString["sCHEDULEID"]);
+                if (sCHEDULEID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showSCHEDULEData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        SCHEDULE sCHEDULE = new SCHEDULE();
+
+        sCHEDULE.EMP_ID = Int32.Parse(ddlEMP_.SelectedValue);
+        sCHEDULE.STDT = txtSTDT.Text;
+        sCHEDULE.ENDDT = txtENDDT.Text;
+        sCHEDULE.MON = txtMON.Text;
+        sCHEDULE.TUE = txtTUE.Text;
+        sCHEDULE.WED = txtWED.Text;
+        sCHEDULE.THS = txtTHS.Text;
+        sCHEDULE.FRI = txtFRI.Text;
+        sCHEDULE.SAT = txtSAT.Text;
+        sCHEDULE.SUN = txtSUN.Text;
+        int resutl = SCHEDULEManager.InsertSCHEDULE(sCHEDULE);
+        Response.Redirect("AdminSCHEDULEDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        SCHEDULE sCHEDULE = new SCHEDULE();
+        sCHEDULE = SCHEDULEManager.GetSCHEDULEByID(Int32.Parse(Request.QueryString["sCHEDULEID"]));
+        SCHEDULE tempSCHEDULE = new SCHEDULE();
+        tempSCHEDULE.SCHEDULEID = sCHEDULE.SCHEDULEID;
+
+        tempSCHEDULE.EMP_ID = Int32.Parse(ddlEMP_.SelectedValue);
+        tempSCHEDULE.STDT = txtSTDT.Text;
+        tempSCHEDULE.ENDDT = txtENDDT.Text;
+        tempSCHEDULE.MON = txtMON.Text;
+        tempSCHEDULE.TUE = txtTUE.Text;
+        tempSCHEDULE.WED = txtWED.Text;
+        tempSCHEDULE.THS = txtTHS.Text;
+        tempSCHEDULE.FRI = txtFRI.Text;
+        tempSCHEDULE.SAT = txtSAT.Text;
+        tempSCHEDULE.SUN = txtSUN.Text;
+        bool result = SCHEDULEManager.UpdateSCHEDULE(tempSCHEDULE);
+        Response.Redirect("AdminSCHEDULEDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        ddlEMP_.SelectedIndex = 0;
+        txtSTDT.Text = "";
+        txtENDDT.Text = "";
+        txtMON.Text = "";
+        txtTUE.Text = "";
+        txtWED.Text = "";
+        txtTHS.Text = "";
+        txtFRI.Text = "";
+        txtSAT.Text = "";
+        txtSUN.Text = "";
+    }
+    private void showSCHEDULEData()
+    {
+        SCHEDULE sCHEDULE = new SCHEDULE();
+        sCHEDULE = SCHEDULEManager.GetSCHEDULEByID(Int32.Parse(Request.QueryString["sCHEDULEID"]));
+
+        ddlEMP_.SelectedValue = sCHEDULE.EMP_ID.ToString();
+        txtSTDT.Text = sCHEDULE.STDT;
+        txtENDDT.Text = sCHEDULE.ENDDT;
+        txtMON.Text = sCHEDULE.MON;
+        txtTUE.Text = sCHEDULE.TUE;
+        txtWED.Text = sCHEDULE.WED;
+        txtTHS.Text = sCHEDULE.THS;
+        txtFRI.Text = sCHEDULE.FRI;
+        txtSAT.Text = sCHEDULE.SAT;
+        txtSUN.Text = sCHEDULE.SUN;
+    }
+    private void loadEMP_()
+    {
+        ListItem li = new ListItem("Select EMP_...", "0");
+        ddlEMP_.Items.Add(li);
+
+        List<EMP_> eMP_s = new List<EMP_>();
+        eMP_s = EMP_Manager.GetAllEMP_s();
+        foreach (EMP_ eMP_ in eMP_s)
+        {
+            ListItem item = new ListItem(eMP_.EMP_Name.ToString(), eMP_.EMP_ID.ToString());
+            ddlEMP_.Items.Add(item);
+        }
+    }
+}

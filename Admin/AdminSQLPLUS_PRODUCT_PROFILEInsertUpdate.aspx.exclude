@@ -1,0 +1,107 @@
+<%@ Page Language="C#" MasterPageFile="~/Admin/AdminMaster.master" AutoEventWireup="true" 
+CodeFile="AdminSQLPLUS_PRODUCT_PROFILEInsertUpdate.aspx.cs" Inherits="AdminSQLPLUS_PRODUCT_PROFILEInsertUpdate" Title="SQLPLUS_PRODUCT_PROFILE Insert/Update By Admin" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <style type="text/css">
+        .tableCss
+        {
+        	text-align: left;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <div class="tableCss">
+        <table>
+            <tr>
+                <td>
+                    <asp:Label ID="lblPRODUCT" runat="server" Text="PRODUCT: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtPRODUCT" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblUSERID" runat="server" Text="USERID: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlUSER" runat="server">
+                    </asp:DropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblATTRIBUTE" runat="server" Text="ATTRIBUTE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtATTRIBUTE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblSCOPE" runat="server" Text="SCOPE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtSCOPE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblNUMERIC_VALUE" runat="server" Text="NUMERIC_VALUE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtNUMERIC_VALUE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCHAR_VALUE" runat="server" Text="CHAR_VALUE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCHAR_VALUE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblDATE_VALUE" runat="server" Text="DATE_VALUE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtDATE_VALUE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblLONG_VALUE" runat="server" Text="LONG_VALUE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtLONG_VALUE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+                    <asp:Button ID="btnUpdate" runat="server" Text="Update" 
+                        OnClick="btnUpdate_Click" />
+                </td>
+                <td>
+                    <asp:Button ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_Click" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</asp:Content>

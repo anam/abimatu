@@ -1,0 +1,84 @@
+<%@ Page Language="C#" MasterPageFile="~/Admin/AdminMaster.master" AutoEventWireup="true"
+    CodeFile="AdminSPR_COMMISSIONDisplay.aspx.cs" Inherits="AdminSPR_COMMISSIONDisplay" Title="Display SPR_COMMISSION By Admin" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style type="text/css">
+        .gridCss
+        {
+            width: 100%;
+            padding: 20px 10px 10px 10px;
+            text-align: center;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <div>
+        <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+        <asp:GridView ID="gvSPR_COMMISSION" runat="server" AutoGenerateColumns="false" CssClass="gridCss">
+            <Columns>
+                <asp:TemplateField HeaderText="Select">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="lbSelect" runat="server" CommandArgument='<%#Eval("SPR_COMMISSIONID") %>' OnClick="lbSelect_Click">
+                            Select
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="STYPE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblSTYPE" runat="server" Text='<%#Eval("STYPE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="SPLAN">
+                    <ItemTemplate>
+                        <asp:Label ID="lblSPLAN" runat="server" Text='<%#Eval("SPLAN") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="SASL">
+                    <ItemTemplate>
+                        <asp:Label ID="lblSASL" runat="server" Text='<%#Eval("SASL") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="SYEAR">
+                    <ItemTemplate>
+                        <asp:Label ID="lblSYEAR" runat="server" Text='<%#Eval("SYEAR") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="BASECOMM">
+                    <ItemTemplate>
+                        <asp:Label ID="lblBASECOMM" runat="server" Text='<%#Eval("BASECOMM") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="ASLCOMM">
+                    <ItemTemplate>
+                        <asp:Label ID="lblASLCOMM" runat="server" Text='<%#Eval("ASLCOMM") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="TYPECOMM">
+                    <ItemTemplate>
+                        <asp:Label ID="lblTYPECOMM" runat="server" Text='<%#Eval("TYPECOMM") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="YEARCOMM">
+                    <ItemTemplate>
+                        <asp:Label ID="lblYEARCOMM" runat="server" Text='<%#Eval("YEARCOMM") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Delete">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="lbDelete" runat="server" CommandArgument='<%#Eval("SPR_COMMISSIONID") %>' OnClick="lbDelete_Click">
+                            Delete
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+    </div>
+</asp:Content>

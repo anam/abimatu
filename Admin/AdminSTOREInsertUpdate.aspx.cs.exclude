@@ -1,0 +1,124 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminSTOREInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            if (Request.QueryString["sTOREID"] != null)
+            {
+                int sTOREID = Int32.Parse(Request.QueryString["sTOREID"]);
+                if (sTOREID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showSTOREData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        STORE sTORE = new STORE();
+
+        sTORE.STORENAME = txtSTORENAME.Text;
+        sTORE.COMPANYNAME = txtCOMPANYNAME.Text;
+        sTORE.ADDRESS = txtADDRESS.Text;
+        sTORE.CITY = txtCITY.Text;
+        sTORE.STATE = txtSTATE.Text;
+        sTORE.ZIP = txtZIP.Text;
+        sTORE.PHONE = txtPHONE.Text;
+        sTORE.ACCOUNTNO = txtACCOUNTNO.Text;
+        sTORE.ROUTINGNO = txtROUTINGNO.Text;
+        sTORE.SSN = txtSSN.Text;
+        sTORE.FTPSERVER = txtFTPSERVER.Text;
+        sTORE.CREATEDBY = Int32.Parse(txtCREATEDBY.Text);
+        sTORE.CREATEDON = txtCREATEDON.Text;
+        sTORE.UPDATEDBY = Int32.Parse(txtUPDATEDBY.Text);
+        sTORE.UPDATEDON = txtUPDATEDON.Text;
+        int resutl = STOREManager.InsertSTORE(sTORE);
+        Response.Redirect("AdminSTOREDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        STORE sTORE = new STORE();
+        sTORE = STOREManager.GetSTOREByID(Int32.Parse(Request.QueryString["sTOREID"]));
+        STORE tempSTORE = new STORE();
+        tempSTORE.STOREID = sTORE.STOREID;
+
+        tempSTORE.STORENAME = txtSTORENAME.Text;
+        tempSTORE.COMPANYNAME = txtCOMPANYNAME.Text;
+        tempSTORE.ADDRESS = txtADDRESS.Text;
+        tempSTORE.CITY = txtCITY.Text;
+        tempSTORE.STATE = txtSTATE.Text;
+        tempSTORE.ZIP = txtZIP.Text;
+        tempSTORE.PHONE = txtPHONE.Text;
+        tempSTORE.ACCOUNTNO = txtACCOUNTNO.Text;
+        tempSTORE.ROUTINGNO = txtROUTINGNO.Text;
+        tempSTORE.SSN = txtSSN.Text;
+        tempSTORE.FTPSERVER = txtFTPSERVER.Text;
+        tempSTORE.CREATEDBY = Int32.Parse(txtCREATEDBY.Text);
+        tempSTORE.CREATEDON = txtCREATEDON.Text;
+        tempSTORE.UPDATEDBY = Int32.Parse(txtUPDATEDBY.Text);
+        tempSTORE.UPDATEDON = txtUPDATEDON.Text;
+        bool result = STOREManager.UpdateSTORE(tempSTORE);
+        Response.Redirect("AdminSTOREDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        txtSTORENAME.Text = "";
+        txtCOMPANYNAME.Text = "";
+        txtADDRESS.Text = "";
+        txtCITY.Text = "";
+        txtSTATE.Text = "";
+        txtZIP.Text = "";
+        txtPHONE.Text = "";
+        txtACCOUNTNO.Text = "";
+        txtROUTINGNO.Text = "";
+        txtSSN.Text = "";
+        txtFTPSERVER.Text = "";
+        txtCREATEDBY.Text = "";
+        txtCREATEDON.Text = "";
+        txtUPDATEDBY.Text = "";
+        txtUPDATEDON.Text = "";
+    }
+    private void showSTOREData()
+    {
+        STORE sTORE = new STORE();
+        sTORE = STOREManager.GetSTOREByID(Int32.Parse(Request.QueryString["sTOREID"]));
+
+        txtSTORENAME.Text = sTORE.STORENAME;
+        txtCOMPANYNAME.Text = sTORE.COMPANYNAME;
+        txtADDRESS.Text = sTORE.ADDRESS;
+        txtCITY.Text = sTORE.CITY;
+        txtSTATE.Text = sTORE.STATE;
+        txtZIP.Text = sTORE.ZIP;
+        txtPHONE.Text = sTORE.PHONE;
+        txtACCOUNTNO.Text = sTORE.ACCOUNTNO;
+        txtROUTINGNO.Text = sTORE.ROUTINGNO;
+        txtSSN.Text = sTORE.SSN;
+        txtFTPSERVER.Text = sTORE.FTPSERVER;
+        txtCREATEDBY.Text = sTORE.CREATEDBY.ToString();
+        txtCREATEDON.Text = sTORE.CREATEDON;
+        txtUPDATEDBY.Text = sTORE.UPDATEDBY.ToString();
+        txtUPDATEDON.Text = sTORE.UPDATEDON;
+    }
+}

@@ -1,0 +1,114 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminGLOBALPAYMENTInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            loadSCALELINEW();
+            if (Request.QueryString["gLOBALPAYMENTID"] != null)
+            {
+                int gLOBALPAYMENTID = Int32.Parse(Request.QueryString["gLOBALPAYMENTID"]);
+                if (gLOBALPAYMENTID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showGLOBALPAYMENTData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        GLOBALPAYMENT gLOBALPAYMENT = new GLOBALPAYMENT();
+
+        gLOBALPAYMENT.ID = txtID.Text;
+        gLOBALPAYMENT.UTILITYNAME = txtUTILITYNAME.Text;
+        gLOBALPAYMENT.UTILITYFEES = Int32.Parse(txtUTILITYFEES.Text);
+        gLOBALPAYMENT.STORECOMM = Int32.Parse(txtSTORECOMM.Text);
+        gLOBALPAYMENT.GLOBALCOMM = Int32.Parse(txtGLOBALCOMM.Text);
+        gLOBALPAYMENT.ACCOUNTLENGTH = Int32.Parse(txtACCOUNTLENGTH.Text);
+        gLOBALPAYMENT.ACCOUNTSTART = Int32.Parse(txtACCOUNTSTART.Text);
+        gLOBALPAYMENT.SCALELINEFROMBOTTON = Int32.Parse(txtSCALELINEFROMBOTTON.Text);
+        gLOBALPAYMENT.SCALELINEWIDTH = Int32.Parse(ddlSCALELINEW.SelectedValue);
+        int resutl = GLOBALPAYMENTManager.InsertGLOBALPAYMENT(gLOBALPAYMENT);
+        Response.Redirect("AdminGLOBALPAYMENTDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        GLOBALPAYMENT gLOBALPAYMENT = new GLOBALPAYMENT();
+        gLOBALPAYMENT = GLOBALPAYMENTManager.GetGLOBALPAYMENTByID(Int32.Parse(Request.QueryString["gLOBALPAYMENTID"]));
+        GLOBALPAYMENT tempGLOBALPAYMENT = new GLOBALPAYMENT();
+        tempGLOBALPAYMENT.GLOBALPAYMENTID = gLOBALPAYMENT.GLOBALPAYMENTID;
+
+        tempGLOBALPAYMENT.ID = txtID.Text;
+        tempGLOBALPAYMENT.UTILITYNAME = txtUTILITYNAME.Text;
+        tempGLOBALPAYMENT.UTILITYFEES = Int32.Parse(txtUTILITYFEES.Text);
+        tempGLOBALPAYMENT.STORECOMM = Int32.Parse(txtSTORECOMM.Text);
+        tempGLOBALPAYMENT.GLOBALCOMM = Int32.Parse(txtGLOBALCOMM.Text);
+        tempGLOBALPAYMENT.ACCOUNTLENGTH = Int32.Parse(txtACCOUNTLENGTH.Text);
+        tempGLOBALPAYMENT.ACCOUNTSTART = Int32.Parse(txtACCOUNTSTART.Text);
+        tempGLOBALPAYMENT.SCALELINEFROMBOTTON = Int32.Parse(txtSCALELINEFROMBOTTON.Text);
+        tempGLOBALPAYMENT.SCALELINEWIDTH = Int32.Parse(ddlSCALELINEW.SelectedValue);
+        bool result = GLOBALPAYMENTManager.UpdateGLOBALPAYMENT(tempGLOBALPAYMENT);
+        Response.Redirect("AdminGLOBALPAYMENTDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        txtID.Text = "";
+        txtUTILITYNAME.Text = "";
+        txtUTILITYFEES.Text = "";
+        txtSTORECOMM.Text = "";
+        txtGLOBALCOMM.Text = "";
+        txtACCOUNTLENGTH.Text = "";
+        txtACCOUNTSTART.Text = "";
+        txtSCALELINEFROMBOTTON.Text = "";
+        ddlSCALELINEW.SelectedIndex = 0;
+    }
+    private void showGLOBALPAYMENTData()
+    {
+        GLOBALPAYMENT gLOBALPAYMENT = new GLOBALPAYMENT();
+        gLOBALPAYMENT = GLOBALPAYMENTManager.GetGLOBALPAYMENTByID(Int32.Parse(Request.QueryString["gLOBALPAYMENTID"]));
+
+        txtID.Text = gLOBALPAYMENT.ID;
+        txtUTILITYNAME.Text = gLOBALPAYMENT.UTILITYNAME;
+        txtUTILITYFEES.Text = gLOBALPAYMENT.UTILITYFEES.ToString();
+        txtSTORECOMM.Text = gLOBALPAYMENT.STORECOMM.ToString();
+        txtGLOBALCOMM.Text = gLOBALPAYMENT.GLOBALCOMM.ToString();
+        txtACCOUNTLENGTH.Text = gLOBALPAYMENT.ACCOUNTLENGTH.ToString();
+        txtACCOUNTSTART.Text = gLOBALPAYMENT.ACCOUNTSTART.ToString();
+        txtSCALELINEFROMBOTTON.Text = gLOBALPAYMENT.SCALELINEFROMBOTTON.ToString();
+        ddlSCALELINEW.SelectedValue = gLOBALPAYMENT.SCALELINEWIDTH.ToString();
+    }
+    private void loadSCALELINEW()
+    {
+        ListItem li = new ListItem("Select SCALELINEW...", "0");
+        ddlSCALELINEW.Items.Add(li);
+
+        List<SCALELINEW> sCALELINEWs = new List<SCALELINEW>();
+        sCALELINEWs = SCALELINEWManager.GetAllSCALELINEWs();
+        foreach (SCALELINEW sCALELINEW in sCALELINEWs)
+        {
+            ListItem item = new ListItem(sCALELINEW.SCALELINEWName.ToString(), sCALELINEW.SCALELINEWIDTH.ToString());
+            ddlSCALELINEW.Items.Add(item);
+        }
+    }
+}

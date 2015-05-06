@@ -1,0 +1,254 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminGTRANSInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            loadUTILITY();
+            loadCUST();
+            loadSTORE();
+            loadLOCATION();
+            loadEMP();
+            loadSTATION();
+            loadSHIFT();
+            loadVO();
+            loadVO();
+            if (Request.QueryString["gTRANSID"] != null)
+            {
+                int gTRANSID = Int32.Parse(Request.QueryString["gTRANSID"]);
+                if (gTRANSID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showGTRANSData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        GTRANS gTRANS = new GTRANS();
+
+        gTRANS.UTILITYID = Int32.Parse(ddlUTILITY.SelectedValue);
+        gTRANS.CUSTID = Int32.Parse(ddlCUST.SelectedValue);
+        gTRANS.STOREID = Int32.Parse(ddlSTORE.SelectedValue);
+        gTRANS.LOCATIONID = Int32.Parse(ddlLOCATION.SelectedValue);
+        gTRANS.TRANSDATE = txtTRANSDATE.Text;
+        gTRANS.TRANSACC = txtTRANSACC.Text;
+        gTRANS.TRANSAMT = Int32.Parse(txtTRANSAMT.Text);
+        gTRANS.TRANSFEES = Int32.Parse(txtTRANSFEES.Text);
+        gTRANS.TRANSCASH = Int32.Parse(txtTRANSCASH.Text);
+        gTRANS.TRANSCHECK = Int32.Parse(txtTRANSCHECK.Text);
+        gTRANS.AUTHCODE = txtAUTHCODE.Text;
+        gTRANS.EMPID = Int32.Parse(ddlEMP.SelectedValue);
+        gTRANS.STATIONID = Int32.Parse(ddlSTATION.SelectedValue);
+        gTRANS.SHIFTID = Int32.Parse(ddlSHIFT.SelectedValue);
+        gTRANS.VOIDFLAG = Int32.Parse(ddlVO.SelectedValue);
+        gTRANS.VOIDAUTHORIZATION = Int32.Parse(ddlVO.SelectedValue);
+        int resutl = GTRANSManager.InsertGTRANS(gTRANS);
+        Response.Redirect("AdminGTRANSDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        GTRANS gTRANS = new GTRANS();
+        gTRANS = GTRANSManager.GetGTRANSByID(Int32.Parse(Request.QueryString["gTRANSID"]));
+        GTRANS tempGTRANS = new GTRANS();
+        tempGTRANS.GTRANSID = gTRANS.GTRANSID;
+
+        tempGTRANS.UTILITYID = Int32.Parse(ddlUTILITY.SelectedValue);
+        tempGTRANS.CUSTID = Int32.Parse(ddlCUST.SelectedValue);
+        tempGTRANS.STOREID = Int32.Parse(ddlSTORE.SelectedValue);
+        tempGTRANS.LOCATIONID = Int32.Parse(ddlLOCATION.SelectedValue);
+        tempGTRANS.TRANSDATE = txtTRANSDATE.Text;
+        tempGTRANS.TRANSACC = txtTRANSACC.Text;
+        tempGTRANS.TRANSAMT = Int32.Parse(txtTRANSAMT.Text);
+        tempGTRANS.TRANSFEES = Int32.Parse(txtTRANSFEES.Text);
+        tempGTRANS.TRANSCASH = Int32.Parse(txtTRANSCASH.Text);
+        tempGTRANS.TRANSCHECK = Int32.Parse(txtTRANSCHECK.Text);
+        tempGTRANS.AUTHCODE = txtAUTHCODE.Text;
+        tempGTRANS.EMPID = Int32.Parse(ddlEMP.SelectedValue);
+        tempGTRANS.STATIONID = Int32.Parse(ddlSTATION.SelectedValue);
+        tempGTRANS.SHIFTID = Int32.Parse(ddlSHIFT.SelectedValue);
+        tempGTRANS.VOIDFLAG = Int32.Parse(ddlVO.SelectedValue);
+        tempGTRANS.VOIDAUTHORIZATION = Int32.Parse(ddlVO.SelectedValue);
+        bool result = GTRANSManager.UpdateGTRANS(tempGTRANS);
+        Response.Redirect("AdminGTRANSDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        ddlUTILITY.SelectedIndex = 0;
+        ddlCUST.SelectedIndex = 0;
+        ddlSTORE.SelectedIndex = 0;
+        ddlLOCATION.SelectedIndex = 0;
+        txtTRANSDATE.Text = "";
+        txtTRANSACC.Text = "";
+        txtTRANSAMT.Text = "";
+        txtTRANSFEES.Text = "";
+        txtTRANSCASH.Text = "";
+        txtTRANSCHECK.Text = "";
+        txtAUTHCODE.Text = "";
+        ddlEMP.SelectedIndex = 0;
+        ddlSTATION.SelectedIndex = 0;
+        ddlSHIFT.SelectedIndex = 0;
+        ddlVO.SelectedIndex = 0;
+        ddlVO.SelectedIndex = 0;
+    }
+    private void showGTRANSData()
+    {
+        GTRANS gTRANS = new GTRANS();
+        gTRANS = GTRANSManager.GetGTRANSByID(Int32.Parse(Request.QueryString["gTRANSID"]));
+
+        ddlUTILITY.SelectedValue = gTRANS.UTILITYID.ToString();
+        ddlCUST.SelectedValue = gTRANS.CUSTID.ToString();
+        ddlSTORE.SelectedValue = gTRANS.STOREID.ToString();
+        ddlLOCATION.SelectedValue = gTRANS.LOCATIONID.ToString();
+        txtTRANSDATE.Text = gTRANS.TRANSDATE;
+        txtTRANSACC.Text = gTRANS.TRANSACC;
+        txtTRANSAMT.Text = gTRANS.TRANSAMT.ToString();
+        txtTRANSFEES.Text = gTRANS.TRANSFEES.ToString();
+        txtTRANSCASH.Text = gTRANS.TRANSCASH.ToString();
+        txtTRANSCHECK.Text = gTRANS.TRANSCHECK.ToString();
+        txtAUTHCODE.Text = gTRANS.AUTHCODE;
+        ddlEMP.SelectedValue = gTRANS.EMPID.ToString();
+        ddlSTATION.SelectedValue = gTRANS.STATIONID.ToString();
+        ddlSHIFT.SelectedValue = gTRANS.SHIFTID.ToString();
+        ddlVO.SelectedValue = gTRANS.VOIDFLAG.ToString();
+        ddlVO.SelectedValue = gTRANS.VOIDAUTHORIZATION.ToString();
+    }
+    private void loadUTILITY()
+    {
+        ListItem li = new ListItem("Select UTILITY...", "0");
+        ddlUTILITY.Items.Add(li);
+
+        List<UTILITY> uTILITYs = new List<UTILITY>();
+        uTILITYs = UTILITYManager.GetAllUTILITYs();
+        foreach (UTILITY uTILITY in uTILITYs)
+        {
+            ListItem item = new ListItem(uTILITY.UTILITYName.ToString(), uTILITY.UTILITYID.ToString());
+            ddlUTILITY.Items.Add(item);
+        }
+    }
+    private void loadCUST()
+    {
+        ListItem li = new ListItem("Select CUST...", "0");
+        ddlCUST.Items.Add(li);
+
+        List<CUST> cUSTs = new List<CUST>();
+        cUSTs = CUSTManager.GetAllCUSTs();
+        foreach (CUST cUST in cUSTs)
+        {
+            ListItem item = new ListItem(cUST.CUSTName.ToString(), cUST.CUSTID.ToString());
+            ddlCUST.Items.Add(item);
+        }
+    }
+    private void loadSTORE()
+    {
+        ListItem li = new ListItem("Select STORE...", "0");
+        ddlSTORE.Items.Add(li);
+
+        List<STORE> sTOREs = new List<STORE>();
+        sTOREs = STOREManager.GetAllSTOREs();
+        foreach (STORE sTORE in sTOREs)
+        {
+            ListItem item = new ListItem(sTORE.STOREName.ToString(), sTORE.STOREID.ToString());
+            ddlSTORE.Items.Add(item);
+        }
+    }
+    private void loadLOCATION()
+    {
+        ListItem li = new ListItem("Select LOCATION...", "0");
+        ddlLOCATION.Items.Add(li);
+
+        List<LOCATION> lOCATIONs = new List<LOCATION>();
+        lOCATIONs = LOCATIONManager.GetAllLOCATIONs();
+        foreach (LOCATION lOCATION in lOCATIONs)
+        {
+            ListItem item = new ListItem(lOCATION.LOCATIONName.ToString(), lOCATION.LOCATIONID.ToString());
+            ddlLOCATION.Items.Add(item);
+        }
+    }
+    private void loadEMP()
+    {
+        ListItem li = new ListItem("Select EMP...", "0");
+        ddlEMP.Items.Add(li);
+
+        List<EMP> eMPs = new List<EMP>();
+        eMPs = EMPManager.GetAllEMPs();
+        foreach (EMP eMP in eMPs)
+        {
+            ListItem item = new ListItem(eMP.EMPName.ToString(), eMP.EMPID.ToString());
+            ddlEMP.Items.Add(item);
+        }
+    }
+    private void loadSTATION()
+    {
+        ListItem li = new ListItem("Select STATION...", "0");
+        ddlSTATION.Items.Add(li);
+
+        List<STATION> sTATIONs = new List<STATION>();
+        sTATIONs = STATIONManager.GetAllSTATIONs();
+        foreach (STATION sTATION in sTATIONs)
+        {
+            ListItem item = new ListItem(sTATION.STATIONName.ToString(), sTATION.STATIONID.ToString());
+            ddlSTATION.Items.Add(item);
+        }
+    }
+    private void loadSHIFT()
+    {
+        ListItem li = new ListItem("Select SHIFT...", "0");
+        ddlSHIFT.Items.Add(li);
+
+        List<SHIFT> sHIFTs = new List<SHIFT>();
+        sHIFTs = SHIFTManager.GetAllSHIFTs();
+        foreach (SHIFT sHIFT in sHIFTs)
+        {
+            ListItem item = new ListItem(sHIFT.SHIFTName.ToString(), sHIFT.SHIFTID.ToString());
+            ddlSHIFT.Items.Add(item);
+        }
+    }
+    private void loadVO()
+    {
+        ListItem li = new ListItem("Select VO...", "0");
+        ddlVO.Items.Add(li);
+
+        List<VO> vOs = new List<VO>();
+        vOs = VOManager.GetAllVOs();
+        foreach (VO vO in vOs)
+        {
+            ListItem item = new ListItem(vO.VOName.ToString(), vO.VOIDFLAG.ToString());
+            ddlVO.Items.Add(item);
+        }
+    }
+    private void loadVO()
+    {
+        ListItem li = new ListItem("Select VO...", "0");
+        ddlVO.Items.Add(li);
+
+        List<VO> vOs = new List<VO>();
+        vOs = VOManager.GetAllVOs();
+        foreach (VO vO in vOs)
+        {
+            ListItem item = new ListItem(vO.VOName.ToString(), vO.VOIDAUTHORIZATION.ToString());
+            ddlVO.Items.Add(item);
+        }
+    }
+}

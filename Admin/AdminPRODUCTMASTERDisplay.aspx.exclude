@@ -1,0 +1,126 @@
+<%@ Page Language="C#" MasterPageFile="~/Admin/AdminMaster.master" AutoEventWireup="true"
+    CodeFile="AdminPRODUCTMASTERDisplay.aspx.cs" Inherits="AdminPRODUCTMASTERDisplay" Title="Display PRODUCTMASTER By Admin" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style type="text/css">
+        .gridCss
+        {
+            width: 100%;
+            padding: 20px 10px 10px 10px;
+            text-align: center;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <div>
+        <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+        <asp:GridView ID="gvPRODUCTMASTER" runat="server" AutoGenerateColumns="false" CssClass="gridCss">
+            <Columns>
+                <asp:TemplateField HeaderText="Select">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="lbSelect" runat="server" CommandArgument='<%#Eval("PRODUCTMASTERID") %>' OnClick="lbSelect_Click">
+                            Select
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="PROD_NAME">
+                    <ItemTemplate>
+                        <asp:Label ID="lblPROD_NAME" runat="server" Text='<%#Eval("PROD_NAME") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="PROD_DESC">
+                    <ItemTemplate>
+                        <asp:Label ID="lblPROD_DESC" runat="server" Text='<%#Eval("PROD_DESC") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="SUPPLIERID">
+                    <ItemTemplate>
+                        <asp:Label ID="lblSUPPLIERID" runat="server" Text='<%#Eval("SUPPLIERID") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="PROD_UPCCODE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblPROD_UPCCODE" runat="server" Text='<%#Eval("PROD_UPCCODE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="PROD_RETAILPRICE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblPROD_RETAILPRICE" runat="server" Text='<%#Eval("PROD_RETAILPRICE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="PROD_STOCKINHAND">
+                    <ItemTemplate>
+                        <asp:Label ID="lblPROD_STOCKINHAND" runat="server" Text='<%#Eval("PROD_STOCKINHAND") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="PROD_REORDERLEVEL">
+                    <ItemTemplate>
+                        <asp:Label ID="lblPROD_REORDERLEVEL" runat="server" Text='<%#Eval("PROD_REORDERLEVEL") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CREATED_ON">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCREATED_ON" runat="server" Text='<%#Eval("CREATED_ON") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="CREATED_BY">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCREATED_BY" runat="server" Text='<%#Eval("CREATED_BY") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="UPDATED_ON">
+                    <ItemTemplate>
+                        <asp:Label ID="lblUPDATED_ON" runat="server" Text='<%#Eval("UPDATED_ON") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="UPDATED_BY">
+                    <ItemTemplate>
+                        <asp:Label ID="lblUPDATED_BY" runat="server" Text='<%#Eval("UPDATED_BY") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="IS_TAXABLE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblIS_TAXABLE" runat="server" Text='<%#Eval("IS_TAXABLE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="PROD_COSTPRICE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblPROD_COSTPRICE" runat="server" Text='<%#Eval("PROD_COSTPRICE") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="DEPT_ID">
+                    <ItemTemplate>
+                        <asp:Label ID="lblDEPT_ID" runat="server" Text='<%#Eval("DEPT_ID") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="AGENTID">
+                    <ItemTemplate>
+                        <asp:Label ID="lblAGENTID" runat="server" Text='<%#Eval("AGENTID") %>'>
+                        </asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Delete">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="lbDelete" runat="server" CommandArgument='<%#Eval("PRODUCTMASTERID") %>' OnClick="lbDelete_Click">
+                            Delete
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+    </div>
+</asp:Content>

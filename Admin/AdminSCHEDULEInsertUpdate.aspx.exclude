@@ -1,0 +1,127 @@
+<%@ Page Language="C#" MasterPageFile="~/Admin/AdminMaster.master" AutoEventWireup="true" 
+CodeFile="AdminSCHEDULEInsertUpdate.aspx.cs" Inherits="AdminSCHEDULEInsertUpdate" Title="SCHEDULE Insert/Update By Admin" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <style type="text/css">
+        .tableCss
+        {
+        	text-align: left;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <div class="tableCss">
+        <table>
+            <tr>
+                <td>
+                    <asp:Label ID="lblEMP_ID" runat="server" Text="EMP_ID: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlEMP_" runat="server">
+                    </asp:DropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblSTDT" runat="server" Text="STDT: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtSTDT" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblENDDT" runat="server" Text="ENDDT: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtENDDT" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblMON" runat="server" Text="MON: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtMON" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblTUE" runat="server" Text="TUE: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtTUE" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblWED" runat="server" Text="WED: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtWED" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblTHS" runat="server" Text="THS: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtTHS" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblFRI" runat="server" Text="FRI: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtFRI" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblSAT" runat="server" Text="SAT: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtSAT" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblSUN" runat="server" Text="SUN: ">
+                    </asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtSUN" runat="server" Text="">
+                    </asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+                    <asp:Button ID="btnUpdate" runat="server" Text="Update" 
+                        OnClick="btnUpdate_Click" />
+                </td>
+                <td>
+                    <asp:Button ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_Click" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</asp:Content>

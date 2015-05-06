@@ -1,0 +1,166 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminPRODUCTMASTERInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            loadSUPPLIER();
+            loadDEPT_();
+            loadAGENT();
+            if (Request.QueryString["pRODUCTMASTERID"] != null)
+            {
+                int pRODUCTMASTERID = Int32.Parse(Request.QueryString["pRODUCTMASTERID"]);
+                if (pRODUCTMASTERID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showPRODUCTMASTERData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        PRODUCTMASTER pRODUCTMASTER = new PRODUCTMASTER();
+
+        pRODUCTMASTER.PROD_NAME = txtPROD_NAME.Text;
+        pRODUCTMASTER.PROD_DESC = txtPROD_DESC.Text;
+        pRODUCTMASTER.SUPPLIERID = Int32.Parse(ddlSUPPLIER.SelectedValue);
+        pRODUCTMASTER.PROD_UPCCODE = txtPROD_UPCCODE.Text;
+        pRODUCTMASTER.PROD_RETAILPRICE = Int32.Parse(txtPROD_RETAILPRICE.Text);
+        pRODUCTMASTER.PROD_STOCKINHAND = Int32.Parse(txtPROD_STOCKINHAND.Text);
+        pRODUCTMASTER.PROD_REORDERLEVEL = Int32.Parse(txtPROD_REORDERLEVEL.Text);
+        pRODUCTMASTER.CREATED_ON = txtCREATED_ON.Text;
+        pRODUCTMASTER.CREATED_BY = txtCREATED_BY.Text;
+        pRODUCTMASTER.UPDATED_ON = txtUPDATED_ON.Text;
+        pRODUCTMASTER.UPDATED_BY = txtUPDATED_BY.Text;
+        pRODUCTMASTER.IS_TAXABLE = txtIS_TAXABLE.Text;
+        pRODUCTMASTER.PROD_COSTPRICE = Int32.Parse(txtPROD_COSTPRICE.Text);
+        pRODUCTMASTER.DEPT_ID = Int32.Parse(ddlDEPT_.SelectedValue);
+        pRODUCTMASTER.AGENTID = Int32.Parse(ddlAGENT.SelectedValue);
+        int resutl = PRODUCTMASTERManager.InsertPRODUCTMASTER(pRODUCTMASTER);
+        Response.Redirect("AdminPRODUCTMASTERDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        PRODUCTMASTER pRODUCTMASTER = new PRODUCTMASTER();
+        pRODUCTMASTER = PRODUCTMASTERManager.GetPRODUCTMASTERByID(Int32.Parse(Request.QueryString["pRODUCTMASTERID"]));
+        PRODUCTMASTER tempPRODUCTMASTER = new PRODUCTMASTER();
+        tempPRODUCTMASTER.PRODUCTMASTERID = pRODUCTMASTER.PRODUCTMASTERID;
+
+        tempPRODUCTMASTER.PROD_NAME = txtPROD_NAME.Text;
+        tempPRODUCTMASTER.PROD_DESC = txtPROD_DESC.Text;
+        tempPRODUCTMASTER.SUPPLIERID = Int32.Parse(ddlSUPPLIER.SelectedValue);
+        tempPRODUCTMASTER.PROD_UPCCODE = txtPROD_UPCCODE.Text;
+        tempPRODUCTMASTER.PROD_RETAILPRICE = Int32.Parse(txtPROD_RETAILPRICE.Text);
+        tempPRODUCTMASTER.PROD_STOCKINHAND = Int32.Parse(txtPROD_STOCKINHAND.Text);
+        tempPRODUCTMASTER.PROD_REORDERLEVEL = Int32.Parse(txtPROD_REORDERLEVEL.Text);
+        tempPRODUCTMASTER.CREATED_ON = txtCREATED_ON.Text;
+        tempPRODUCTMASTER.CREATED_BY = txtCREATED_BY.Text;
+        tempPRODUCTMASTER.UPDATED_ON = txtUPDATED_ON.Text;
+        tempPRODUCTMASTER.UPDATED_BY = txtUPDATED_BY.Text;
+        tempPRODUCTMASTER.IS_TAXABLE = txtIS_TAXABLE.Text;
+        tempPRODUCTMASTER.PROD_COSTPRICE = Int32.Parse(txtPROD_COSTPRICE.Text);
+        tempPRODUCTMASTER.DEPT_ID = Int32.Parse(ddlDEPT_.SelectedValue);
+        tempPRODUCTMASTER.AGENTID = Int32.Parse(ddlAGENT.SelectedValue);
+        bool result = PRODUCTMASTERManager.UpdatePRODUCTMASTER(tempPRODUCTMASTER);
+        Response.Redirect("AdminPRODUCTMASTERDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        txtPROD_NAME.Text = "";
+        txtPROD_DESC.Text = "";
+        ddlSUPPLIER.SelectedIndex = 0;
+        txtPROD_UPCCODE.Text = "";
+        txtPROD_RETAILPRICE.Text = "";
+        txtPROD_STOCKINHAND.Text = "";
+        txtPROD_REORDERLEVEL.Text = "";
+        txtCREATED_ON.Text = "";
+        txtCREATED_BY.Text = "";
+        txtUPDATED_ON.Text = "";
+        txtUPDATED_BY.Text = "";
+        txtIS_TAXABLE.Text = "";
+        txtPROD_COSTPRICE.Text = "";
+        ddlDEPT_.SelectedIndex = 0;
+        ddlAGENT.SelectedIndex = 0;
+    }
+    private void showPRODUCTMASTERData()
+    {
+        PRODUCTMASTER pRODUCTMASTER = new PRODUCTMASTER();
+        pRODUCTMASTER = PRODUCTMASTERManager.GetPRODUCTMASTERByID(Int32.Parse(Request.QueryString["pRODUCTMASTERID"]));
+
+        txtPROD_NAME.Text = pRODUCTMASTER.PROD_NAME;
+        txtPROD_DESC.Text = pRODUCTMASTER.PROD_DESC;
+        ddlSUPPLIER.SelectedValue = pRODUCTMASTER.SUPPLIERID.ToString();
+        txtPROD_UPCCODE.Text = pRODUCTMASTER.PROD_UPCCODE;
+        txtPROD_RETAILPRICE.Text = pRODUCTMASTER.PROD_RETAILPRICE.ToString();
+        txtPROD_STOCKINHAND.Text = pRODUCTMASTER.PROD_STOCKINHAND.ToString();
+        txtPROD_REORDERLEVEL.Text = pRODUCTMASTER.PROD_REORDERLEVEL.ToString();
+        txtCREATED_ON.Text = pRODUCTMASTER.CREATED_ON;
+        txtCREATED_BY.Text = pRODUCTMASTER.CREATED_BY;
+        txtUPDATED_ON.Text = pRODUCTMASTER.UPDATED_ON;
+        txtUPDATED_BY.Text = pRODUCTMASTER.UPDATED_BY;
+        txtIS_TAXABLE.Text = pRODUCTMASTER.IS_TAXABLE;
+        txtPROD_COSTPRICE.Text = pRODUCTMASTER.PROD_COSTPRICE.ToString();
+        ddlDEPT_.SelectedValue = pRODUCTMASTER.DEPT_ID.ToString();
+        ddlAGENT.SelectedValue = pRODUCTMASTER.AGENTID.ToString();
+    }
+    private void loadSUPPLIER()
+    {
+        ListItem li = new ListItem("Select SUPPLIER...", "0");
+        ddlSUPPLIER.Items.Add(li);
+
+        List<SUPPLIER> sUPPLIERs = new List<SUPPLIER>();
+        sUPPLIERs = SUPPLIERManager.GetAllSUPPLIERs();
+        foreach (SUPPLIER sUPPLIER in sUPPLIERs)
+        {
+            ListItem item = new ListItem(sUPPLIER.SUPPLIERName.ToString(), sUPPLIER.SUPPLIERID.ToString());
+            ddlSUPPLIER.Items.Add(item);
+        }
+    }
+    private void loadDEPT_()
+    {
+        ListItem li = new ListItem("Select DEPT_...", "0");
+        ddlDEPT_.Items.Add(li);
+
+        List<DEPT_> dEPT_s = new List<DEPT_>();
+        dEPT_s = DEPT_Manager.GetAllDEPT_s();
+        foreach (DEPT_ dEPT_ in dEPT_s)
+        {
+            ListItem item = new ListItem(dEPT_.DEPT_Name.ToString(), dEPT_.DEPT_ID.ToString());
+            ddlDEPT_.Items.Add(item);
+        }
+    }
+    private void loadAGENT()
+    {
+        ListItem li = new ListItem("Select AGENT...", "0");
+        ddlAGENT.Items.Add(li);
+
+        List<AGENT> aGENTs = new List<AGENT>();
+        aGENTs = AGENTManager.GetAllAGENTs();
+        foreach (AGENT aGENT in aGENTs)
+        {
+            ListItem item = new ListItem(aGENT.AGENTName.ToString(), aGENT.AGENTID.ToString());
+            ddlAGENT.Items.Add(item);
+        }
+    }
+}

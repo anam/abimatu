@@ -1,0 +1,152 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminMOABOVE3000InsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            loadCUST_();
+            loadEMP_();
+            loadSTATION_();
+            loadSHIFT_();
+            if (Request.QueryString["mOABOVE3000ID"] != null)
+            {
+                int mOABOVE3000ID = Int32.Parse(Request.QueryString["mOABOVE3000ID"]);
+                if (mOABOVE3000ID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showMOABOVE3000Data();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        MOABOVE3000 mOABOVE3000 = new MOABOVE3000();
+
+        mOABOVE3000.DT = txtDT.Text;
+        mOABOVE3000.CUST_ID = Int32.Parse(ddlCUST_.SelectedValue);
+        mOABOVE3000.STARTNO = txtSTARTNO.Text;
+        mOABOVE3000.ENDNO = txtENDNO.Text;
+        mOABOVE3000.AMOUNT = Int32.Parse(txtAMOUNT.Text);
+        mOABOVE3000.EMP_ID = Int32.Parse(ddlEMP_.SelectedValue);
+        mOABOVE3000.STATION_ID = Int32.Parse(ddlSTATION_.SelectedValue);
+        mOABOVE3000.SHIFT_ID = Int32.Parse(ddlSHIFT_.SelectedValue);
+        int resutl = MOABOVE3000Manager.InsertMOABOVE3000(mOABOVE3000);
+        Response.Redirect("AdminMOABOVE3000Display.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        MOABOVE3000 mOABOVE3000 = new MOABOVE3000();
+        mOABOVE3000 = MOABOVE3000Manager.GetMOABOVE3000ByID(Int32.Parse(Request.QueryString["mOABOVE3000ID"]));
+        MOABOVE3000 tempMOABOVE3000 = new MOABOVE3000();
+        tempMOABOVE3000.MOABOVE3000ID = mOABOVE3000.MOABOVE3000ID;
+
+        tempMOABOVE3000.DT = txtDT.Text;
+        tempMOABOVE3000.CUST_ID = Int32.Parse(ddlCUST_.SelectedValue);
+        tempMOABOVE3000.STARTNO = txtSTARTNO.Text;
+        tempMOABOVE3000.ENDNO = txtENDNO.Text;
+        tempMOABOVE3000.AMOUNT = Int32.Parse(txtAMOUNT.Text);
+        tempMOABOVE3000.EMP_ID = Int32.Parse(ddlEMP_.SelectedValue);
+        tempMOABOVE3000.STATION_ID = Int32.Parse(ddlSTATION_.SelectedValue);
+        tempMOABOVE3000.SHIFT_ID = Int32.Parse(ddlSHIFT_.SelectedValue);
+        bool result = MOABOVE3000Manager.UpdateMOABOVE3000(tempMOABOVE3000);
+        Response.Redirect("AdminMOABOVE3000Display.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        txtDT.Text = "";
+        ddlCUST_.SelectedIndex = 0;
+        txtSTARTNO.Text = "";
+        txtENDNO.Text = "";
+        txtAMOUNT.Text = "";
+        ddlEMP_.SelectedIndex = 0;
+        ddlSTATION_.SelectedIndex = 0;
+        ddlSHIFT_.SelectedIndex = 0;
+    }
+    private void showMOABOVE3000Data()
+    {
+        MOABOVE3000 mOABOVE3000 = new MOABOVE3000();
+        mOABOVE3000 = MOABOVE3000Manager.GetMOABOVE3000ByID(Int32.Parse(Request.QueryString["mOABOVE3000ID"]));
+
+        txtDT.Text = mOABOVE3000.DT;
+        ddlCUST_.SelectedValue = mOABOVE3000.CUST_ID.ToString();
+        txtSTARTNO.Text = mOABOVE3000.STARTNO;
+        txtENDNO.Text = mOABOVE3000.ENDNO;
+        txtAMOUNT.Text = mOABOVE3000.AMOUNT.ToString();
+        ddlEMP_.SelectedValue = mOABOVE3000.EMP_ID.ToString();
+        ddlSTATION_.SelectedValue = mOABOVE3000.STATION_ID.ToString();
+        ddlSHIFT_.SelectedValue = mOABOVE3000.SHIFT_ID.ToString();
+    }
+    private void loadCUST_()
+    {
+        ListItem li = new ListItem("Select CUST_...", "0");
+        ddlCUST_.Items.Add(li);
+
+        List<CUST_> cUST_s = new List<CUST_>();
+        cUST_s = CUST_Manager.GetAllCUST_s();
+        foreach (CUST_ cUST_ in cUST_s)
+        {
+            ListItem item = new ListItem(cUST_.CUST_Name.ToString(), cUST_.CUST_ID.ToString());
+            ddlCUST_.Items.Add(item);
+        }
+    }
+    private void loadEMP_()
+    {
+        ListItem li = new ListItem("Select EMP_...", "0");
+        ddlEMP_.Items.Add(li);
+
+        List<EMP_> eMP_s = new List<EMP_>();
+        eMP_s = EMP_Manager.GetAllEMP_s();
+        foreach (EMP_ eMP_ in eMP_s)
+        {
+            ListItem item = new ListItem(eMP_.EMP_Name.ToString(), eMP_.EMP_ID.ToString());
+            ddlEMP_.Items.Add(item);
+        }
+    }
+    private void loadSTATION_()
+    {
+        ListItem li = new ListItem("Select STATION_...", "0");
+        ddlSTATION_.Items.Add(li);
+
+        List<STATION_> sTATION_s = new List<STATION_>();
+        sTATION_s = STATION_Manager.GetAllSTATION_s();
+        foreach (STATION_ sTATION_ in sTATION_s)
+        {
+            ListItem item = new ListItem(sTATION_.STATION_Name.ToString(), sTATION_.STATION_ID.ToString());
+            ddlSTATION_.Items.Add(item);
+        }
+    }
+    private void loadSHIFT_()
+    {
+        ListItem li = new ListItem("Select SHIFT_...", "0");
+        ddlSHIFT_.Items.Add(li);
+
+        List<SHIFT_> sHIFT_s = new List<SHIFT_>();
+        sHIFT_s = SHIFT_Manager.GetAllSHIFT_s();
+        foreach (SHIFT_ sHIFT_ in sHIFT_s)
+        {
+            ListItem item = new ListItem(sHIFT_.SHIFT_Name.ToString(), sHIFT_.SHIFT_ID.ToString());
+            ddlSHIFT_.Items.Add(item);
+        }
+    }
+}

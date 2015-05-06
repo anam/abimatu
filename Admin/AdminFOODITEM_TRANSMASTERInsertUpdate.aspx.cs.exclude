@@ -1,0 +1,190 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public partial class AdminFOODITEM_TRANSMASTERInsertUpdate : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            loadC();
+            loadL();
+            loadA();
+            loadREC();
+            loadSTORE();
+            if (Request.QueryString["fOODITEM_TRANSMASTERID"] != null)
+            {
+                int fOODITEM_TRANSMASTERID = Int32.Parse(Request.QueryString["fOODITEM_TRANSMASTERID"]);
+                if (fOODITEM_TRANSMASTERID == 0)
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                    showFOODITEM_TRANSMASTERData();
+                }
+            }
+        }
+    }
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        FOODITEM_TRANSMASTER fOODITEM_TRANSMASTER = new FOODITEM_TRANSMASTER();
+
+        fOODITEM_TRANSMASTER.TDATE = txtTDATE.Text;
+        fOODITEM_TRANSMASTER.CID = Int32.Parse(ddlC.SelectedValue);
+        fOODITEM_TRANSMASTER.LID = Int32.Parse(ddlL.SelectedValue);
+        fOODITEM_TRANSMASTER.AID = Int32.Parse(ddlA.SelectedValue);
+        fOODITEM_TRANSMASTER.TOTALAMT = Int32.Parse(txtTOTALAMT.Text);
+        fOODITEM_TRANSMASTER.TRANSSTATUS = txtTRANSSTATUS.Text;
+        fOODITEM_TRANSMASTER.REFCODE = txtREFCODE.Text;
+        fOODITEM_TRANSMASTER.RECID = Int32.Parse(ddlREC.SelectedValue);
+        fOODITEM_TRANSMASTER.RECDATE = txtRECDATE.Text;
+        fOODITEM_TRANSMASTER.STOREID = Int32.Parse(ddlSTORE.SelectedValue);
+        fOODITEM_TRANSMASTER.CREATEDON = txtCREATEDON.Text;
+        fOODITEM_TRANSMASTER.CREATEDBY = Int32.Parse(txtCREATEDBY.Text);
+        fOODITEM_TRANSMASTER.UPDATEDON = txtUPDATEDON.Text;
+        fOODITEM_TRANSMASTER.UPDATEDBY = Int32.Parse(txtUPDATEDBY.Text);
+        int resutl = FOODITEM_TRANSMASTERManager.InsertFOODITEM_TRANSMASTER(fOODITEM_TRANSMASTER);
+        Response.Redirect("AdminFOODITEM_TRANSMASTERDisplay.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        FOODITEM_TRANSMASTER fOODITEM_TRANSMASTER = new FOODITEM_TRANSMASTER();
+        fOODITEM_TRANSMASTER = FOODITEM_TRANSMASTERManager.GetFOODITEM_TRANSMASTERByID(Int32.Parse(Request.QueryString["fOODITEM_TRANSMASTERID"]));
+        FOODITEM_TRANSMASTER tempFOODITEM_TRANSMASTER = new FOODITEM_TRANSMASTER();
+        tempFOODITEM_TRANSMASTER.FOODITEM_TRANSMASTERID = fOODITEM_TRANSMASTER.FOODITEM_TRANSMASTERID;
+
+        tempFOODITEM_TRANSMASTER.TDATE = txtTDATE.Text;
+        tempFOODITEM_TRANSMASTER.CID = Int32.Parse(ddlC.SelectedValue);
+        tempFOODITEM_TRANSMASTER.LID = Int32.Parse(ddlL.SelectedValue);
+        tempFOODITEM_TRANSMASTER.AID = Int32.Parse(ddlA.SelectedValue);
+        tempFOODITEM_TRANSMASTER.TOTALAMT = Int32.Parse(txtTOTALAMT.Text);
+        tempFOODITEM_TRANSMASTER.TRANSSTATUS = txtTRANSSTATUS.Text;
+        tempFOODITEM_TRANSMASTER.REFCODE = txtREFCODE.Text;
+        tempFOODITEM_TRANSMASTER.RECID = Int32.Parse(ddlREC.SelectedValue);
+        tempFOODITEM_TRANSMASTER.RECDATE = txtRECDATE.Text;
+        tempFOODITEM_TRANSMASTER.STOREID = Int32.Parse(ddlSTORE.SelectedValue);
+        tempFOODITEM_TRANSMASTER.CREATEDON = txtCREATEDON.Text;
+        tempFOODITEM_TRANSMASTER.CREATEDBY = Int32.Parse(txtCREATEDBY.Text);
+        tempFOODITEM_TRANSMASTER.UPDATEDON = txtUPDATEDON.Text;
+        tempFOODITEM_TRANSMASTER.UPDATEDBY = Int32.Parse(txtUPDATEDBY.Text);
+        bool result = FOODITEM_TRANSMASTERManager.UpdateFOODITEM_TRANSMASTER(tempFOODITEM_TRANSMASTER);
+        Response.Redirect("AdminFOODITEM_TRANSMASTERDisplay.aspx");
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        txtTDATE.Text = "";
+        ddlC.SelectedIndex = 0;
+        ddlL.SelectedIndex = 0;
+        ddlA.SelectedIndex = 0;
+        txtTOTALAMT.Text = "";
+        txtTRANSSTATUS.Text = "";
+        txtREFCODE.Text = "";
+        ddlREC.SelectedIndex = 0;
+        txtRECDATE.Text = "";
+        ddlSTORE.SelectedIndex = 0;
+        txtCREATEDON.Text = "";
+        txtCREATEDBY.Text = "";
+        txtUPDATEDON.Text = "";
+        txtUPDATEDBY.Text = "";
+    }
+    private void showFOODITEM_TRANSMASTERData()
+    {
+        FOODITEM_TRANSMASTER fOODITEM_TRANSMASTER = new FOODITEM_TRANSMASTER();
+        fOODITEM_TRANSMASTER = FOODITEM_TRANSMASTERManager.GetFOODITEM_TRANSMASTERByID(Int32.Parse(Request.QueryString["fOODITEM_TRANSMASTERID"]));
+
+        txtTDATE.Text = fOODITEM_TRANSMASTER.TDATE;
+        ddlC.SelectedValue = fOODITEM_TRANSMASTER.CID.ToString();
+        ddlL.SelectedValue = fOODITEM_TRANSMASTER.LID.ToString();
+        ddlA.SelectedValue = fOODITEM_TRANSMASTER.AID.ToString();
+        txtTOTALAMT.Text = fOODITEM_TRANSMASTER.TOTALAMT.ToString();
+        txtTRANSSTATUS.Text = fOODITEM_TRANSMASTER.TRANSSTATUS;
+        txtREFCODE.Text = fOODITEM_TRANSMASTER.REFCODE;
+        ddlREC.SelectedValue = fOODITEM_TRANSMASTER.RECID.ToString();
+        txtRECDATE.Text = fOODITEM_TRANSMASTER.RECDATE;
+        ddlSTORE.SelectedValue = fOODITEM_TRANSMASTER.STOREID.ToString();
+        txtCREATEDON.Text = fOODITEM_TRANSMASTER.CREATEDON;
+        txtCREATEDBY.Text = fOODITEM_TRANSMASTER.CREATEDBY.ToString();
+        txtUPDATEDON.Text = fOODITEM_TRANSMASTER.UPDATEDON;
+        txtUPDATEDBY.Text = fOODITEM_TRANSMASTER.UPDATEDBY.ToString();
+    }
+    private void loadC()
+    {
+        ListItem li = new ListItem("Select C...", "0");
+        ddlC.Items.Add(li);
+
+        List<C> cs = new List<C>();
+        cs = CManager.GetAllCs();
+        foreach (C c in cs)
+        {
+            ListItem item = new ListItem(c.CName.ToString(), c.CID.ToString());
+            ddlC.Items.Add(item);
+        }
+    }
+    private void loadL()
+    {
+        ListItem li = new ListItem("Select L...", "0");
+        ddlL.Items.Add(li);
+
+        List<L> ls = new List<L>();
+        ls = LManager.GetAllLs();
+        foreach (L l in ls)
+        {
+            ListItem item = new ListItem(l.LName.ToString(), l.LID.ToString());
+            ddlL.Items.Add(item);
+        }
+    }
+    private void loadA()
+    {
+        ListItem li = new ListItem("Select A...", "0");
+        ddlA.Items.Add(li);
+
+        List<A> as = new List<A>();
+        as = AManager.GetAllAs();
+        foreach (A a in as)
+        {
+            ListItem item = new ListItem(a.AName.ToString(), a.AID.ToString());
+            ddlA.Items.Add(item);
+        }
+    }
+    private void loadREC()
+    {
+        ListItem li = new ListItem("Select REC...", "0");
+        ddlREC.Items.Add(li);
+
+        List<REC> rECs = new List<REC>();
+        rECs = RECManager.GetAllRECs();
+        foreach (REC rEC in rECs)
+        {
+            ListItem item = new ListItem(rEC.RECName.ToString(), rEC.RECID.ToString());
+            ddlREC.Items.Add(item);
+        }
+    }
+    private void loadSTORE()
+    {
+        ListItem li = new ListItem("Select STORE...", "0");
+        ddlSTORE.Items.Add(li);
+
+        List<STORE> sTOREs = new List<STORE>();
+        sTOREs = STOREManager.GetAllSTOREs();
+        foreach (STORE sTORE in sTOREs)
+        {
+            ListItem item = new ListItem(sTORE.STOREName.ToString(), sTORE.STOREID.ToString());
+            ddlSTORE.Items.Add(item);
+        }
+    }
+}
