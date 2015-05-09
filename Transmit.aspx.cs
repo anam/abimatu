@@ -37,14 +37,21 @@ public partial class SearchLocation : System.Web.UI.Page
                 ssReferenceCodeFINAL = (List<string>)Session["ssReferenceCode"];
 
                 string stReferenceCode = string.Empty;
+                string singleRefCode = "";
                 for (int i = 0; i < ssReferenceCodeFINAL.Count; i++)
                 {
                     lblReferenceCODE.Text = stReferenceCode.ToString() + "<br/><a href='EditPayment.aspx?REFCODE=" + ssReferenceCodeFINAL[i].ToString() + "' target='_blank'>" + ssReferenceCodeFINAL[i].ToString()+"</a>";
-
+                    if (singleRefCode == "")
+                        singleRefCode = ssReferenceCodeFINAL[i].ToString();
                     stReferenceCode = lblReferenceCODE.Text;
 
                 }
-
+                decimal amountSUM_15_days = 0;
+                DataSet ds = MSSQL.SQLExec("SELECT [AbiMatuEnterpriseDB].[dbo].[getTotalTransactionAmountSUS_15_days] ('" + singleRefCode + "');");
+                if (decimal.Parse(ds.Tables[0].Rows[0][0].ToString()) >= 3000)
+                {
+                    lblReferenceCODE.Text += "<br/><a href='CustomerSign.aspx?REFCODE=" + singleRefCode + "' target='_blank'>Print Form For Sign</a>";
+                }
 
 
             }
