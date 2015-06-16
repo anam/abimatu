@@ -1024,6 +1024,25 @@ INSERT INTO [SessionTable]
         MSSQL.SQLExec(sql);
         lblDownloadPage.Text = "<a target='_blank' href='ReportLocationWisePrint.aspx?fromDate=" + txtFromDate.Text + @"&toDate=" + txtToDate.Text + @"'>Click here to go donwload page</a>";
     }
+
+    protected void btnPrintMinMax_Click(object sender, EventArgs e)
+    {
+        string sql = @"Delete SessionTable ;
+INSERT INTO [SessionTable]
+           ([SessionName]
+           ,[SessionValue])
+     VALUES
+           ('LocationIDs','" + getLocationIDs().Replace("'", "''") + @"');";
+
+        sql += @"INSERT INTO [SessionTable]
+           ([SessionName]
+           ,[SessionValue])
+     VALUES
+           ('Status','" + loadStatus().Replace("'", "''") + @"');";
+
+        MSSQL.SQLExec(sql);
+        lblDownloadPage.Text = "<a target='_blank' href='ReportLocationWisePrintAdminMinMax.aspx?MinMax="+txtMinMax.Text.Trim()+"&fromDate=" + txtFromDate.Text + @"&toDate=" + txtToDate.Text + @"'>Click here to go donwload page</a>";
+    }
     protected void btnPdfAdmin_Click(object sender, EventArgs e)
     {
         string sql = @"Delete SessionTable ;

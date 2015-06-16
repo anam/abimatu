@@ -601,6 +601,16 @@
             <td>
                 <asp:TextBox ID="txtAmountForFindingSUS" runat="server" Text="3000"></asp:TextBox>
             </td>
+
+            </tr>
+             <tr>
+            <td>
+            Min - Max
+            </td>
+            <td>
+                <asp:TextBox ID="txtMinMax" runat="server" Text="3000-10000"></asp:TextBox>
+            </td>
+
             </tr>
                 <tr runat="server" id="trFromDate">
                     <td>
@@ -645,6 +655,10 @@
                             Text="Generate Link For Status Change Page" 
                             onclick="btnChangeStatus_Click"/>
                             <%--onclick="btnPrint_Click" /> --%>
+                            <br />
+                              <asp:Button ID="Button1" runat="server" Text="Generate Download Page for Min-Max" 
+                            onclick="btnPrintMinMax_Click" />
+                            <br />
                         
                         <br />
                         <br />
