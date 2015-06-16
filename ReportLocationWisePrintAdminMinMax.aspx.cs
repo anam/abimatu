@@ -187,7 +187,7 @@ html += @"</center>
                 //    html += header;
                 //}
 
-                html += "<tr   class='colorbackground'><td colspan='9'>" + dr["COUNTRY"].ToString() + " - " + dr["CITY"].ToString() + " - " + dr["BRANCH"].ToString() + @"</td></tr>
+                html += "<tr   class='colorbackground'><td colspan='11'>" + dr["COUNTRY"].ToString() + " - " + dr["CITY"].ToString() + " - " + dr["BRANCH"].ToString() + @"</td></tr>
 <tr class='colorbackground'  >
                 <td>SI.
                     </td>
@@ -201,7 +201,6 @@ html += @"</center>
                     </td>
                 <td>SSN/ID
                     </td>
-                <td>
                 <td>Receiver
                     </td>
                 <td style='display:none;'>Location
