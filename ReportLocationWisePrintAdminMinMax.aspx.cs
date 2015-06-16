@@ -29,6 +29,8 @@ SELECT     TRANS.LOCATIONID, TRANS.CUSTID, TRANS.RECEIVERID, TRANS.TRANSID,
 TRANS.TRANSAMOUNT, TRANS.TRANSFEES, 
 	TRANS.TRANSTOTALAMOUNT, TRANS.REFCODE, TRANS.CREATEDON as TRANSDT, 
 CUSTOMER.CUSTFNAME+' '+CUSTOMER.CUSTMNAME+' '+CUSTOMER.CUSTLNAME as SenderName,
+CUSTOMER.CUSTADDRESS1 +', '+CUSTOMER.CUSTCITY+', '+CUSTOMER.CUSTSTATE+', '+CUSTOMER.CUSTZIP as Address,
+CUSTOMER.CUSTSSN +' / '+CUSTOMER.CUSTIDNUMBER as SSN
 RECEIVER.RECEIVERFNAME+' '+RECEIVER.RECEIVERMNAME+' '+RECEIVER.RECEIVERLNAME as ReceiverName,
 LOCATION.COUNTRY, LOCATION.CITY, LOCATION.BRANCH,TRANS.[TRANSSTATUS]
 FROM         TRANS INNER JOIN
@@ -83,7 +85,7 @@ LOCATION.COUNTRY,LOCATION.CITY,LOCATION.BRANCH, TRANS.REFCODE, TRANS.CREATEDON  
          */
         DataSet ds = MSSQL.SQLExec(sql);
         html = @"<table border='1' cellspacing='0' cellpadding='5'>
-<tr><td colspan='9' align='center'>
+<tr><td colspan='11' align='center'>
 <center>";
         if (Request.QueryString["fromDate"] != null)
         {
@@ -104,6 +106,10 @@ LOCATION.COUNTRY,LOCATION.CITY,LOCATION.BRANCH, TRANS.REFCODE, TRANS.CREATEDON  
                 <td>Code
                     </td>
                 <td>Sender
+                    </td>
+<td>Address
+                    </td>
+<td>SSN/ID
                     </td>
                 <td>Receiver
                     </td>
@@ -154,6 +160,11 @@ html += @"</center>
                 <td>
                     </td>
                 <td>
+<td>
+                    </td>
+                <td>
+                    </td>
+                <td>
                     </td>
                 <td style='display:none;'>
                     </td>
@@ -186,6 +197,11 @@ html += @"</center>
                     </td>
                 <td>Sender
                     </td>
+<td>Address
+                    </td>
+                <td>SSN/ID
+                    </td>
+                <td>
                 <td>Receiver
                     </td>
                 <td style='display:none;'>Location
@@ -213,6 +229,10 @@ html += @"</center>
                 <td>"+dr["REFCODE"].ToString()+@"
                     </td>
                 <td>" + dr["SenderName"].ToString() + @"
+                    </td>
+<td>" + dr["Address"].ToString() + @"
+                    </td>
+<td>" + dr["SSN"].ToString() + @"
                     </td>
                 <td>" + dr["ReceiverName"].ToString() + @"
                     </td>
@@ -248,6 +268,10 @@ html += @"</center>
                     </td>
                 <td>
                     </td>
+<td>
+                    </td>
+                <td>
+                    </td>
                 <td>
                     </td>
                 <td style='display:none;'>
@@ -270,6 +294,10 @@ html += @"</center>
                 <td>
                     </td>
                 <td>
+                    </td>
+                <td>
+                    </td>
+<td>
                     </td>
                 <td>
                     </td>
