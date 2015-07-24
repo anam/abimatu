@@ -75,7 +75,9 @@ public partial class CustomerSign : System.Web.UI.Page
 </tr>
 <tr>
     <td>Purpose of money trasfer</td>
-    <td colspan='5' class='underlineBorder'></td>
+    <td colspan='5' class='underlineBorder'>
+    <input type='text' style='width:550px' name='firstname'>
+</td>
 </tr>
 </table>
 ";
