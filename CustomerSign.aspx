@@ -26,7 +26,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div style="width:800px;text-align:center;" >
+    <div style="width:800px;text-align:center;" runat="server" id='wholePage'>
         <span class="style1"><strong>ABIMATU ENTERPRISE, INC.
     </strong></span>
     <br />

@@ -19,6 +19,7 @@ public partial class CustomerSign : System.Web.UI.Page
 
     private void loadData()
     {
+
         string sql = @"SELECT  [REFCODE],C.CUSTFNAME,C.CUSTMNAME,C.CUSTLNAME,C.CUSTSSN,C.CUSTIDNUMBER
 ,C.CUSTDOB,C.CUSTEXPIREDATE,C.CUSTADDRESS1,C.CUSTCITY,C.CUSTSTATE,C.CUSTZIP
 ,C.CUSTHPHONE,C.CUSTWPHONE,C.CUSTCPHONE
@@ -84,5 +85,6 @@ public partial class CustomerSign : System.Web.UI.Page
 
         }
         lblReceiver.Text = html;
+
     }
 }
