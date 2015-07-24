@@ -28,7 +28,7 @@ public partial class CustomerSign : System.Web.UI.Page
   inner join CUSTOMER as C on C.CUSTOMERID =T.CUSTID
   inner join RECEIVER as R on R.RECEIVERID =T.RECEIVERID
   inner join LOCATION as L on L.LOCATIONID =T.LOCATIONID
-  where T.CREATEDON =(select CREATEDON from TRANS where [REFCODE]='" + Request.QueryString["REFCODE"]+@"') and T.CUSTID=(select top 1 CUSTID from TRANS where  [REFCODE]='"+Request.QueryString["REFCODE"]+@"' order by CREATEDON desc)
+  where T.TRANSSTATUS in ('PENDING','PAID') and  T.CREATEDON =(select CREATEDON from TRANS where [REFCODE]='" + Request.QueryString["REFCODE"] + @"') and T.CUSTID=(select top 1 CUSTID from TRANS where  [REFCODE]='" + Request.QueryString["REFCODE"] + @"' order by CREATEDON desc)
   order by T.CreateDON desc";
 
         DataSet ds = MSSQL.SQLExec(sql);
