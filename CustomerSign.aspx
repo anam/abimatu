@@ -103,7 +103,7 @@ All first time customers are required to present a photo I.D.
                         <td>
                             Street Address</td>
                         <td colspan="5" class="underlineBorder">
-                            <asp:TextBox ID="lblStreetAddress" runat="server" Text=""></asp:TextBox>
+                            <asp:TextBox ID="lblStreetAddress" runat="server" Text="" Width="100%"></asp:TextBox>
                             </td>
                         
                     </tr>
@@ -116,7 +116,7 @@ All first time customers are required to present a photo I.D.
                         <td>
                             State</td>
                         <td class="underlineBorder">
-                            <asp:TextBox ID="lblStateAddress" runat="server" Text="" Width="100%"></asp:TextBox>
+                            <asp:TextBox ID="lblStateAddress" runat="server" Text=""></asp:TextBox>
                             </td>
                         <td>
                             Zip Code</td>
