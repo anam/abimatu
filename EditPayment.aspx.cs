@@ -427,4 +427,8 @@ public partial class EditPayment : System.Web.UI.Page
     {
         updateTRANS("PAID");
     }
+    protected void btnComplianceForm_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("CustomerSign.aspx?refcode="+txtReferenceCode.Text);
+    }
 }

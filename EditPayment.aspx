@@ -148,6 +148,8 @@
                         </td>
                         <td>
                             <asp:Button ID="Button1" runat="server" Text="Search" OnClick="btnSearch_Click" CssClass="btnregtop" />
+                            <asp:Button ID="btnComplianceForm" runat="server" Text="Compliance Form"  
+                                CssClass="btnregtop" onclick="btnComplianceForm_Click" />
                             <%--<asp:Button ID="btn_BACK" runat="server" Text="Back" 
         onclick="btnBack_Click" CssClass="btnregtop" />--%>
                         </td>
