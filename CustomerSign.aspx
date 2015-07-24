@@ -52,58 +52,58 @@ All first time customers are required to present a photo I.D.
                         <td>
                             First Name</td>
                         <td class="underlineBorder">
-                            <asp:Label ID="lblFName" runat="server" Text=""></asp:Label>
+                            <asp:TextBox ID="lblFName" runat="server" Text=""></asp:TextBox>
                         </td>
                         <td>
                             Middle Name</td>
                         <td class="underlineBorder">
-                            <asp:Label ID="lblMName" runat="server" Text=""></asp:Label>
+                            <asp:TextBox ID="lblMName" runat="server" Text=""></asp:TextBox>
                             </td>
                         <td>
                             Last Name</td>
                         <td class="underlineBorder">
-                            <asp:Label ID="lblLName" runat="server" Text=""></asp:Label>
+                            <asp:TextBox ID="lblLName" runat="server" Text=""></asp:TextBox>
                             </td>
                     </tr>
                     <tr>
                         <td>
                             SSN</td>
                         <td class="underlineBorder">
-                            <asp:Label ID="lblSSN" runat="server" Text=""></asp:Label>
+                            <asp:TextBox ID="lblSSN" runat="server" Text=""></asp:TextBox>
                             </td>
                         <td>
                             ID No.</td>
                         <td class="underlineBorder">
-                            <asp:Label ID="lblIDNo" runat="server" Text=""></asp:Label>
+                            <asp:TextBox ID="lblIDNo" runat="server" Text=""></asp:TextBox>
                             </td>
                         <td>
                             State</td>
                         <td class="underlineBorder">
-                            <asp:Label ID="lblStateID" runat="server" Text=""></asp:Label>
+                            <asp:TextBox ID="lblStateID" runat="server" Text=""></asp:TextBox>
                             </td>
                     </tr>
                     <tr>
                         <td>
                             Expire Date</td>
                         <td class="underlineBorder">
-                            <asp:Label ID="lblExpireDate" runat="server" Text=""></asp:Label>
+                            <asp:TextBox ID="lblExpireDate" runat="server" Text=""></asp:TextBox>
                             </td>
                         <td>
                             Date of Birth</td>
                         <td class="underlineBorder">
-                            <asp:Label ID="lblDOB" runat="server" Text=""></asp:Label>
+                            <asp:TextBox ID="lblDOB" runat="server" Text=""></asp:TextBox>
                             </td>
                         <td>
                             Place of Birth</td>
                         <td class="underlineBorder">
-                            <asp:Label ID="lblPlaceOfBirth" runat="server" Text=""></asp:Label>
+                            <asp:TextBox ID="lblPlaceOfBirth" runat="server" Text=""></asp:TextBox>
                             </td>
                     </tr>
                     <tr>
                         <td>
                             Street Address</td>
                         <td colspan="5" class="underlineBorder">
-                            <asp:Label ID="lblStreetAddress" runat="server" Text=""></asp:Label>
+                            <asp:TextBox ID="lblStreetAddress" runat="server" Text=""></asp:TextBox>
                             </td>
                         
                     </tr>
@@ -111,34 +111,34 @@ All first time customers are required to present a photo I.D.
                         <td>
                             City</td>
                         <td class="underlineBorder">
-                            <asp:Label ID="lblCity" runat="server" Text=""></asp:Label>
+                            <asp:TextBox ID="lblCity" runat="server" Text=""></asp:TextBox>
                             </td>
                         <td>
                             State</td>
                         <td class="underlineBorder">
-                            <asp:Label ID="lblStateAddress" runat="server" Text=""></asp:Label>
+                            <asp:TextBox ID="lblStateAddress" runat="server" Text=""></asp:TextBox>
                             </td>
                         <td>
                             Zip Code</td>
                         <td class="underlineBorder">
-                            <asp:Label ID="lblZip" runat="server" Text=""></asp:Label>
+                            <asp:TextBox ID="lblZip" runat="server" Text=""></asp:TextBox>
                             </td>
                     </tr>
                     <tr>
                         <td>
                             Home Phone</td>
                         <td class="underlineBorder">
-                            <asp:Label ID="lblHomePhone" runat="server" Text=""></asp:Label>
+                            <asp:TextBox ID="lblHomePhone" runat="server" Text=""></asp:TextBox>
                             </td>
                         <td>
                             Work Phone</td>
                         <td class="underlineBorder">
-                            <asp:Label ID="lblWorkPhone" runat="server" Text=""></asp:Label>
+                            <asp:TextBox ID="lblWorkPhone" runat="server" Text=""></asp:TextBox>
                             </td>
                         <td>
                             Cell</td>
                         <td class="underlineBorder">
-                            <asp:Label ID="lblCellPhone" runat="server" Text=""></asp:Label>
+                            <asp:TextBox ID="lblCellPhone" runat="server" Text=""></asp:TextBox>
                             </td>
                     </tr>
                 </table>
@@ -155,7 +155,8 @@ All first time customers are required to present a photo I.D.
             <table width="100%">
         <tr>
             <td width='50px'>Description</td>
-            <td class="underlineBorder"></td>
+            <td class="underlineBorder">
+                <asp:TextBox ID="TextBox1" runat="server" Width="100%"></asp:TextBox></td>
             
         </tr>
         </table>

@@ -38,8 +38,8 @@ public partial class CustomerSign : System.Web.UI.Page
 
             lblCellPhone.Text = dr["CUSTCPHONE"].ToString();
             lblCity.Text = dr["CUSTCITY"].ToString();
-            lblDOB.Text = dr["CUSTDOB"].ToString();
-            lblExpireDate.Text = dr["CUSTEXPIREDATE"].ToString();
+            lblDOB.Text = DateTime.Parse(dr["CUSTDOB"].ToString()).ToString("dd MMM yyyy");
+            lblExpireDate.Text = DateTime.Parse(dr["CUSTEXPIREDATE"].ToString()).ToString("dd MMM yyyy");
             lblFName.Text = dr["CUSTFNAME"].ToString();
             lblHomePhone.Text = dr["CUSTHPHONE"].ToString();
             lblIDNo.Text = dr["CUSTIDNUMBER"].ToString();
